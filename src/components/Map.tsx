@@ -22,7 +22,7 @@ export const Map: FC<Props> = (props: Props) => {
     <MapContainer center={[44.856614, 2.35]} zoom={7} scrollWheelZoom={false}>
       <MapListener {...props}></MapListener>
       <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <LayerGroup>
