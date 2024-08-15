@@ -1,17 +1,16 @@
-import React, { useState } from "react";
-import { FC, Fragment } from "react";
-import { Map } from "./components/Map";
-import * as small from "../data/small.json";
-import db from "../data/small_database.json";
-import { LatLngBounds } from "leaflet";
-import { AugmentedRandoLight, RandoLight } from "./model/Rando";
+import { LatLngBounds } from 'leaflet';
+import React, { useState, FC, Fragment } from 'react';
+import { Map } from './components/Map';
+import { AugmentedRandoLight, RandoLight } from './model/Rando';
+import * as small from '../data/small.json';
+import db from '../data/small_database.json';
 
 const typedDb: RandoLight[] = db as RandoLight[];
 const augmentedDb: AugmentedRandoLight[] = typedDb.map((rando) => ({
   ...rando,
   bbox: new LatLngBounds(
     [rando.bbox[1], rando.bbox[0]],
-    [rando.bbox[3], rando.bbox[2]]
+    [rando.bbox[3], rando.bbox[2]],
   ),
 }));
 
@@ -21,7 +20,7 @@ export const App: FC<{}> = () => {
   let count = 0;
   if (bbox) {
     const intersecting = augmentedDb.filter((rando) =>
-      bbox.contains(rando.bbox)
+      bbox.contains(rando.bbox),
     );
     count = intersecting.length;
     console.log(intersecting.slice(0, 10));
