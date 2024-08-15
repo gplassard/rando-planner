@@ -22,7 +22,7 @@ const project = new TypescriptApplicationProject({
     include: [
       'src/**/*.tsx',
     ],
-  }
+  },
 });
 project.addScripts( {
   dev: 'vite',
