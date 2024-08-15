@@ -24,11 +24,13 @@
     "strictPropertyInitialization": true,
     "stripInternal": true,
     "target": "ES2019",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "jsx": "react-jsx"
   },
   "include": [
     "src/**/*.ts",
     "test/**/*.ts",
+    "src/**/*.tsx",
     ".projenrc.ts",
     "projenrc/**/*.ts"
   ],

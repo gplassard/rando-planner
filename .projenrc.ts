@@ -1,4 +1,5 @@
 import { TypescriptApplicationProject } from '@gplassard/projen-extensions';
+import { TypeScriptJsxMode } from 'projen/lib/javascript';
 
 const project = new TypescriptApplicationProject({
   name: 'rando-planner',
@@ -13,6 +14,14 @@ const project = new TypescriptApplicationProject({
     'sass',
     'vite',
   ],
+  tsconfig: {
+    compilerOptions: {
+      jsx: TypeScriptJsxMode.REACT_JSX,
+    },
+    include: [
+      'src/**/*.tsx',
+    ],
+  }
 });
 project.addScripts( {
   dev: 'vite',

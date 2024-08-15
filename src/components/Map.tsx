@@ -1,6 +1,5 @@
-import { LatLngBounds } from "leaflet";
-import React from "react";
-import { FC } from "react";
+import { LatLngBounds } from 'leaflet';
+import React, { FC } from 'react';
 import {
   LayerGroup,
   MapContainer,
@@ -10,7 +9,7 @@ import {
   useMap,
   useMapEvents,
   Rectangle,
-} from "react-leaflet";
+} from 'react-leaflet';
 
 interface Props {
   features: any[];
