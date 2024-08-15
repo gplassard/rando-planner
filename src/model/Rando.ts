@@ -1,4 +1,4 @@
-import { LatLngBounds } from "leaflet";
+import { LatLngBounds } from 'leaflet';
 
 export interface RandoLight {
   id: string;
