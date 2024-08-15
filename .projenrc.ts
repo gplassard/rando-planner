@@ -16,6 +16,7 @@ const project = new TypescriptApplicationProject({
   ],
   tsconfig: {
     compilerOptions: {
+      lib: ['dom', 'es2019'],
       jsx: TypeScriptJsxMode.REACT_JSX,
     },
     include: [
