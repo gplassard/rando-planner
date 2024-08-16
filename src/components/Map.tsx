@@ -1,3 +1,4 @@
+import type { Point } from 'geojson';
 import { LatLngBounds } from 'leaflet';
 import React, { FC } from 'react';
 import {
@@ -8,12 +9,22 @@ import {
   Tooltip,
   useMap,
   useMapEvents,
-  Rectangle,
 } from 'react-leaflet';
+import { Station } from '../model/Station';
 
-interface Props {
-  features: any[];
-  onMove?: (bbox: LatLngBounds) => any;
+interface Props extends MapListenerProps{
+  stations: Station[];
+}
+
+function stationToGeoJson(station: Station): Point {
+  return {
+    ...station,
+    type: 'Point',
+    coordinates: [
+      station.location.lat,
+      station.location.lng,
+    ],
+  };
 }
 
 export const Map: FC<Props> = (props: Props) => {
@@ -25,22 +36,12 @@ export const Map: FC<Props> = (props: Props) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <LayerGroup>
-        {props.features.map((feature) => (
-          <GeoJSON key={feature.id} data={feature as any}>
-            <Tooltip>{feature.properties.name}</Tooltip>
+        {props.stations.map((station) => (
+          <GeoJSON key={station.id} data={stationToGeoJson(station)}>
+            <Tooltip>{station.label}</Tooltip>
           </GeoJSON>
         ))}
       </LayerGroup>
-
-      {props.features.map((feature) => (
-        <Rectangle
-          key={feature.id}
-          bounds={[
-            [feature.properties.bbox[1], feature.properties.bbox[0]],
-            [feature.properties.bbox[3], feature.properties.bbox[2]],
-          ]}
-        ></Rectangle>
-      ))}
     </MapContainer>
   );
 };
