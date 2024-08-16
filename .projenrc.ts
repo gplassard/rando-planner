@@ -11,7 +11,7 @@ const project = new TypescriptApplicationProject({
     '@types/geojson',
     '@types/react',
     '@types/react-dom',
-    '@vitejs/plugin-react-refresh',
+    '@vitejs/plugin-react',
     'sass',
     'vite',
   ],

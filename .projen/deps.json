@@ -40,7 +40,7 @@
       "type": "build"
     },
     {
-      "name": "@vitejs/plugin-react-refresh",
+      "name": "@vitejs/plugin-react",
       "type": "build"
     },
     {
