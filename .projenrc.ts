@@ -8,6 +8,7 @@ const project = new TypescriptApplicationProject({
   ],
   devDeps: [
     '@types/leaflet',
+    '@types/geojson',
     '@types/react',
     '@types/react-dom',
     '@vitejs/plugin-react-refresh',

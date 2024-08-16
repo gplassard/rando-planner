@@ -1,8 +1,8 @@
 import { LatLngBounds } from 'leaflet';
 import React, { useState, FC, Fragment } from 'react';
 import { Map } from './components/Map';
+import { useStations } from './hooks/useStations';
 import { AugmentedRandoLight, RandoLight } from './model/Rando';
-import * as small from '../data/small.json';
 import db from '../data/small_database.json';
 
 const typedDb: RandoLight[] = db as RandoLight[];
@@ -16,6 +16,7 @@ const augmentedDb: AugmentedRandoLight[] = typedDb.map((rando) => ({
 
 export const App: FC<{}> = () => {
   const [bbox, setBbox] = useState<LatLngBounds | null>(null);
+  const { stations } = useStations();
 
   let count = 0;
   if (bbox) {
@@ -30,7 +31,7 @@ export const App: FC<{}> = () => {
     <Fragment>
       <p>{count} / {augmentedDb.length}</p>
       <p>{bbox?.toBBoxString()}</p>
-      <Map features={small.features} onMove={setBbox}></Map>
+      <Map stations={stations} onMove={setBbox}></Map>
     </Fragment>
   );
 };
