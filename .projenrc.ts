@@ -24,6 +24,11 @@ const project = new TypescriptApplicationProject({
       'src/**/*.tsx',
     ],
   },
+  tsconfigDev: {
+    include: [
+      'vite.config.ts',
+    ],
+  },
 });
 project.addScripts( {
   dev: 'vite',
