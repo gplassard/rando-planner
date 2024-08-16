@@ -1,5 +1,5 @@
 import type { Point } from 'geojson';
-import { LatLngBounds } from 'leaflet';
+import { DivIcon, Icon, LatLngBounds, LatLngExpression, StyleFunction } from 'leaflet';
 import React, { FC } from 'react';
 import {
   LayerGroup,
@@ -8,9 +8,10 @@ import {
   GeoJSON,
   Tooltip,
   useMap,
-  useMapEvents,
+  useMapEvents, Marker, MarkerProps,
 } from 'react-leaflet';
 import { Station } from '../model/Station';
+import marker from '../../public/marker.svg'
 
 interface Props extends MapListenerProps{
   stations: Station[];
@@ -28,6 +29,13 @@ function stationToGeoJson(station: Station): Point {
 }
 
 export const Map: FC<Props> = (props: Props) => {
+  const icon = new DivIcon({
+    html: `<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" >
+    <path class="poi" d="M16 30C12 22 10 20 10 14C10 9 13 6 16 6C19 6 22 9 22 14C22 20 20 22 16 30Z"/>
+    <circle cx="16" cy="14" r="2.5" fill="#fff"/>
+</svg>
+`
+  });
   return (
     <MapContainer center={[44.856614, 2.35]} zoom={7} scrollWheelZoom={false}>
       <MapListener {...props}></MapListener>
@@ -37,9 +45,9 @@ export const Map: FC<Props> = (props: Props) => {
       />
       <LayerGroup>
         {props.stations.map((station) => (
-          <GeoJSON key={station.id} data={stationToGeoJson(station)}>
+          <Marker key={station.id} position={station.location} icon={icon}>
             <Tooltip>{station.label}</Tooltip>
-          </GeoJSON>
+          </Marker>
         ))}
       </LayerGroup>
     </MapContainer>

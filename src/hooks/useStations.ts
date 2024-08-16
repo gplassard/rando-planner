@@ -4,7 +4,7 @@ import { Station } from '../model/Station';
 
 const stations: Station[] = data.map(d => ({
   ...d,
-  location: new LatLng(d.location[0], d.location[1]),
+  location: new LatLng(d.location[1], d.location[0]),
 }));
 
 export const useStations: () => { stations: Station[] } = () => {
