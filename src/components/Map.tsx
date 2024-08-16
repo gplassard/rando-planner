@@ -10,8 +10,8 @@ import {
   useMap,
   useMapEvents, Marker, MarkerProps,
 } from 'react-leaflet';
+import marker from '../../public/marker.svg';
 import { Station } from '../model/Station';
-import marker from '../../public/marker.svg'
 
 interface Props extends MapListenerProps{
   stations: Station[];
@@ -34,7 +34,7 @@ export const Map: FC<Props> = (props: Props) => {
     <path class="poi" d="M16 30C12 22 10 20 10 14C10 9 13 6 16 6C19 6 22 9 22 14C22 20 20 22 16 30Z"/>
     <circle cx="16" cy="14" r="2.5" fill="#fff"/>
 </svg>
-`
+`,
   });
   return (
     <MapContainer center={[44.856614, 2.35]} zoom={7} scrollWheelZoom={false}>
