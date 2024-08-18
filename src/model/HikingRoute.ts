@@ -1,4 +1,5 @@
 import { LatLngBounds } from 'leaflet';
+import type { Position } from 'geojson';
 
 export interface HikingRoute {
     id: string
@@ -6,6 +7,7 @@ export interface HikingRoute {
     from: string | null
     to: string | null
     bbox: LatLngBounds
+    approximatePath: Position[]
 }
 
 export function hikingRouteName(route: Omit<HikingRoute, 'bbox'>): string | null {

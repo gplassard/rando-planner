@@ -32,6 +32,7 @@
     "src/**/*.ts",
     "test/**/*.ts",
     "src/**/*.tsx",
+    "scripts/**/*.ts",
     "vite.config.ts",
     ".projenrc.ts",
     "projenrc/**/*.ts"

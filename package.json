@@ -20,7 +20,10 @@
     "watch": "npx projen watch",
     "projen": "npx projen",
     "dev": "vite",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "run_prepare": "pnpm run prepare_2 && pnpm run prepare_3",
+    "prepare_2": "./scripts/2_prepare.sh",
+    "prepare_3": "ts-node scripts/3_prepare_hiking_route.ts"
   },
   "devDependencies": {
     "@gplassard/projen-extensions": "^0.0.113",
