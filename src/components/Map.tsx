@@ -1,5 +1,5 @@
 import type { Point } from 'geojson';
-import React, { FC } from 'react';
+import React, { FC, useContext, useEffect, useMemo, useState } from 'react';
 import {
   LayerGroup,
   MapContainer,
@@ -7,11 +7,13 @@ import {
   GeoJSON,
   Tooltip,
   useMap,
-  useMapEvents, Popup,
+  useMapEvents, Popup, Rectangle,
 } from 'react-leaflet';
 import { MapState } from '../model/MapState';
 import { Station } from '../model/Station';
 import './Map.scss';
+import { useHikingRoutes } from '../hooks/useHikingRoutes';
+import { Map as LeafletMap } from 'leaflet';
 
 interface Props extends MapListenerProps{
   stations: Station[];
@@ -32,31 +34,54 @@ function stationToGeoJson(station: Station): Point {
 }
 
 export const Map: FC<Props> = (props: Props) => {
-  return (
-    <div className="Map">
-      <MapContainer center={[44.856614, 2.35]} zoom={7} scrollWheelZoom={false}>
-        <MapListener {...props}></MapListener>
-        <TileLayer
-          attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <LayerGroup>
-          {props.stations.map((station) => (
-            <GeoJSON
+  const [map, setMap] = useState<LeafletMap | null>(null)
+  const { hikingRoutes } = useHikingRoutes(map ? ({
+    boundingBox: map.getBounds(),
+    zoom: map.getZoom()
+  }) : null);
+
+  const displayMap = useMemo(() =>  <MapContainer
+      center={[44.856614, 2.35]}
+      ref={setMap}
+      zoom={6}
+      scrollWheelZoom={false}
+  >
+    <MapListener {...props}></MapListener>
+    <TileLayer
+        attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    />
+    <LayerGroup>
+      {props.stations.map((station) => (
+          <GeoJSON
               key={station.id}
               data={stationToGeoJson(station)}>
-              <Tooltip>{station.label}</Tooltip>
-              <Popup>
-                <h4>{station.label} ({station.city})</h4>
-                <p>Utiliser comme :</p>
-                <button onClick={() => props.onSelectStart(station)}>Départ</button>
-                <button onClick={() => props.onSelectStep(station)}>Etape</button>
-                <button onClick={() => props.onSelectEnd(station)}>Arrivée</button>
-              </Popup>
-            </GeoJSON>
-          ))}
-        </LayerGroup>
-      </MapContainer>
+            <Tooltip>{station.label}</Tooltip>
+            <Popup>
+              <h4>{station.label} ({station.city})</h4>
+              <p>Utiliser comme :</p>
+              <button onClick={() => props.onSelectStart(station)}>Départ</button>
+              <button onClick={() => props.onSelectStep(station)}>Etape</button>
+              <button onClick={() => props.onSelectEnd(station)}>Arrivée</button>
+            </Popup>
+          </GeoJSON>
+      ))}
+    </LayerGroup>
+    <LayerGroup>
+      {hikingRoutes.map(r => (
+          <Rectangle key={r.id} bounds={r.bbox} fillColor="yellow" color="red" >
+            <Tooltip>
+              {r.name} {r.from && r.to && <>{r.from} - {r.to}</>}
+            </Tooltip>
+          </Rectangle>
+      ))}
+    </LayerGroup>
+  </MapContainer>, [hikingRoutes])
+
+
+  return (
+    <div className="Map">
+      {displayMap}
     </div>
   );
 };
@@ -66,6 +91,10 @@ export interface MapListenerProps {
 }
 const MapListener: FC<MapListenerProps> = (props) => {
   const map = useMap();
+  useEffect(() => {
+    // ugly trigger a move in order for the rest of the program to trigger a mapState update
+    map.setZoom(7, { animate: true });
+  }, []);
   useMapEvents({
     moveend: () => {
       if (props.onStateChange) {
