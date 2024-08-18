@@ -1,0 +1,10 @@
+.App {
+  display: flex;
+  .Map {
+    width: 70%;
+  }
+  .Sidebar {
+    width: 30%;
+    word-wrap: break-word;
+  }
+}
