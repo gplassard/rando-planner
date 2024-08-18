@@ -1,37 +1,29 @@
-import { LatLngBounds } from 'leaflet';
-import React, { useState, FC, Fragment } from 'react';
+import React, { useState, FC } from 'react';
 import { Map } from './components/Map';
+import { Sidebar } from './components/Sidebar';
 import { useStations } from './hooks/useStations';
-import { AugmentedRandoLight, RandoLight } from './model/Rando';
-import db from '../data/small_database.json';
+import './App.scss';
+import { MapState } from './model/MapState';
+import { useItinerary } from './hooks/useItinerary';
 
-const typedDb: RandoLight[] = db as RandoLight[];
-const augmentedDb: AugmentedRandoLight[] = typedDb.map((rando) => ({
-  ...rando,
-  bbox: new LatLngBounds(
-    [rando.bbox[1], rando.bbox[0]],
-    [rando.bbox[3], rando.bbox[2]],
-  ),
-}));
-
-export const App: FC<{}> = () => {
-  const [bbox, setBbox] = useState<LatLngBounds | null>(null);
+export const App: FC = () => {
+  const [mapState, setMapState] = useState<MapState | null>(null);
   const { stations } = useStations();
-
-  let count = 0;
-  if (bbox) {
-    const intersecting = augmentedDb.filter((rando) =>
-      bbox.contains(rando.bbox),
-    );
-    count = intersecting.length;
-    console.log(intersecting.slice(0, 10));
-  }
+  const { itinerary, handlers } = useItinerary();
 
   return (
-    <Fragment>
-      <p>{count} / {augmentedDb.length}</p>
-      <p>{bbox?.toBBoxString()}</p>
-      <Map stations={stations} onMove={setBbox}></Map>
-    </Fragment>
+    <div className="App">
+      <Map stations={stations}
+        onSelectStart={handlers.setStart}
+        onSelectStep={handlers.addStep}
+        onSelectEnd={handlers.setEnd}
+        onStateChange={setMapState}
+      />
+      <Sidebar
+        mapState={mapState}
+        itinerary={itinerary}
+        itineraryHandlers={handlers}
+      />
+    </div>
   );
 };
