@@ -1,9 +1,8 @@
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { AugmentedRandoLight, RandoLight } from '../model/Rando';
 import { LatLngBounds } from 'leaflet';
 import { Itinerary } from '../model/Itinerary';
 import { Station } from '../model/Station';
-import smallDatabase from '../../data/small_database.json';
 
 /**
  * Hook to load and manage hiking route data
@@ -13,10 +12,33 @@ import smallDatabase from '../../data/small_database.json';
 export const useRandoRoutes = (itinerary?: Itinerary): {
   allRoutes: AugmentedRandoLight[];
   relevantRoutes: AugmentedRandoLight[];
+  loading: boolean;
 } => {
+  const [loading, setLoading] = useState(true);
+  const [routeData, setRouteData] = useState<RandoLight[]>([]);
+
+  // Lazy load the route data
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        // Dynamic import to load the data only when needed
+        const module = await import('../../data/small_database.json');
+        setRouteData(module.default as RandoLight[]);
+      } catch (error) {
+        console.error('Error loading route data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    // Handle the promise to avoid ESLint error
+    void loadData();
+  }, []);
+
   // Convert the raw data to AugmentedRandoLight objects
   const allRoutes = useMemo(() => {
-    return (smallDatabase as RandoLight[]).map(route => {
+    return routeData.map(route => {
       // Convert the bbox array to a LatLngBounds object
       const [minLng, minLat, maxLng, maxLat] = route.bbox;
       const bounds = new LatLngBounds(
@@ -29,7 +51,7 @@ export const useRandoRoutes = (itinerary?: Itinerary): {
         bbox: bounds,
       };
     });
-  }, []);
+  }, [routeData]);
 
   // Filter routes based on the selected stations in the itinerary
   const relevantRoutes = useMemo(() => {
@@ -57,5 +79,5 @@ export const useRandoRoutes = (itinerary?: Itinerary): {
     });
   }, [allRoutes, itinerary]);
 
-  return { allRoutes, relevantRoutes };
+  return { allRoutes, relevantRoutes, loading };
 };

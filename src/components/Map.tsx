@@ -1,4 +1,4 @@
-import type { Point } from 'geojson';
+import type { Point, LineString } from 'geojson';
 import React, { FC } from 'react';
 import {
   LayerGroup,
@@ -7,14 +7,29 @@ import {
   GeoJSON,
   Tooltip,
   useMap,
-  useMapEvents, Popup,
+  useMapEvents,
+  Popup,
+  Polyline,
+  CircleMarker,
 } from 'react-leaflet';
+import { LatLng } from 'leaflet';
 import { MapState } from '../model/MapState';
 import { Station } from '../model/Station';
+import { AugmentedRandoLight } from '../model/Rando';
+import { Itinerary } from '../model/Itinerary';
+import { LegType } from '../model/Leg';
 import './Map.scss';
 
 interface Props extends MapListenerProps{
   stations: Station[];
+  routes?: AugmentedRandoLight[];
+  routeGeometries?: Record<string, {
+    id: string;
+    type: 'LineString';
+    coordinates: LatLng[];
+  }>;
+  itinerary?: Itinerary;
+  loading?: boolean;
   onSelectStart: (station: Station) => any;
   onSelectEnd: (station: Station) => any;
   onSelectStep: (station: Station) => any;
@@ -40,6 +55,43 @@ export const Map: FC<Props> = (props: Props) => {
           attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+
+        {/* Display hiking routes */}
+        {!props.loading && props.routes && props.routeGeometries && (
+          <LayerGroup>
+            {props.routes.map((route) => {
+              const geometry = props.routeGeometries?.[route.id];
+              if (!geometry) return null;
+
+              // Check if this route is part of the itinerary
+              const isSelected = props.itinerary?.legs.some(
+                leg => leg.type === LegType.HIKING && 'route' in leg && leg.route.id === route.id,
+              );
+
+              // Apply different styles based on whether the route is selected or not
+              const color = isSelected ? '#ff4500' : '#3388ff'; // Orange for selected, blue for available
+              const weight = isSelected ? 5 : 3;
+              const opacity = isSelected ? 0.9 : 0.6;
+
+              return (
+                <Polyline
+                  key={route.id}
+                  positions={geometry.coordinates}
+                  color={color}
+                  weight={weight}
+                  opacity={opacity}
+                >
+                  <Tooltip>
+                    {route.name || route.id}
+                    {isSelected && ' (Selected)'}
+                  </Tooltip>
+                </Polyline>
+              );
+            })}
+          </LayerGroup>
+        )}
+
+        {/* Display stations */}
         <LayerGroup>
           {props.stations.map((station) => (
             <GeoJSON

@@ -14,13 +14,13 @@ This document contains a detailed checklist of tasks to implement the improvemen
 - [x] Enhance data preparation scripts for more efficient data structures
 - [x] Add preprocessing to establish connections between stations and routes
 - [x] Create spatial indices to improve performance when searching for nearby routes
-- [ ] Optimize the data loading process for faster application startup
+- [x] Optimize the data loading process for faster application startup
 
 ## 2. User Interface Enhancements
 
 ### 2.1 Map Visualization Improvements
-- [ ] Display hiking routes on the map as lines connecting stations
-- [ ] Implement different colors/styles for selected routes vs. available routes
+- [x] Display hiking routes on the map as lines connecting stations
+- [x] Implement different colors/styles for selected routes vs. available routes
 - [ ] Add visual indicators for start, end, and intermediate points
 - [ ] Implement zooming to show the entire selected route
 - [ ] Add tooltips showing route information on hover
