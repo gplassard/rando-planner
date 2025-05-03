@@ -1,36 +1,29 @@
+/* Hide print-only elements by default */
+.print-only {
+  display: none;
+}
+
 @media print {
   /* Hide elements that shouldn't be printed */
   .Map,
   .print-button,
   .remove-button,
-  .toggle-icon {
+  .toggle-icon,
+  .Sidebar {
     display: none !important;
   }
 
-  /* Expand the sidebar to full width */
-  .Sidebar {
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 20px !important;
-  }
-
-  /* Ensure all sections are expanded for printing */
-  .section-content,
-  .empty-state {
+  /* Show print-only elements when printing */
+  .print-only {
     display: block !important;
   }
 
-  /* Add page breaks before major sections */
-  .itinerary-section {
-    page-break-inside: avoid;
-    margin-bottom: 20px;
-  }
-
-  /* Style the headers for print */
-  .section-header {
-    border-bottom: 1px solid #000;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
+  /* Show the print view */
+  .print-view {
+    display: block !important;
+    width: 100% !important;
+    padding: 20px !important;
+    font-family: Arial, sans-serif;
   }
 
   /* Improve readability of text */
@@ -41,28 +34,158 @@
     background: #fff;
   }
 
-  /* Style the station information */
-  .station-info {
+  /* Style the print header */
+  .print-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .print-header h1 {
+    font-size: 24pt;
+    margin-bottom: 5px;
+  }
+
+  .print-date {
+    font-size: 10pt;
+    color: #666;
+  }
+
+  /* Style the print summary */
+  .print-summary {
+    margin-bottom: 30px;
+    page-break-inside: avoid;
+  }
+
+  .print-summary h2 {
+    font-size: 18pt;
+    border-bottom: 1px solid #000;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+  }
+
+  .print-summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+
+  .print-summary-item {
     margin-bottom: 10px;
   }
 
-  .station-name {
+  .print-summary-label {
+    font-weight: bold;
+    display: block;
+  }
+
+  /* Style the print itinerary */
+  .print-itinerary h2 {
+    font-size: 18pt;
+    border-bottom: 1px solid #000;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+  }
+
+  .print-section {
+    margin-bottom: 25px;
+    page-break-inside: avoid;
+  }
+
+  .print-section h3 {
+    font-size: 14pt;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  .print-section-icon {
+    margin-right: 10px;
+  }
+
+  /* Style the station information */
+  .print-station-info {
+    margin-bottom: 15px;
+    padding-left: 20px;
+  }
+
+  .print-station-name {
+    font-weight: bold;
+    font-size: 12pt;
+  }
+
+  .print-station-city {
+    font-size: 10pt;
+    color: #444;
+  }
+
+  .print-empty-state {
+    font-style: italic;
+    color: #666;
+    padding-left: 20px;
+  }
+
+  /* Style the steps */
+  .print-step {
+    margin-bottom: 15px;
+    padding-left: 20px;
+  }
+
+  .print-step-number {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  /* Style the legs */
+  .print-legs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .print-leg {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    page-break-inside: avoid;
+  }
+
+  .print-leg-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+  }
+
+  .print-leg-type {
     font-weight: bold;
   }
 
-  /* Style the summary statistics */
-  .summary-content {
+  .print-leg-details {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
   }
 
-  .summary-stat {
-    margin-bottom: 10px;
+  .print-leg-stat {
+    margin-bottom: 5px;
   }
 
-  .stat-label {
+  .print-stat-label {
     font-weight: bold;
+    margin-right: 5px;
+  }
+
+  .print-leg-notes {
+    grid-column: 1 / span 2;
+    margin-top: 10px;
+    border-top: 1px dashed #eee;
+    padding-top: 10px;
+  }
+
+  .print-notes-label {
+    font-weight: bold;
+    margin-right: 5px;
   }
 
   /* Add a footer with page numbers */
@@ -71,17 +194,5 @@
     @bottom-center {
       content: "Page " counter(page) " of " counter(pages);
     }
-  }
-
-  /* Add a title to the first page */
-  .sidebar-header h2 {
-    font-size: 24pt;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  /* Hide the description in print view */
-  .sidebar-header p {
-    display: none;
   }
 }

@@ -1,6 +1,7 @@
 import React, { useState, FC } from 'react';
 import { Map } from './components/Map';
 import { Sidebar } from './components/Sidebar';
+import { PrintView } from './components/PrintView';
 import { useStations } from './hooks/useStations';
 import './App.scss';
 import { MapState } from './model/MapState';
@@ -22,6 +23,7 @@ export const App: FC = () => {
         routes={relevantRoutes}
         routeGeometries={geometries}
         itinerary={itinerary}
+        itineraryHandlers={handlers}
         loading={stationsLoading || routesLoading || geometriesLoading}
         onSelectStart={handlers.setStart}
         onSelectStep={handlers.addStep}
@@ -33,6 +35,10 @@ export const App: FC = () => {
         itinerary={itinerary}
         itineraryHandlers={handlers}
       />
+      {/* PrintView is hidden by default and only shown when printing */}
+      <div className="print-only">
+        <PrintView itinerary={itinerary} />
+      </div>
     </div>
   );
 };

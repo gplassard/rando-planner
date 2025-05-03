@@ -1,5 +1,5 @@
 import type { Point, LineString } from 'geojson';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import {
   LayerGroup,
   MapContainer,
@@ -17,7 +17,8 @@ import { MapState } from '../model/MapState';
 import { Station } from '../model/Station';
 import { AugmentedRandoLight } from '../model/Rando';
 import { Itinerary } from '../model/Itinerary';
-import { LegType } from '../model/Leg';
+import { HikingLeg, LegType } from '../model/Leg';
+import { RouteSelector } from './RouteSelector';
 import './Map.scss';
 
 interface Props extends MapListenerProps{
@@ -29,6 +30,9 @@ interface Props extends MapListenerProps{
     coordinates: LatLng[];
   }>;
   itinerary?: Itinerary;
+  itineraryHandlers?: {
+    addLeg: (leg: HikingLeg) => void;
+  };
   loading?: boolean;
   onSelectStart: (station: Station) => any;
   onSelectEnd: (station: Station) => any;
@@ -47,8 +51,65 @@ function stationToGeoJson(station: Station): Point {
 }
 
 export const Map: FC<Props> = (props: Props) => {
+  // State for route selection
+  const [routeSelectionVisible, setRouteSelectionVisible] = useState(false);
+  const [fromStation, setFromStation] = useState<Station | null>(null);
+  const [toStation, setToStation] = useState<Station | null>(null);
+  const [consideringRouteIds, setConsideringRouteIds] = useState<string[]>([]);
+
+  // Handle station selection for route creation
+  const handleStationSelect = (station: Station) => {
+    // If we don't have a from station yet, set it
+    if (!fromStation) {
+      setFromStation(station);
+      return;
+    }
+
+    // If we have a from station but not a to station, set the to station and show the route selector
+    if (!toStation) {
+      setToStation(station);
+      setRouteSelectionVisible(true);
+      return;
+    }
+
+    // If we have both stations, reset and start over with the new station
+    setFromStation(station);
+    setToStation(null);
+    setRouteSelectionVisible(false);
+  };
+
+  // Handle route selection
+  const handleRouteSelect = (leg: HikingLeg) => {
+    props.onSelectStart?.(leg.from);
+    props.onSelectEnd?.(leg.to);
+    props.itineraryHandlers?.addLeg(leg);
+
+    // Reset the route selection state
+    setRouteSelectionVisible(false);
+    setFromStation(null);
+    setToStation(null);
+  };
+
+  // Handle route selection cancellation
+  const handleRouteCancel = () => {
+    setRouteSelectionVisible(false);
+    setFromStation(null);
+    setToStation(null);
+  };
+
   return (
     <div className="Map">
+      {/* Show the route selector when both from and to stations are selected */}
+      {routeSelectionVisible && fromStation && toStation && props.routes && (
+        <RouteSelector
+          from={fromStation}
+          to={toStation}
+          availableRoutes={props.routes}
+          onRouteSelect={handleRouteSelect}
+          onCancel={handleRouteCancel}
+        />
+      )}
+
       <MapContainer center={[44.856614, 2.35]} zoom={7} scrollWheelZoom={false}>
         <MapListener {...props}></MapListener>
         {props.itinerary && props.routeGeometries && (
@@ -155,6 +216,14 @@ export const Map: FC<Props> = (props: Props) => {
                     <button onClick={() => props.onSelectStart(station)}>Départ</button>
                     <button onClick={() => props.onSelectStep(station)}>Etape</button>
                     <button onClick={() => props.onSelectEnd(station)}>Arrivée</button>
+                    <div className="route-creation">
+                      <p>Ou créer un itinéraire :</p>
+                      <button onClick={() => handleStationSelect(station)}>
+                        {!fromStation ? 'Sélectionner comme point de départ' :
+                          fromStation.id === station.id ? 'Déjà sélectionné' :
+                            'Sélectionner comme destination'}
+                      </button>
+                    </div>
                   </Popup>
                 </CircleMarker>
               </React.Fragment>

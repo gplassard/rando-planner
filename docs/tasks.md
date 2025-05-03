@@ -30,10 +30,10 @@ This document contains a detailed checklist of tasks to implement the improvemen
 - [x] Display human-readable information instead of raw JSON
 - [x] Add summary statistics (total distance, number of legs, estimated time)
 - [x] Implement collapsible sections for detailed information
-- [ ] Create a print-friendly view of the itinerary
+- [x] Create a print-friendly view of the itinerary
 
 ### 2.3 Interactive Route Selection
-- [ ] Implement a route selection interface when users select start and end points
+- [x] Implement a route selection interface when users select start and end points
 - [ ] Show alternative routes between points when available
 - [ ] Allow users to drag routes to modify the path
 - [ ] Add confirmation dialogs for major itinerary changes
