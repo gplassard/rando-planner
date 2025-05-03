@@ -1,9 +1,10 @@
 import { FC, useState } from 'react';
 import { Itinerary, ItineraryHandlers } from '../model/Itinerary';
 import { MapState } from '../model/MapState';
-import { Leg, LegType } from '../model/Leg';
+import { Leg, LegType, RestLeg, HikingLeg } from '../model/Leg';
 import { ConfirmationDialog } from './ConfirmationDialog';
 import { Station } from '../model/Station';
+import './Sidebar.scss';
 
 export interface SidebarProps {
   mapState: MapState | null;
@@ -17,6 +18,7 @@ export const Sidebar: FC<SidebarProps> = (props) => {
     start: true,
     steps: true,
     end: true,
+    legs: true,
     summary: true,
   });
 
@@ -26,8 +28,10 @@ export const Sidebar: FC<SidebarProps> = (props) => {
     title: string;
     message: string;
     onConfirm: () => void;
-    type: 'removeStart' | 'removeStep' | 'removeEnd' | null;
+    type: 'removeStart' | 'removeStep' | 'removeEnd' | 'removeLeg' | 'addRestLeg' | null;
     stepToRemove?: Station;
+    legToRemove?: Leg;
+    restLegLocation?: Station;
   }>({
         isOpen: false,
         title: '',
@@ -74,6 +78,47 @@ export const Sidebar: FC<SidebarProps> = (props) => {
         closeConfirmationDialog();
       },
       type: 'removeEnd',
+    });
+  };
+
+  const showRemoveLegConfirmation = (leg: Leg) => {
+    const legDescription = leg.type === LegType.HIKING
+      ? `hiking leg from ${leg.from.label} to ${leg.to.label}`
+      : `rest leg at ${(leg as any).location?.label || 'unknown location'}`;
+
+    setConfirmationDialog({
+      isOpen: true,
+      title: 'Remove Leg',
+      message: `Are you sure you want to remove this ${legDescription}?`,
+      onConfirm: () => {
+        props.itineraryHandlers.removeLeg(leg.id);
+        closeConfirmationDialog();
+      },
+      type: 'removeLeg',
+      legToRemove: leg,
+    });
+  };
+
+  const showAddRestLegConfirmation = (location: Station) => {
+    setConfirmationDialog({
+      isOpen: true,
+      title: 'Add Rest Leg',
+      message: `Add a rest day at ${location.label}?`,
+      onConfirm: () => {
+        // Create a new rest leg
+        const restLeg: RestLeg = {
+          id: `rest-${Date.now()}`,
+          type: LegType.REST,
+          from: location,
+          to: location,
+          location: location,
+          notes: '',
+        };
+        props.itineraryHandlers.addLeg(restLeg);
+        closeConfirmationDialog();
+      },
+      type: 'addRestLeg',
+      restLegLocation: location,
     });
   };
 
@@ -256,6 +301,121 @@ export const Sidebar: FC<SidebarProps> = (props) => {
             ) : (
               <div className="empty-state">
                 No ending point selected. Click on a station and select "Arrivée".
+              </div>
+            )
+          )}
+        </div>
+
+        {/* Legs Section */}
+        <div className="itinerary-section">
+          <h3
+            className={`section-header ${expandedSections.legs ? 'expanded' : 'collapsed'}`}
+            onClick={() => toggleSection('legs')}
+          >
+            <span className="section-icon legs-icon">🥾</span>
+            Legs
+            <span className="leg-count">({props.itinerary.legs.length})</span>
+            <span className="toggle-icon">{expandedSections.legs ? '▼' : '►'}</span>
+          </h3>
+          {expandedSections.legs && (
+            props.itinerary.legs.length > 0 ? (
+              <div className="section-content">
+                {props.itinerary.legs.map((leg, index) => (
+                  <div key={leg.id} className="leg-item">
+                    <div className="leg-header">
+                      <div className="leg-number">Leg {index + 1}</div>
+                      <div className="leg-type">
+                        {leg.type === LegType.HIKING ? '🥾 Hiking' : '🏠 Rest'}
+                      </div>
+                    </div>
+
+                    {leg.type === LegType.HIKING ? (
+                      <div className="leg-details">
+                        <div className="leg-route">
+                          <strong>Route:</strong> {(leg as HikingLeg).route.name || 'Unnamed route'}
+                        </div>
+                        <div className="leg-stations">
+                          <div><strong>From:</strong> {leg.from.label}</div>
+                          <div><strong>To:</strong> {leg.to.label}</div>
+                        </div>
+                        {leg.distance && (
+                          <div className="leg-distance">
+                            <strong>Distance:</strong> {leg.distance.toFixed(1)} km
+                          </div>
+                        )}
+                        {leg.estimatedTime && (
+                          <div className="leg-time">
+                            <strong>Time:</strong> {formatTime(leg.estimatedTime)}
+                          </div>
+                        )}
+                        {(leg as HikingLeg).difficulty && (
+                          <div className="leg-difficulty">
+                            <strong>Difficulty:</strong> {(leg as HikingLeg).difficulty}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="leg-details">
+                        <div className="leg-location">
+                          <strong>Location:</strong> {(leg as RestLeg).location.label}
+                        </div>
+                        {(leg as RestLeg).notes && (
+                          <div className="leg-notes">
+                            <strong>Notes:</strong> {(leg as RestLeg).notes}
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    <div className="leg-actions">
+                      <button
+                        className="remove-button"
+                        onClick={() => showRemoveLegConfirmation(leg)}
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                ))}
+
+                {/* Add Rest Leg controls */}
+                <div className="add-rest-leg">
+                  <h4>Add Rest Day</h4>
+                  <p>Select a location for your rest day:</p>
+                  <div className="rest-location-options">
+                    {props.itinerary.start && (
+                      <button
+                        className="location-button"
+                        onClick={() => showAddRestLegConfirmation(props.itinerary.start!)}
+                      >
+                        {props.itinerary.start.label} (Start)
+                      </button>
+                    )}
+
+                    {props.itinerary.steps.map(step => (
+                      <button
+                        key={step.id}
+                        className="location-button"
+                        onClick={() => showAddRestLegConfirmation(step)}
+                      >
+                        {step.label} (Step)
+                      </button>
+                    ))}
+
+                    {props.itinerary.end && (
+                      <button
+                        className="location-button"
+                        onClick={() => showAddRestLegConfirmation(props.itinerary.end!)}
+                      >
+                        {props.itinerary.end.label} (End)
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="empty-state">
+                No legs added yet. Select hiking routes on the map or add rest days to create legs.
               </div>
             )
           )}

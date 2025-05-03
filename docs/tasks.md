@@ -36,15 +36,15 @@ This document contains a detailed checklist of tasks to implement the improvemen
 - [x] Implement a route selection interface when users select start and end points
 - [x] Show alternative routes between points when available
 - [x] Allow users to drag routes to modify the path
-- [ ] Add confirmation dialogs for major itinerary changes
+- [x] Add confirmation dialogs for major itinerary changes
 
 ## 3. Core Functionality Implementation
 
 ### 3.1 Leg Management
-- [ ] Extend the Itinerary model to include the concept of legs between points
-- [ ] Implement different types of legs (hiking, rest)
-- [ ] Add UI controls to add, remove, and modify legs
-- [ ] Store additional metadata for each leg (distance, estimated time, difficulty)
+- [x] Extend the Itinerary model to include the concept of legs between points
+- [x] Implement different types of legs (hiking, rest)
+- [x] Add UI controls to add, remove, and modify legs
+- [x] Store additional metadata for each leg (distance, estimated time, difficulty)
 - [ ] Implement validation to ensure a coherent itinerary
 
 ### 3.2 Distance and Time Calculation
@@ -55,10 +55,10 @@ This document contains a detailed checklist of tasks to implement the improvemen
 - [ ] Add elevation profile visualization for routes
 
 ### 3.3 Rest Leg Implementation
-- [ ] Add UI controls to insert rest days at specific locations
-- [ ] Extend the itinerary model to include rest days
-- [ ] Update the trip summary to account for rest days
-- [ ] Allow users to add notes to rest days (accommodation, points of interest)
+- [x] Add UI controls to insert rest days at specific locations
+- [x] Extend the itinerary model to include rest days
+- [x] Update the trip summary to account for rest days
+- [x] Allow users to add notes to rest days (accommodation, points of interest)
 
 ## 4. Technical Improvements
 
