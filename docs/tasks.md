@@ -34,8 +34,8 @@ This document contains a detailed checklist of tasks to implement the improvemen
 
 ### 2.3 Interactive Route Selection
 - [x] Implement a route selection interface when users select start and end points
-- [ ] Show alternative routes between points when available
-- [ ] Allow users to drag routes to modify the path
+- [x] Show alternative routes between points when available
+- [x] Allow users to drag routes to modify the path
 - [ ] Add confirmation dialogs for major itinerary changes
 
 ## 3. Core Functionality Implementation

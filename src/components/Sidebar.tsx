@@ -2,6 +2,8 @@ import { FC, useState } from 'react';
 import { Itinerary, ItineraryHandlers } from '../model/Itinerary';
 import { MapState } from '../model/MapState';
 import { Leg, LegType } from '../model/Leg';
+import { ConfirmationDialog } from './ConfirmationDialog';
+import { Station } from '../model/Station';
 
 export interface SidebarProps {
   mapState: MapState | null;
@@ -17,6 +19,70 @@ export const Sidebar: FC<SidebarProps> = (props) => {
     end: true,
     summary: true,
   });
+
+  // State for confirmation dialogs
+  const [confirmationDialog, setConfirmationDialog] = useState<{
+    isOpen: boolean;
+    title: string;
+    message: string;
+    onConfirm: () => void;
+    type: 'removeStart' | 'removeStep' | 'removeEnd' | null;
+    stepToRemove?: Station;
+  }>({
+        isOpen: false,
+        title: '',
+        message: '',
+        onConfirm: () => {},
+        type: null,
+      });
+
+  // Handlers for confirmation dialogs
+  const showRemoveStartConfirmation = () => {
+    setConfirmationDialog({
+      isOpen: true,
+      title: 'Remove Starting Point',
+      message: 'Are you sure you want to remove the starting point? This will affect your itinerary.',
+      onConfirm: () => {
+        props.itineraryHandlers.setStart(undefined);
+        closeConfirmationDialog();
+      },
+      type: 'removeStart',
+    });
+  };
+
+  const showRemoveStepConfirmation = (step: Station) => {
+    setConfirmationDialog({
+      isOpen: true,
+      title: 'Remove Intermediate Step',
+      message: `Are you sure you want to remove ${step.label} from your itinerary?`,
+      onConfirm: () => {
+        props.itineraryHandlers.removeStep(step);
+        closeConfirmationDialog();
+      },
+      type: 'removeStep',
+      stepToRemove: step,
+    });
+  };
+
+  const showRemoveEndConfirmation = () => {
+    setConfirmationDialog({
+      isOpen: true,
+      title: 'Remove Ending Point',
+      message: 'Are you sure you want to remove the ending point? This will affect your itinerary.',
+      onConfirm: () => {
+        props.itineraryHandlers.setEnd(undefined);
+        closeConfirmationDialog();
+      },
+      type: 'removeEnd',
+    });
+  };
+
+  const closeConfirmationDialog = () => {
+    setConfirmationDialog(prev => ({
+      ...prev,
+      isOpen: false,
+    }));
+  };
 
   // Toggle section expansion
   const toggleSection = (section: 'start' | 'steps' | 'end' | 'summary') => {
@@ -78,6 +144,17 @@ export const Sidebar: FC<SidebarProps> = (props) => {
 
   return (
     <div className="Sidebar">
+      {/* Confirmation Dialog */}
+      <ConfirmationDialog
+        isOpen={confirmationDialog.isOpen}
+        title={confirmationDialog.title}
+        message={confirmationDialog.message}
+        onConfirm={confirmationDialog.onConfirm}
+        onCancel={closeConfirmationDialog}
+        confirmText="Yes, Remove"
+        cancelText="Cancel"
+      />
+
       <div className="sidebar-header">
         <h2>Itinerary</h2>
         <p>Plan your hiking trip by selecting stations on the map</p>
@@ -107,7 +184,7 @@ export const Sidebar: FC<SidebarProps> = (props) => {
                 {formatStation(props.itinerary.start)}
                 <button
                   className="remove-button"
-                  onClick={() => props.itineraryHandlers.setStart(undefined)}
+                  onClick={showRemoveStartConfirmation}
                 >
                   Remove
                 </button>
@@ -140,7 +217,7 @@ export const Sidebar: FC<SidebarProps> = (props) => {
                     {formatStation(step)}
                     <button
                       className="remove-button"
-                      onClick={() => props.itineraryHandlers.removeStep(step)}
+                      onClick={() => showRemoveStepConfirmation(step)}
                     >
                       Remove
                     </button>
@@ -171,7 +248,7 @@ export const Sidebar: FC<SidebarProps> = (props) => {
                 {formatStation(props.itinerary.end)}
                 <button
                   className="remove-button"
-                  onClick={() => props.itineraryHandlers.setEnd(undefined)}
+                  onClick={showRemoveEndConfirmation}
                 >
                   Remove
                 </button>

@@ -1,5 +1,6 @@
 import { Station } from './Station';
 import { AugmentedRandoLight } from './Rando';
+import { LatLng } from 'leaflet';
 
 /**
  * Represents the type of a leg in an itinerary
@@ -28,6 +29,7 @@ export interface HikingLeg extends BaseLeg {
   type: LegType.HIKING;
   route: AugmentedRandoLight;
   difficulty?: string;
+  editedCoordinates?: LatLng[]; // Custom edited path coordinates
 }
 
 /**

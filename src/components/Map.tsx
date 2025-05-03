@@ -1,5 +1,5 @@
 import type { Point, LineString } from 'geojson';
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useCallback } from 'react';
 import {
   LayerGroup,
   MapContainer,
@@ -11,8 +11,9 @@ import {
   Popup,
   Polyline,
   CircleMarker,
+  Marker,
 } from 'react-leaflet';
-import { LatLng } from 'leaflet';
+import { LatLng, Icon, DivIcon } from 'leaflet';
 import { MapState } from '../model/MapState';
 import { Station } from '../model/Station';
 import { AugmentedRandoLight } from '../model/Rando';
@@ -32,6 +33,7 @@ interface Props extends MapListenerProps{
   itinerary?: Itinerary;
   itineraryHandlers?: {
     addLeg: (leg: HikingLeg) => void;
+    updateLeg?: (leg: HikingLeg) => void;
   };
   loading?: boolean;
   onSelectStart: (station: Station) => any;
@@ -56,6 +58,10 @@ export const Map: FC<Props> = (props: Props) => {
   const [fromStation, setFromStation] = useState<Station | null>(null);
   const [toStation, setToStation] = useState<Station | null>(null);
   const [consideringRouteIds, setConsideringRouteIds] = useState<string[]>([]);
+
+  // State for route editing
+  const [editingRouteId, setEditingRouteId] = useState<string | null>(null);
+  const [editedCoordinates, setEditedCoordinates] = useState<LatLng[]>([]);
 
   // Handle station selection for route creation
   const handleStationSelect = (station: Station) => {
@@ -97,6 +103,53 @@ export const Map: FC<Props> = (props: Props) => {
     setToStation(null);
   };
 
+  // Start editing a route
+  const handleStartEditing = useCallback((routeId: string, coordinates: LatLng[]) => {
+    setEditingRouteId(routeId);
+    setEditedCoordinates(coordinates);
+  }, []);
+
+  // Handle marker drag
+  const handleMarkerDrag = useCallback((index: number, newPosition: LatLng) => {
+    setEditedCoordinates(prev => {
+      const newCoordinates = [...prev];
+      newCoordinates[index] = newPosition;
+      return newCoordinates;
+    });
+  }, []);
+
+  // Save the edited route
+  const handleSaveRoute = useCallback(() => {
+    if (!editingRouteId || !props.itineraryHandlers?.updateLeg) return;
+
+    // Find the leg with this route
+    const hikingLeg = props.itinerary?.legs.find(
+      currentLeg => currentLeg.type === LegType.HIKING && 'route' in currentLeg && currentLeg.route.id === editingRouteId,
+    );
+
+    if (hikingLeg && hikingLeg.type === LegType.HIKING && 'route' in hikingLeg) {
+      // Create a new leg with the updated route
+      const updatedLeg: HikingLeg = {
+        ...hikingLeg,
+        // We're not actually updating the route's geometry in the database,
+        // just storing the edited coordinates in the leg for display purposes
+        editedCoordinates: editedCoordinates,
+      };
+
+      props.itineraryHandlers.updateLeg(updatedLeg);
+    }
+
+    // Reset editing state
+    setEditingRouteId(null);
+    setEditedCoordinates([]);
+  }, [editingRouteId, editedCoordinates, props.itinerary?.legs, props.itineraryHandlers]);
+
+  // Cancel editing
+  const handleCancelEditing = useCallback(() => {
+    setEditingRouteId(null);
+    setEditedCoordinates([]);
+  }, []);
+
   return (
     <div className="Map">
       {/* Show the route selector when both from and to stations are selected */}
@@ -131,37 +184,92 @@ export const Map: FC<Props> = (props: Props) => {
               if (!geometry) return null;
 
               // Check if this route is part of the itinerary
-              const isSelected = props.itinerary?.legs.some(
+              const hikingLeg = props.itinerary?.legs.find(
                 leg => leg.type === LegType.HIKING && 'route' in leg && leg.route.id === route.id,
               );
+
+              const isSelected = !!hikingLeg;
+              const isEditing = editingRouteId === route.id;
 
               // Apply different styles based on whether the route is selected or not
               const color = isSelected ? '#ff4500' : '#3388ff'; // Orange for selected, blue for available
               const weight = isSelected ? 5 : 3;
               const opacity = isSelected ? 0.9 : 0.6;
 
+              // Determine which coordinates to use
+              let positions = geometry.coordinates;
+              if (isEditing && editedCoordinates.length > 0) {
+                positions = editedCoordinates;
+              } else if (hikingLeg && hikingLeg.type === LegType.HIKING && hikingLeg.editedCoordinates) {
+                positions = hikingLeg.editedCoordinates;
+              }
+
               return (
-                <Polyline
-                  key={route.id}
-                  positions={geometry.coordinates}
-                  color={color}
-                  weight={weight}
-                  opacity={opacity}
-                >
-                  <Tooltip>
-                    <div style={{ fontWeight: 'bold' }}>
-                      {route.name || `Route ${route.id}`}
-                      {isSelected && ' (Selected)'}
-                    </div>
-                    {(route.from || route.to) && (
-                      <div>
-                        {route.from && <span>From: {route.from}</span>}
-                        {route.from && route.to && <span> • </span>}
-                        {route.to && <span>To: {route.to}</span>}
+                <React.Fragment key={route.id}>
+                  <Polyline
+                    positions={positions}
+                    color={color}
+                    weight={weight}
+                    opacity={opacity}
+                    eventHandlers={{
+                      click: () => {
+                        if (isSelected && !isEditing) {
+                          handleStartEditing(route.id, [...positions]);
+                        }
+                      },
+                    }}
+                  >
+                    <Tooltip>
+                      <div style={{ fontWeight: 'bold' }}>
+                        {route.name || `Route ${route.id}`}
+                        {isSelected && !isEditing && ' (Selected - Click to edit)'}
+                        {isEditing && ' (Editing)'}
                       </div>
-                    )}
-                  </Tooltip>
-                </Polyline>
+                      {(route.from || route.to) && (
+                        <div>
+                          {route.from && <span>From: {route.from}</span>}
+                          {route.from && route.to && <span> • </span>}
+                          {route.to && <span>To: {route.to}</span>}
+                        </div>
+                      )}
+                    </Tooltip>
+                  </Polyline>
+
+                  {/* Add draggable markers when in editing mode */}
+                  {isEditing && editedCoordinates.map((coord, index) => (
+                    <Marker
+                      key={`marker-${index}`}
+                      position={coord}
+                      draggable={true}
+                      eventHandlers={{
+                        dragend: (e) => {
+                          const marker = e.target;
+                          const position = marker.getLatLng();
+                          handleMarkerDrag(index, position);
+                        },
+                      }}
+                    />
+                  ))}
+
+                  {/* Add editing controls when in editing mode */}
+                  {isEditing && (
+                    <div className="route-editing-controls" style={{
+                      position: 'absolute',
+                      top: '10px',
+                      right: '10px',
+                      zIndex: 1000,
+                      backgroundColor: 'white',
+                      padding: '10px',
+                      borderRadius: '5px',
+                      boxShadow: '0 0 10px rgba(0,0,0,0.2)',
+                    }}>
+                      <h4>Editing Route</h4>
+                      <p>Drag the markers to modify the route</p>
+                      <button onClick={handleSaveRoute}>Save Changes</button>
+                      <button onClick={handleCancelEditing}>Cancel</button>
+                    </div>
+                  )}
+                </React.Fragment>
               );
             })}
           </LayerGroup>
