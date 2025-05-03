@@ -1,0 +1,87 @@
+@media print {
+  /* Hide elements that shouldn't be printed */
+  .Map,
+  .print-button,
+  .remove-button,
+  .toggle-icon {
+    display: none !important;
+  }
+
+  /* Expand the sidebar to full width */
+  .Sidebar {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 20px !important;
+  }
+
+  /* Ensure all sections are expanded for printing */
+  .section-content,
+  .empty-state {
+    display: block !important;
+  }
+
+  /* Add page breaks before major sections */
+  .itinerary-section {
+    page-break-inside: avoid;
+    margin-bottom: 20px;
+  }
+
+  /* Style the headers for print */
+  .section-header {
+    border-bottom: 1px solid #000;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+  }
+
+  /* Improve readability of text */
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #000;
+    background: #fff;
+  }
+
+  /* Style the station information */
+  .station-info {
+    margin-bottom: 10px;
+  }
+
+  .station-name {
+    font-weight: bold;
+  }
+
+  /* Style the summary statistics */
+  .summary-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .summary-stat {
+    margin-bottom: 10px;
+  }
+
+  .stat-label {
+    font-weight: bold;
+  }
+
+  /* Add a footer with page numbers */
+  @page {
+    margin: 2cm;
+    @bottom-center {
+      content: "Page " counter(page) " of " counter(pages);
+    }
+  }
+
+  /* Add a title to the first page */
+  .sidebar-header h2 {
+    font-size: 24pt;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  /* Hide the description in print view */
+  .sidebar-header p {
+    display: none;
+  }
+}

@@ -51,6 +51,12 @@ export const Map: FC<Props> = (props: Props) => {
     <div className="Map">
       <MapContainer center={[44.856614, 2.35]} zoom={7} scrollWheelZoom={false}>
         <MapListener {...props}></MapListener>
+        {props.itinerary && props.routeGeometries && (
+          <ItineraryBoundsHandler
+            itinerary={props.itinerary}
+            routeGeometries={props.routeGeometries}
+          />
+        )}
         <TileLayer
           attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -82,8 +88,17 @@ export const Map: FC<Props> = (props: Props) => {
                   opacity={opacity}
                 >
                   <Tooltip>
-                    {route.name || route.id}
-                    {isSelected && ' (Selected)'}
+                    <div style={{ fontWeight: 'bold' }}>
+                      {route.name || `Route ${route.id}`}
+                      {isSelected && ' (Selected)'}
+                    </div>
+                    {(route.from || route.to) && (
+                      <div>
+                        {route.from && <span>From: {route.from}</span>}
+                        {route.from && route.to && <span> • </span>}
+                        {route.to && <span>To: {route.to}</span>}
+                      </div>
+                    )}
                   </Tooltip>
                 </Polyline>
               );
@@ -93,20 +108,58 @@ export const Map: FC<Props> = (props: Props) => {
 
         {/* Display stations */}
         <LayerGroup>
-          {props.stations.map((station) => (
-            <GeoJSON
-              key={station.id}
-              data={stationToGeoJson(station)}>
-              <Tooltip>{station.label}</Tooltip>
-              <Popup>
-                <h4>{station.label} ({station.city})</h4>
-                <p>Utiliser comme :</p>
-                <button onClick={() => props.onSelectStart(station)}>Départ</button>
-                <button onClick={() => props.onSelectStep(station)}>Etape</button>
-                <button onClick={() => props.onSelectEnd(station)}>Arrivée</button>
-              </Popup>
-            </GeoJSON>
-          ))}
+          {props.stations.map((station) => {
+            // Determine if this station is a start, end, or step point in the itinerary
+            const isStart = props.itinerary?.start?.id === station.id;
+            const isEnd = props.itinerary?.end?.id === station.id;
+            const isStep = props.itinerary?.steps.some(step => step.id === station.id);
+
+            // Set different styles based on the station's role
+            let color = '#3388ff'; // Default blue
+            let radius = 8;
+            let fillOpacity = 0.6;
+            let tooltipContent = station.label;
+
+            if (isStart) {
+              color = '#00cc00'; // Green for start
+              radius = 10;
+              fillOpacity = 0.8;
+              tooltipContent = `${station.label} (Départ)`;
+            } else if (isEnd) {
+              color = '#cc0000'; // Red for end
+              radius = 10;
+              fillOpacity = 0.8;
+              tooltipContent = `${station.label} (Arrivée)`;
+            } else if (isStep) {
+              color = '#ff9900'; // Orange for steps
+              radius = 9;
+              fillOpacity = 0.7;
+              tooltipContent = `${station.label} (Etape)`;
+            }
+
+            return (
+              <React.Fragment key={station.id}>
+                <CircleMarker
+                  center={[station.location.lat, station.location.lng]}
+                  radius={radius}
+                  pathOptions={{
+                    color: color,
+                    fillColor: color,
+                    fillOpacity: fillOpacity,
+                  }}
+                >
+                  <Tooltip>{tooltipContent}</Tooltip>
+                  <Popup>
+                    <h4>{station.label} ({station.city})</h4>
+                    <p>Utiliser comme :</p>
+                    <button onClick={() => props.onSelectStart(station)}>Départ</button>
+                    <button onClick={() => props.onSelectStep(station)}>Etape</button>
+                    <button onClick={() => props.onSelectEnd(station)}>Arrivée</button>
+                  </Popup>
+                </CircleMarker>
+              </React.Fragment>
+            );
+          })}
         </LayerGroup>
       </MapContainer>
     </div>
@@ -129,5 +182,60 @@ const MapListener: FC<MapListenerProps> = (props) => {
     },
     click: (e) => map.setView(e.latlng, map.getZoom(), { animate: true }),
   });
+  return null;
+};
+
+// Component to handle zooming to show the entire selected route
+interface ItineraryBoundsHandlerProps {
+  itinerary?: Itinerary;
+  routeGeometries?: Record<string, {
+    id: string;
+    type: 'LineString';
+    coordinates: LatLng[];
+  }>;
+}
+
+const ItineraryBoundsHandler: FC<ItineraryBoundsHandlerProps> = ({ itinerary, routeGeometries }) => {
+  const map = useMap();
+
+  // Effect to zoom to the bounds of the selected route when the itinerary changes
+  React.useEffect(() => {
+    if (!itinerary || !routeGeometries) return;
+
+    // Only proceed if we have a start and end point
+    if (!itinerary.start || !itinerary.end) return;
+
+    // Collect all points that are part of the itinerary (start, end, steps)
+    const points: LatLng[] = [];
+
+    // Add start point
+    points.push(new LatLng(itinerary.start.location.lat, itinerary.start.location.lng));
+
+    // Add step points
+    itinerary.steps.forEach(step => {
+      points.push(new LatLng(step.location.lat, step.location.lng));
+    });
+
+    // Add end point
+    points.push(new LatLng(itinerary.end.location.lat, itinerary.end.location.lng));
+
+    // Add route coordinates
+    itinerary.legs.forEach(leg => {
+      if (leg.type === LegType.HIKING && 'route' in leg) {
+        const routeId = leg.route.id;
+        const geometry = routeGeometries[routeId];
+        if (geometry) {
+          points.push(...geometry.coordinates);
+        }
+      }
+    });
+
+    // If we have points, create a bounds object and fit the map to it
+    if (points.length > 0) {
+      const bounds = points.reduce((acc, point) => acc.extend(point), new LatLng(points[0].lat, points[0].lng).toBounds(0));
+      map.fitBounds(bounds, { padding: [50, 50], maxZoom: 12, animate: true });
+    }
+  }, [itinerary, routeGeometries, map]);
+
   return null;
 };

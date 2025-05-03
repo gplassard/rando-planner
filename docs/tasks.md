@@ -21,15 +21,15 @@ This document contains a detailed checklist of tasks to implement the improvemen
 ### 2.1 Map Visualization Improvements
 - [x] Display hiking routes on the map as lines connecting stations
 - [x] Implement different colors/styles for selected routes vs. available routes
-- [ ] Add visual indicators for start, end, and intermediate points
-- [ ] Implement zooming to show the entire selected route
-- [ ] Add tooltips showing route information on hover
+- [x] Add visual indicators for start, end, and intermediate points
+- [x] Implement zooming to show the entire selected route
+- [x] Add tooltips showing route information on hover
 
 ### 2.2 Sidebar Redesign
-- [ ] Redesign the sidebar to show a structured itinerary with clear sections
-- [ ] Display human-readable information instead of raw JSON
-- [ ] Add summary statistics (total distance, number of legs, estimated time)
-- [ ] Implement collapsible sections for detailed information
+- [x] Redesign the sidebar to show a structured itinerary with clear sections
+- [x] Display human-readable information instead of raw JSON
+- [x] Add summary statistics (total distance, number of legs, estimated time)
+- [x] Implement collapsible sections for detailed information
 - [ ] Create a print-friendly view of the itinerary
 
 ### 2.3 Interactive Route Selection
