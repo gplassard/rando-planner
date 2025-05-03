@@ -2,6 +2,7 @@ import React, { FC, useState, useEffect } from 'react';
 import { Station } from '../model/Station';
 import { AugmentedRandoLight } from '../model/Rando';
 import { HikingLeg, LegType } from '../model/Leg';
+import { getRouteDistance, estimateHikingTime } from '../utils/distance';
 import './RouteSelector.scss';
 
 export interface RouteSelectorProps {
@@ -29,10 +30,10 @@ export const RouteSelector: FC<RouteSelectorProps> = ({
       return from.lineIds.includes(route.id) && to.lineIds.includes(route.id);
     });
 
-    // Sort routes by estimated distance (shortest first)
+    // Sort routes by distance (shortest first)
     const sortedRoutes = [...routes].sort((a, b) => {
-      const distanceA = estimateDistance(a);
-      const distanceB = estimateDistance(b);
+      const distanceA = getDistance(a);
+      const distanceB = getDistance(b);
       return distanceA - distanceB;
     });
 
@@ -68,39 +69,27 @@ export const RouteSelector: FC<RouteSelectorProps> = ({
       from,
       to,
       route: selectedRoute,
-      // Estimate distance and time based on the route
-      distance: estimateDistance(selectedRoute),
+      // Calculate distance and time based on the route
+      distance: getDistance(selectedRoute),
       estimatedTime: estimateTime(selectedRoute),
     };
 
     onRouteSelect(leg);
   };
 
-  // Estimate distance in kilometers based on the route
-  const estimateDistance = (route: AugmentedRandoLight): number => {
-    // This is a simplified calculation - in a real app, you'd use the actual route geometry
-    // For now, we'll just use a rough estimate based on the bounding box
-    const bounds = route.bbox;
-    const southWest = bounds.getSouthWest();
-    const northEast = bounds.getNorthEast();
-
-    // Calculate the diagonal distance of the bounding box in kilometers
-    const latDiff = northEast.lat - southWest.lat;
-    const lngDiff = northEast.lng - southWest.lng;
-
-    // Convert to kilometers (very rough approximation)
-    const latKm = latDiff * 111; // 1 degree of latitude is approximately 111 km
-    const lngKm = lngDiff * 111 * Math.cos(southWest.lat * Math.PI / 180); // Adjust for longitude
-
-    return Math.sqrt(latKm * latKm + lngKm * lngKm);
+  // Get distance in kilometers for a route using the utility function
+  const getDistance = (route: AugmentedRandoLight): number => {
+    return getRouteDistance(route);
   };
 
-  // Estimate time in minutes based on the distance
+  // Estimate time in minutes based on the distance and route properties
   const estimateTime = (route: AugmentedRandoLight): number => {
-    const distance = estimateDistance(route);
-    // Assume an average hiking speed of 4 km/h
-    const hours = distance / 4;
-    return Math.round(hours * 60); // Convert to minutes
+    const distance = getDistance(route);
+    // Use the utility function for time estimation
+    // Pass ascent and descent if available in the route properties
+    const ascent = route.properties?.ascent;
+    const descent = route.properties?.descent;
+    return estimateHikingTime(distance, ascent, descent);
   };
 
   return (
@@ -139,7 +128,7 @@ export const RouteSelector: FC<RouteSelectorProps> = ({
 
             <div className="routes-list">
               {filteredRoutes.map((route, index) => {
-                const distance = estimateDistance(route);
+                const distance = getDistance(route);
                 const time = estimateTime(route);
                 const isShortestRoute = index === 0;
 

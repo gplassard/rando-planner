@@ -45,13 +45,13 @@ This document contains a detailed checklist of tasks to implement the improvemen
 - [x] Implement different types of legs (hiking, rest)
 - [x] Add UI controls to add, remove, and modify legs
 - [x] Store additional metadata for each leg (distance, estimated time, difficulty)
-- [ ] Implement validation to ensure a coherent itinerary
+- [x] Implement validation to ensure a coherent itinerary
 
 ### 3.2 Distance and Time Calculation
-- [ ] Implement algorithms to calculate distances along hiking routes
-- [ ] Add estimated time calculations based on distance and terrain
-- [ ] Display distance and time information for each leg
-- [ ] Calculate and display total trip statistics
+- [x] Implement algorithms to calculate distances along hiking routes
+- [x] Add estimated time calculations based on distance and terrain
+- [x] Display distance and time information for each leg
+- [x] Calculate and display total trip statistics
 - [ ] Add elevation profile visualization for routes
 
 ### 3.3 Rest Leg Implementation
