@@ -204,13 +204,6 @@ export const Sidebar: FC<SidebarProps> = (props) => {
       <div className="sidebar-header">
         <h2>Itinerary</h2>
         <p>Plan your hiking trip by selecting stations on the map</p>
-        <button
-          className="print-button"
-          onClick={() => window.print()}
-          title="Print Itinerary"
-        >
-          🖨️ Print Itinerary
-        </button>
       </div>
 
       <div className="itinerary-container">

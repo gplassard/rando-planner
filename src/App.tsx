@@ -1,7 +1,6 @@
 import React, { useState, FC } from 'react';
 import { Map } from './components/Map';
 import { Sidebar } from './components/Sidebar';
-import { PrintView } from './components/PrintView';
 import './App.scss';
 import { MapState } from './model/MapState';
 import { useStationsList, useStationsLoading } from './context/StationsContext';
@@ -39,10 +38,6 @@ export const App: FC = () => {
         itinerary={itinerary}
         itineraryHandlers={handlers}
       />
-      {/* PrintView is hidden by default and only shown when printing */}
-      <div className="print-only">
-        <PrintView itinerary={itinerary} />
-      </div>
     </div>
   );
 };
