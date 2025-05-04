@@ -1,0 +1,220 @@
+.route-selector {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  width: 400px;
+  max-width: 90vw;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.route-selector-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.route-selector-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.close-button:hover {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.route-selector-content {
+  padding: 20px;
+}
+
+.route-endpoints {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.route-from, .route-to {
+  display: flex;
+  align-items: center;
+}
+
+.endpoint-label {
+  font-weight: bold;
+  width: 50px;
+  color: #555;
+}
+
+.endpoint-name {
+  font-size: 16px;
+}
+
+.no-routes-message {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-style: italic;
+}
+
+.routes-header {
+  margin-bottom: 15px;
+}
+
+.routes-header h4 {
+  margin: 0 0 5px 0;
+  color: #333;
+  font-size: 16px;
+}
+
+.routes-tip {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.routes-list {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.route-option {
+  position: relative;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.route-option:hover {
+  background-color: #f9f9f9;
+  border-color: #ccc;
+}
+
+.route-option.selected {
+  background-color: #e6f7ff;
+  border-color: #91d5ff;
+}
+
+.route-option.shortest {
+  border-color: #52c41a;
+  border-width: 2px;
+}
+
+.route-badge {
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  background-color: #52c41a;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.route-name {
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #333;
+  font-size: 15px;
+}
+
+.route-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #666;
+  font-size: 14px;
+}
+
+.route-detail {
+  display: flex;
+  align-items: center;
+}
+
+.detail-icon {
+  margin-right: 5px;
+  font-size: 16px;
+}
+
+.detail-label {
+  font-weight: 500;
+  margin-right: 5px;
+  min-width: 80px;
+}
+
+.route-path {
+  margin-top: 5px;
+  padding-top: 5px;
+  border-top: 1px dashed #eee;
+}
+
+.route-selector-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.select-route-button, .cancel-button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.select-route-button {
+  background-color: #1890ff;
+  color: white;
+  border: none;
+}
+
+.select-route-button:hover {
+  background-color: #40a9ff;
+}
+
+.select-route-button:disabled {
+  background-color: #d9d9d9;
+  cursor: not-allowed;
+}
+
+.cancel-button {
+  background-color: white;
+  color: #666;
+  border: 1px solid #d9d9d9;
+}
+
+.cancel-button:hover {
+  color: #40a9ff;
+  border-color: #40a9ff;
+}

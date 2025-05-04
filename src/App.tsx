@@ -1,19 +1,33 @@
 import React, { useState, FC } from 'react';
 import { Map } from './components/Map';
 import { Sidebar } from './components/Sidebar';
-import { useStations } from './hooks/useStations';
 import './App.scss';
 import { MapState } from './model/MapState';
-import { useItinerary } from './hooks/useItinerary';
+import { useStationsList, useStationsLoading } from './context/StationsContext';
+import { useItineraryState, useItineraryHandlers } from './context/ItineraryContext';
+import { useRelevantRoutes, useRoutesLoading } from './context/RandoRoutesContext';
+import { useGeometries, useGeometriesLoading } from './context/RouteGeometryContext';
 
 export const App: FC = () => {
   const [mapState, setMapState] = useState<MapState | null>(null);
-  const { stations } = useStations();
-  const { itinerary, handlers } = useItinerary();
+  const stations = useStationsList();
+  const stationsLoading = useStationsLoading();
+  const itinerary = useItineraryState();
+  const handlers = useItineraryHandlers();
+  const relevantRoutes = useRelevantRoutes();
+  const routesLoading = useRoutesLoading();
+  const geometries = useGeometries();
+  const geometriesLoading = useGeometriesLoading();
 
   return (
     <div className="App">
-      <Map stations={stations}
+      <Map
+        stations={stations}
+        routes={relevantRoutes}
+        routeGeometries={geometries}
+        itinerary={itinerary}
+        itineraryHandlers={handlers}
+        loading={stationsLoading || routesLoading || geometriesLoading}
         onSelectStart={handlers.setStart}
         onSelectStep={handlers.addStep}
         onSelectEnd={handlers.setEnd}
