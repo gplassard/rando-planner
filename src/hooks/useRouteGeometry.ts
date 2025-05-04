@@ -1,24 +1,8 @@
+import type { MultiLineString } from 'geojson';
 import { useState, useEffect } from 'react';
-import { LatLng } from 'leaflet';
 import { AugmentedRandoLight } from '../model/Rando';
 
-/**
- * Interface for route geometry data
- */
-interface RouteGeometry {
-  id: string;
-  type: 'LineString';
-  coordinates: [number, number][];
-}
-
-/**
- * Interface for route geometry with Leaflet LatLng objects
- */
-interface AugmentedRouteGeometry {
-  id: string;
-  type: 'LineString';
-  coordinates: LatLng[];
-}
+export type HikingGeometry = MultiLineString;
 
 /**
  * Hook to load and provide geometry data for routes
@@ -26,11 +10,11 @@ interface AugmentedRouteGeometry {
  * @returns Object containing the geometry data and loading state
  */
 export const useRouteGeometry = (routes: AugmentedRandoLight[]): {
-  geometries: Record<string, AugmentedRouteGeometry>;
+  geometries: Record<string, HikingGeometry>;
   loading: boolean;
 } => {
   const [loading, setLoading] = useState(true);
-  const [geometries, setGeometries] = useState<Record<string, AugmentedRouteGeometry>>({});
+  const [geometries, setGeometries] = useState<Record<string, HikingGeometry>>({});
 
   // Load geometry data for the specified routes
   useEffect(() => {
@@ -43,25 +27,19 @@ export const useRouteGeometry = (routes: AugmentedRandoLight[]): {
       try {
         setLoading(true);
 
-        // Dynamic import to load the data only when needed
-        const module = await import('../../data/rando_lines.json');
-        const allGeometries = module.default as RouteGeometry[];
+        const module = await import('../../data/small.json');
+        const allGeometries = module.default.features;
 
         // Filter geometries for the specified routes
         const routeIds = new Set(routes.map(route => route.id));
         const filteredGeometries = allGeometries.filter(geo => routeIds.has(geo.id));
 
-        // Transform coordinates to LatLng objects
-        const transformedGeometries: Record<string, AugmentedRouteGeometry> = {};
-
+        const g: Record<string, HikingGeometry> = {};
         filteredGeometries.forEach(geo => {
-          transformedGeometries[geo.id] = {
-            ...geo,
-            coordinates: geo.coordinates.map(([lng, lat]) => new LatLng(lat, lng))
-          };
+          g[geo.id] = geo.geometry as HikingGeometry;
         });
 
-        setGeometries(transformedGeometries);
+        setGeometries(g);
       } catch (error) {
         console.error('Error loading route geometries:', error);
       } finally {
@@ -69,7 +47,6 @@ export const useRouteGeometry = (routes: AugmentedRandoLight[]): {
       }
     };
 
-    // Handle the promise to avoid ESLint error
     void loadGeometries();
   }, [routes]);
 
