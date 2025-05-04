@@ -63,6 +63,78 @@ export const Map: FC<Props> = (props: Props) => {
   const [editingRouteId, setEditingRouteId] = useState<string | null>(null);
   const [editedCoordinates, setEditedCoordinates] = useState<LatLng[]>([]);
 
+  // State for map zoom level
+  const [currentZoom, setCurrentZoom] = useState<number>(7); // Default zoom level
+
+  // Interface for station clusters
+  interface StationCluster {
+    id: string;
+    stations: Station[];
+    center: LatLng;
+    count: number;
+  }
+
+  // Function to group stations into clusters based on zoom level
+  const clusterStations = (stations: Station[], zoom: number): (Station | StationCluster)[] => {
+    // If zoom level is high enough, don't cluster
+    if (zoom >= 10) {
+      return stations;
+    }
+
+    const clusters: StationCluster[] = [];
+    const processedStations = new Set<string>();
+
+    // Define clustering distance based on zoom level (in degrees)
+    // Lower zoom = larger clustering distance
+    const clusterDistance = zoom <= 7 ? 0.1 : 0.05;
+
+    // Process each station
+    stations.forEach(station => {
+      // Skip if already in a cluster
+      if (processedStations.has(station.id)) {
+        return;
+      }
+
+      // Find nearby stations
+      const nearbyStations = stations.filter(s =>
+        !processedStations.has(s.id) &&
+        Math.abs(s.location.lat - station.location.lat) < clusterDistance &&
+        Math.abs(s.location.lng - station.location.lng) < clusterDistance
+      );
+
+      // If we have multiple stations, create a cluster
+      if (nearbyStations.length > 1) {
+        // Mark all stations in this cluster as processed
+        nearbyStations.forEach(s => processedStations.add(s.id));
+
+        // Calculate center of cluster
+        const sumLat = nearbyStations.reduce((sum, s) => sum + s.location.lat, 0);
+        const sumLng = nearbyStations.reduce((sum, s) => sum + s.location.lng, 0);
+        const center = new LatLng(
+          sumLat / nearbyStations.length,
+          sumLng / nearbyStations.length
+        );
+
+        // Create cluster
+        clusters.push({
+          id: `cluster-${clusters.length}`,
+          stations: nearbyStations,
+          center,
+          count: nearbyStations.length
+        });
+      } else {
+        // Mark single station as processed
+        processedStations.add(station.id);
+      }
+    });
+
+    // Add individual stations that weren't clustered
+    const individualStations = stations.filter(s => !processedStations.has(s.id));
+
+    // Return both clusters and individual stations
+    return [...clusters, ...individualStations];
+  };
+
   // Handle station selection for route creation
   const handleStationSelect = (station: Station) => {
     // If we don't have a from station yet, set it
@@ -164,7 +236,7 @@ export const Map: FC<Props> = (props: Props) => {
       )}
 
       <MapContainer center={[44.856614, 2.35]} zoom={7} scrollWheelZoom={false}>
-        <MapListener {...props}></MapListener>
+        <MapListener {...props} onZoomChange={setCurrentZoom}></MapListener>
         {props.itinerary && props.routeGeometries && (
           <ItineraryBoundsHandler
             itinerary={props.itinerary}
@@ -275,67 +347,110 @@ export const Map: FC<Props> = (props: Props) => {
           </LayerGroup>
         )}
 
-        {/* Display stations */}
+        {/* Display stations with clustering */}
         <LayerGroup>
-          {props.stations.map((station) => {
-            // Determine if this station is a start, end, or step point in the itinerary
-            const isStart = props.itinerary?.start?.id === station.id;
-            const isEnd = props.itinerary?.end?.id === station.id;
-            const isStep = props.itinerary?.steps.some(step => step.id === station.id);
+          {clusterStations(props.stations, currentZoom).map((item) => {
+            // Check if this is a cluster or an individual station
+            if ('count' in item) {
+              // This is a cluster
+              const cluster = item as StationCluster;
 
-            // Set different styles based on the station's role
-            let color = '#3388ff'; // Default blue
-            let radius = 8;
-            let fillOpacity = 0.6;
-            let tooltipContent = station.label;
+              // Render a cluster marker
+              return (
+                <React.Fragment key={cluster.id}>
+                  <CircleMarker
+                    center={[cluster.center.lat, cluster.center.lng]}
+                    radius={Math.min(15, 10 + Math.log(cluster.count))}
+                    pathOptions={{
+                      color: '#3388ff',
+                      fillColor: '#3388ff',
+                      fillOpacity: 0.7,
+                      weight: 2,
+                    }}
+                  >
+                    <Tooltip>Groupe de {cluster.count} stations</Tooltip>
+                    <Popup>
+                      <h4>Groupe de {cluster.count} stations</h4>
+                      <p>Stations dans ce groupe:</p>
+                      <ul>
+                        {cluster.stations.map(s => (
+                          <li key={s.id}>
+                            {s.label} ({s.city})
+                            <div>
+                              <button onClick={() => props.onSelectStart(s)}>Départ</button>
+                              <button onClick={() => props.onSelectStep(s)}>Etape</button>
+                              <button onClick={() => props.onSelectEnd(s)}>Arrivée</button>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </Popup>
+                  </CircleMarker>
+                </React.Fragment>
+              );
+            } else {
+              // This is an individual station
+              const station = item as Station;
 
-            if (isStart) {
-              color = '#00cc00'; // Green for start
-              radius = 10;
-              fillOpacity = 0.8;
-              tooltipContent = `${station.label} (Départ)`;
-            } else if (isEnd) {
-              color = '#cc0000'; // Red for end
-              radius = 10;
-              fillOpacity = 0.8;
-              tooltipContent = `${station.label} (Arrivée)`;
-            } else if (isStep) {
-              color = '#ff9900'; // Orange for steps
-              radius = 9;
-              fillOpacity = 0.7;
-              tooltipContent = `${station.label} (Etape)`;
+              // Determine if this station is a start, end, or step point in the itinerary
+              const isStart = props.itinerary?.start?.id === station.id;
+              const isEnd = props.itinerary?.end?.id === station.id;
+              const isStep = props.itinerary?.steps.some(step => step.id === station.id);
+
+              // Set different styles based on the station's role
+              let color = '#3388ff'; // Default blue
+              let radius = 8;
+              let fillOpacity = 0.6;
+              let tooltipContent = station.label;
+
+              if (isStart) {
+                color = '#00cc00'; // Green for start
+                radius = 10;
+                fillOpacity = 0.8;
+                tooltipContent = `${station.label} (Départ)`;
+              } else if (isEnd) {
+                color = '#cc0000'; // Red for end
+                radius = 10;
+                fillOpacity = 0.8;
+                tooltipContent = `${station.label} (Arrivée)`;
+              } else if (isStep) {
+                color = '#ff9900'; // Orange for steps
+                radius = 9;
+                fillOpacity = 0.7;
+                tooltipContent = `${station.label} (Etape)`;
+              }
+
+              return (
+                <React.Fragment key={station.id}>
+                  <CircleMarker
+                    center={[station.location.lat, station.location.lng]}
+                    radius={radius}
+                    pathOptions={{
+                      color: color,
+                      fillColor: color,
+                      fillOpacity: fillOpacity,
+                    }}
+                  >
+                    <Tooltip>{tooltipContent}</Tooltip>
+                    <Popup>
+                      <h4>{station.label} ({station.city})</h4>
+                      <p>Utiliser comme :</p>
+                      <button onClick={() => props.onSelectStart(station)}>Départ</button>
+                      <button onClick={() => props.onSelectStep(station)}>Etape</button>
+                      <button onClick={() => props.onSelectEnd(station)}>Arrivée</button>
+                      <div className="route-creation">
+                        <p>Ou créer un itinéraire :</p>
+                        <button onClick={() => handleStationSelect(station)}>
+                          {!fromStation ? 'Sélectionner comme point de départ' :
+                            fromStation.id === station.id ? 'Déjà sélectionné' :
+                              'Sélectionner comme destination'}
+                        </button>
+                      </div>
+                    </Popup>
+                  </CircleMarker>
+                </React.Fragment>
+              );
             }
-
-            return (
-              <React.Fragment key={station.id}>
-                <CircleMarker
-                  center={[station.location.lat, station.location.lng]}
-                  radius={radius}
-                  pathOptions={{
-                    color: color,
-                    fillColor: color,
-                    fillOpacity: fillOpacity,
-                  }}
-                >
-                  <Tooltip>{tooltipContent}</Tooltip>
-                  <Popup>
-                    <h4>{station.label} ({station.city})</h4>
-                    <p>Utiliser comme :</p>
-                    <button onClick={() => props.onSelectStart(station)}>Départ</button>
-                    <button onClick={() => props.onSelectStep(station)}>Etape</button>
-                    <button onClick={() => props.onSelectEnd(station)}>Arrivée</button>
-                    <div className="route-creation">
-                      <p>Ou créer un itinéraire :</p>
-                      <button onClick={() => handleStationSelect(station)}>
-                        {!fromStation ? 'Sélectionner comme point de départ' :
-                          fromStation.id === station.id ? 'Déjà sélectionné' :
-                            'Sélectionner comme destination'}
-                      </button>
-                    </div>
-                  </Popup>
-                </CircleMarker>
-              </React.Fragment>
-            );
           })}
         </LayerGroup>
       </MapContainer>
@@ -345,16 +460,23 @@ export const Map: FC<Props> = (props: Props) => {
 
 export interface MapListenerProps {
   onStateChange?: (mapState: MapState) => any;
+  onZoomChange?: (zoom: number) => void;
 }
 const MapListener: FC<MapListenerProps> = (props) => {
   const map = useMap();
   useMapEvents({
     moveend: () => {
+      const currentZoom = map.getZoom();
+
       if (props.onStateChange) {
         props.onStateChange({
           boundingBox: map.getBounds(),
-          zoom: map.getZoom(),
+          zoom: currentZoom,
         });
+      }
+
+      if (props.onZoomChange) {
+        props.onZoomChange(currentZoom);
       }
     },
     click: (e) => map.setView(e.latlng, map.getZoom(), { animate: true }),
