@@ -3,6 +3,7 @@ import { Itinerary, ItineraryHandlers } from '../model/Itinerary';
 import { MapState } from '../model/MapState';
 import { Leg, LegType, RestLeg, HikingLeg } from '../model/Leg';
 import { ConfirmationDialog } from './ConfirmationDialog';
+import { ElevationProfile } from './ElevationProfile';
 import { Station } from '../model/Station';
 import './Sidebar.scss';
 
@@ -352,6 +353,11 @@ export const Sidebar: FC<SidebarProps> = (props) => {
                           <div className="leg-difficulty">
                             <strong>Difficulty:</strong> {(leg as HikingLeg).difficulty}
                           </div>
+                        )}
+
+                        {/* Elevation Profile */}
+                        {(leg as HikingLeg).route && (
+                          <ElevationProfile route={(leg as HikingLeg).route} />
                         )}
                       </div>
                     ) : (

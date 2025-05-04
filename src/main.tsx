@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './App';
+import { AppProvider } from './context/AppProvider';
 import './style.scss';
 import './print.scss';
 
@@ -9,6 +10,8 @@ const root = createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App/>
+    <AppProvider>
+      <App/>
+    </AppProvider>
   </React.StrictMode>,
 );

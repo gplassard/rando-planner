@@ -2,19 +2,23 @@ import React, { useState, FC } from 'react';
 import { Map } from './components/Map';
 import { Sidebar } from './components/Sidebar';
 import { PrintView } from './components/PrintView';
-import { useStations } from './hooks/useStations';
 import './App.scss';
 import { MapState } from './model/MapState';
-import { useItinerary } from './hooks/useItinerary';
-import { useRandoRoutes } from './hooks/useRandoRoutes';
-import { useRouteGeometry } from './hooks/useRouteGeometry';
+import { useStationsList, useStationsLoading } from './context/StationsContext';
+import { useItineraryState, useItineraryHandlers } from './context/ItineraryContext';
+import { useRelevantRoutes, useRoutesLoading } from './context/RandoRoutesContext';
+import { useGeometries, useGeometriesLoading } from './context/RouteGeometryContext';
 
 export const App: FC = () => {
   const [mapState, setMapState] = useState<MapState | null>(null);
-  const { stations, loading: stationsLoading } = useStations();
-  const { itinerary, handlers } = useItinerary();
-  const { relevantRoutes, loading: routesLoading } = useRandoRoutes(itinerary);
-  const { geometries, loading: geometriesLoading } = useRouteGeometry(relevantRoutes);
+  const stations = useStationsList();
+  const stationsLoading = useStationsLoading();
+  const itinerary = useItineraryState();
+  const handlers = useItineraryHandlers();
+  const relevantRoutes = useRelevantRoutes();
+  const routesLoading = useRoutesLoading();
+  const geometries = useGeometries();
+  const geometriesLoading = useGeometriesLoading();
 
   return (
     <div className="App">

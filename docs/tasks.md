@@ -52,7 +52,7 @@ This document contains a detailed checklist of tasks to implement the improvemen
 - [x] Add estimated time calculations based on distance and terrain
 - [x] Display distance and time information for each leg
 - [x] Calculate and display total trip statistics
-- [ ] Add elevation profile visualization for routes
+- [x] Add elevation profile visualization for routes
 
 ### 3.3 Rest Leg Implementation
 - [x] Add UI controls to insert rest days at specific locations
@@ -63,7 +63,7 @@ This document contains a detailed checklist of tasks to implement the improvemen
 ## 4. Technical Improvements
 
 ### 4.1 State Management Refactoring
-- [ ] Evaluate and implement a more robust state management solution
+- [x] Evaluate and implement a more robust state management solution
 - [ ] Refactor existing hooks to better separate concerns
 - [ ] Implement proper error handling and loading states
 - [ ] Add persistence for user's itineraries (local storage)
