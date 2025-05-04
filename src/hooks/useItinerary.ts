@@ -1,58 +1,15 @@
 import { useCallback, useEffect, useState } from 'react';
+import { LatLng, LatLngBounds } from 'leaflet';
 import { Itinerary, ItineraryHandlers } from '../model/Itinerary';
 import { Station } from '../model/Station';
-import { Leg } from '../model/Leg';
-
-/**
- * Validates an itinerary for coherence
- * @param itinerary The itinerary to validate
- * @returns An object with a valid flag and an optional error message
- */
-export const validateItinerary = (itinerary: Itinerary): { valid: boolean; error?: string } => {
-  const { start, end, legs } = itinerary;
-
-  // If there are no legs, the itinerary is valid but empty
-  if (legs.length === 0) {
-    return { valid: true };
-  }
-
-  // Check if legs form a continuous path
-  for (let i = 0; i < legs.length - 1; i++) {
-    const currentLeg = legs[i];
-    const nextLeg = legs[i + 1];
-
-    if (currentLeg.to.id !== nextLeg.from.id) {
-      return {
-        valid: false,
-        error: `Discontinuity detected: Leg ${i + 1} ends at ${currentLeg.to.name} but leg ${i + 2} starts at ${nextLeg.from.name}`,
-      };
-    }
-  }
-
-  // Check if start station matches the first leg's from station
-  if (start && legs.length > 0 && start.id !== legs[0].from.id) {
-    return {
-      valid: false,
-      error: `Start station (${start.name}) doesn't match the first leg's starting point (${legs[0].from.name})`,
-    };
-  }
-
-  // Check if end station matches the last leg's to station
-  if (end && legs.length > 0 && end.id !== legs[legs.length - 1].to.id) {
-    return {
-      valid: false,
-      error: `End station (${end.name}) doesn't match the last leg's ending point (${legs[legs.length - 1].to.name})`,
-    };
-  }
-
-  // Check for duplicate legs
-  const legIds = legs.map(leg => leg.id);
-  if (new Set(legIds).size !== legIds.length) {
-    return { valid: false, error: 'Duplicate legs detected in the itinerary' };
-  }
-
-  return { valid: true };
-};
+import { Leg, LegType, HikingLeg, RestLeg } from '../model/Leg';
+import {
+  validateItinerary,
+  calculateTotalDistance,
+  calculateTotalTime,
+  saveItineraryToLocalStorage,
+  loadItineraryFromLocalStorage,
+} from '../utils/itineraryUtils';
 
 export type UseItinerary = () => {
   itinerary: Itinerary;
@@ -77,23 +34,88 @@ export const useItinerary: UseItinerary = () => {
 
   // Calculate total distance and time whenever legs change
   useEffect(() => {
-    if (legs.length === 0) {
-      setTotalDistance(undefined);
-      setTotalTime(undefined);
-      return;
-    }
-
-    const distance = legs.reduce((total, leg) => {
-      return total + (leg.distance || 0);
-    }, 0);
-
-    const time = legs.reduce((total, leg) => {
-      return total + (leg.estimatedTime || 0);
-    }, 0);
-
-    setTotalDistance(distance > 0 ? distance : undefined);
-    setTotalTime(time > 0 ? time : undefined);
+    setTotalDistance(calculateTotalDistance(legs));
+    setTotalTime(calculateTotalTime(legs));
   }, [legs]);
+
+  // Load itinerary from local storage on initialization
+  useEffect(() => {
+    try {
+      const savedItinerary = loadItineraryFromLocalStorage();
+      if (!savedItinerary) return;
+
+      // Convert serialized coordinates back to Leaflet objects
+      if (savedItinerary.start) {
+        const location = savedItinerary.start.location;
+        savedItinerary.start.location = new LatLng(location[0], location[1]);
+        setStart(savedItinerary.start);
+      }
+
+      if (savedItinerary.end) {
+        const location = savedItinerary.end.location;
+        savedItinerary.end.location = new LatLng(location[0], location[1]);
+        setEnd(savedItinerary.end);
+      }
+
+      if (savedItinerary.steps && Array.isArray(savedItinerary.steps)) {
+        const convertedSteps = savedItinerary.steps.map(step => ({
+          ...step,
+          location: new LatLng(step.location[0], step.location[1]),
+        }));
+        setSteps(convertedSteps);
+      }
+
+      if (savedItinerary.legs && Array.isArray(savedItinerary.legs)) {
+        const convertedLegs = savedItinerary.legs.map(leg => {
+          const baseLeg = {
+            ...leg,
+            from: {
+              ...leg.from,
+              location: new LatLng(leg.from.location[0], leg.from.location[1]),
+            },
+            to: {
+              ...leg.to,
+              location: new LatLng(leg.to.location[0], leg.to.location[1]),
+            },
+          };
+
+          if (leg.type === LegType.HIKING) {
+            const hikingLeg = baseLeg as HikingLeg;
+            const bbox = leg.route.bbox;
+            hikingLeg.route = {
+              ...leg.route,
+              bbox: new LatLngBounds(
+                new LatLng(bbox[0], bbox[1]),
+                new LatLng(bbox[2], bbox[3]),
+              ),
+            };
+
+            if (leg.editedCoordinates) {
+              hikingLeg.editedCoordinates = leg.editedCoordinates.map(
+                coord => new LatLng(coord[0], coord[1]),
+              );
+            }
+
+            return hikingLeg;
+          } else if (leg.type === LegType.REST) {
+            const restLeg = baseLeg as RestLeg;
+            restLeg.location = {
+              ...leg.location,
+              location: new LatLng(leg.location.location[0], leg.location.location[1]),
+            };
+            return restLeg;
+          }
+
+          return baseLeg;
+        });
+
+        setLegs(convertedLegs);
+      }
+    } catch (error) {
+      console.error('Error loading itinerary from local storage:', error);
+      // Continue with empty itinerary if loading fails
+    }
+  }, []);
 
   // Validate the itinerary whenever relevant parts change
   useEffect(() => {
@@ -116,7 +138,29 @@ export const useItinerary: UseItinerary = () => {
         error: error instanceof Error ? error.message : 'Unknown validation error occurred',
       });
     }
-  }, [start, end, legs]);
+  }, [start, end, legs, steps, totalDistance, totalTime]);
+
+  // Save itinerary to local storage whenever it changes
+  useEffect(() => {
+    // Only save if we have at least a start or end point
+    if (start || end || legs.length > 0) {
+      const currentItinerary = {
+        start,
+        end,
+        steps,
+        legs,
+        totalDistance,
+        totalTime,
+      };
+
+      try {
+        saveItineraryToLocalStorage(currentItinerary);
+      } catch (error) {
+        console.error('Error saving itinerary to local storage:', error);
+        // We don't need to update the UI for this error, just log it
+      }
+    }
+  }, [start, end, steps, legs, totalDistance, totalTime]);
 
   // Add a leg to the itinerary
   const addLeg = useCallback((leg: Leg) => {

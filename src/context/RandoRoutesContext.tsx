@@ -8,6 +8,8 @@ interface RandoRoutesContextType {
   allRoutes: AugmentedRandoLight[];
   relevantRoutes: AugmentedRandoLight[];
   loading: boolean;
+  error: Error | null;
+  loadFullData: () => Promise<void>;
 }
 
 // Create the context with a default value
@@ -16,18 +18,22 @@ const RandoRoutesContext = createContext<RandoRoutesContextType | undefined>(und
 // Provider component
 interface RandoRoutesProviderProps {
   children: ReactNode;
+  dataSource?: 'small' | 'full' | string;
 }
 
-export const RandoRoutesProvider: React.FC<RandoRoutesProviderProps> = ({ children }) => {
+export const RandoRoutesProvider: React.FC<RandoRoutesProviderProps> = ({
+  children,
+  dataSource = 'small'
+}) => {
   // Get the itinerary state from the ItineraryContext
   const itinerary = useItineraryState();
 
-  // Use the existing hook to manage state
-  const { allRoutes, relevantRoutes, loading } = useRandoRoutes(itinerary);
+  // Use the enhanced hook to manage state with lazy loading
+  const { allRoutes, relevantRoutes, loading, error, loadFullData } = useRandoRoutes(itinerary, dataSource);
 
   // Provide the state to the context
   return (
-    <RandoRoutesContext.Provider value={{ allRoutes, relevantRoutes, loading }}>
+    <RandoRoutesContext.Provider value={{ allRoutes, relevantRoutes, loading, error, loadFullData }}>
       {children}
     </RandoRoutesContext.Provider>
   );
@@ -53,4 +59,12 @@ export const useRelevantRoutes = (): AugmentedRandoLight[] => {
 
 export const useRoutesLoading = (): boolean => {
   return useRandoRoutesContext().loading;
+};
+
+export const useRoutesError = (): Error | null => {
+  return useRandoRoutesContext().error;
+};
+
+export const useLoadFullData = (): (() => Promise<void>) => {
+  return useRandoRoutesContext().loadFullData;
 };
