@@ -5,7 +5,7 @@ import { Station } from '../model/Station';
 export type UseItinerary = () => {
   itinerary: Itinerary;
   handlers: ItineraryHandlers;
-}
+};
 
 export const useItinerary: UseItinerary = () => {
   const [start, setStart] = useState<Station>();
