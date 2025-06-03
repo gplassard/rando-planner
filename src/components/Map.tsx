@@ -13,7 +13,7 @@ import { MapState } from '../model/MapState';
 import { Station } from '../model/Station';
 import './Map.scss';
 
-interface Props extends MapListenerProps{
+interface Props extends MapListenerProps {
   stations: Station[];
   onSelectStart: (station: Station) => any;
   onSelectEnd: (station: Station) => any;

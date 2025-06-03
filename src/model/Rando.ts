@@ -8,4 +8,4 @@ export interface RandoLight {
   bbox: [number, number, number, number];
 }
 
-export type AugmentedRandoLight = Omit<RandoLight, 'bbox'> & {bbox: LatLngBounds};
+export type AugmentedRandoLight = Omit<RandoLight, 'bbox'> & { bbox: LatLngBounds };
