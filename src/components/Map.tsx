@@ -7,14 +7,18 @@ import {
   GeoJSON,
   Tooltip,
   useMap,
-  useMapEvents, Popup,
+  useMapEvents,
+  Popup,
+  Rectangle,
 } from 'react-leaflet';
 import { MapState } from '../model/MapState';
 import { Station } from '../model/Station';
+import { HikingRoute } from '../model/HikingRoute';
 import './Map.scss';
 
 interface Props extends MapListenerProps {
   stations: Station[];
+  hikingRoutes?: HikingRoute[];
   onSelectStart: (station: Station) => any;
   onSelectEnd: (station: Station) => any;
   onSelectStep: (station: Station) => any;
@@ -54,6 +58,16 @@ export const Map: FC<Props> = (props: Props) => {
                 <button onClick={() => props.onSelectEnd(station)}>Arrivée</button>
               </Popup>
             </GeoJSON>
+          ))}
+        </LayerGroup>
+        <LayerGroup>
+          {props.hikingRoutes?.map((route) => (
+            <Rectangle
+              key={route.id}
+              bounds={route.bounds}
+              pathOptions={{ color: 'green', weight: 1 }}>
+              <Tooltip>{route.name || 'Unnamed route'}</Tooltip>
+            </Rectangle>
           ))}
         </LayerGroup>
       </MapContainer>
