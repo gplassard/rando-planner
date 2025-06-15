@@ -11,9 +11,9 @@ import {
   Popup,
   Rectangle,
 } from 'react-leaflet';
+import { HikingRoute } from '../model/HikingRoute';
 import { MapState } from '../model/MapState';
 import { Station } from '../model/Station';
-import { HikingRoute } from '../model/HikingRoute';
 import './Map.scss';
 
 interface Props extends MapListenerProps {

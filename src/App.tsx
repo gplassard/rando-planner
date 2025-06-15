@@ -1,8 +1,8 @@
 import React, { useState, FC } from 'react';
 import { Map } from './components/Map';
 import { Sidebar } from './components/Sidebar';
-import { useStations } from './hooks/useStations';
 import { useHikingRoutes } from './hooks/useHikingRoutes';
+import { useStations } from './hooks/useStations';
 import './App.scss';
 import { MapState } from './model/MapState';
 import { useItinerary } from './hooks/useItinerary';
