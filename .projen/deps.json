@@ -14,10 +14,6 @@
       "type": "build"
     },
     {
-      "name": "@types/jest",
-      "type": "build"
-    },
-    {
       "name": "@types/leaflet",
       "type": "build"
     },
@@ -71,19 +67,11 @@
       "type": "build"
     },
     {
-      "name": "jest",
-      "type": "build"
-    },
-    {
       "name": "projen",
       "type": "build"
     },
     {
       "name": "sass",
-      "type": "build"
-    },
-    {
-      "name": "ts-jest",
       "type": "build"
     },
     {
@@ -96,6 +84,10 @@
     },
     {
       "name": "vite",
+      "type": "build"
+    },
+    {
+      "name": "vitest",
       "type": "build"
     },
     {

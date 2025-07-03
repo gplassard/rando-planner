@@ -30,7 +30,8 @@ jspm_packages/
 *.tgz
 .yarn-integrity
 .cache
-!/jest.config.json
+/test-reports/
+junit.xml
 /coverage/
 !/.github/workflows/build.yml
 /dist/changelog.md
@@ -50,4 +51,6 @@ jspm_packages/
 *.iml
 .vscode
 .DS_Store
+!/.github/workflows/datadog-software-composition-analysis.yml
+!/.github/workflows/datadog-static-analysis.yml
 !/.projenrc.ts
