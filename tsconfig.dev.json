@@ -33,6 +33,7 @@
     "test/**/*.ts",
     "src/**/*.tsx",
     "vite.config.ts",
+    "vitest.config.ts",
     ".projenrc.ts",
     "projenrc/**/*.ts"
   ],
