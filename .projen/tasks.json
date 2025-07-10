@@ -188,20 +188,25 @@
       "description": "Run tests",
       "steps": [
         {
-          "exec": "jest --passWithNoTests --updateSnapshot",
+          "exec": "vitest run -u",
           "receiveArgs": true
-        },
+        }
+      ]
+    },
+    "test:compile": {
+      "name": "test:compile",
+      "steps": [
         {
-          "spawn": "eslint"
+          "exec": "tsc --noEmit --project tsconfig.dev.json"
         }
       ]
     },
     "test:watch": {
       "name": "test:watch",
-      "description": "Run jest in watch mode",
+      "description": "Run vitest in watch mode",
       "steps": [
         {
-          "exec": "jest --watch"
+          "exec": "vitest watch"
         }
       ]
     },
@@ -230,13 +235,13 @@
       },
       "steps": [
         {
-          "exec": "pnpm dlx npm-check-updates@16 --upgrade --target=latest --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@gplassard/projen-extensions,@types/geojson,@types/jest,@types/leaflet,@types/node,@types/react,@types/react-dom,@vitejs/plugin-react,eslint-import-resolver-typescript,eslint-plugin-import,jest,projen,sass,ts-jest,ts-node,typescript,vite,leaflet,react,react-dom,react-leaflet"
+          "exec": "pnpm dlx npm-check-updates@16 --upgrade --target=latest --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@gplassard/projen-extensions,@types/geojson,@types/leaflet,@types/node,@types/react,@types/react-dom,@vitejs/plugin-react,eslint-import-resolver-typescript,eslint-plugin-import,projen,sass,ts-node,typescript,vite,vitest,leaflet,react,react-dom,react-leaflet"
         },
         {
           "exec": "pnpm i --no-frozen-lockfile"
         },
         {
-          "exec": "pnpm update @gplassard/projen-extensions @stylistic/eslint-plugin @types/geojson @types/jest @types/leaflet @types/node @types/react @types/react-dom @typescript-eslint/eslint-plugin @typescript-eslint/parser @vitejs/plugin-react commit-and-tag-version constructs eslint-import-resolver-typescript eslint-plugin-import eslint jest projen sass ts-jest ts-node typescript vite leaflet react react-dom react-leaflet"
+          "exec": "pnpm update @gplassard/projen-extensions @stylistic/eslint-plugin @types/geojson @types/leaflet @types/node @types/react @types/react-dom @typescript-eslint/eslint-plugin @typescript-eslint/parser @vitejs/plugin-react commit-and-tag-version constructs eslint-import-resolver-typescript eslint-plugin-import eslint projen sass ts-node typescript vite vitest leaflet react react-dom react-leaflet"
         },
         {
           "exec": "npx projen"
