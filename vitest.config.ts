@@ -6,5 +6,6 @@ export default defineConfig({
   test: {
     environment: 'node',
     include: ['**/?(*.)+(spec|test).ts?(x)'],
+    passWithNoTests: true,
   },
 });
