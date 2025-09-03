@@ -1,5 +1,5 @@
 import { TypescriptApplicationProject } from '@gplassard/projen-extensions';
-import { TypeScriptJsxMode, TypeScriptModuleResolution } from 'projen/lib/javascript';
+import { TypeScriptJsxMode } from 'projen/lib/javascript';
 
 const project = new TypescriptApplicationProject({
   name: 'rando-planner',
