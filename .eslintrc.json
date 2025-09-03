@@ -8,7 +8,8 @@
   "plugins": [
     "@typescript-eslint",
     "import",
-    "@stylistic"
+    "@stylistic",
+    "eslint-plugin-unused-imports"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -153,6 +154,8 @@
         "devDependencies": [
           "**/test/**",
           "**/build-tools/**",
+          "**/*.test.ts",
+          "**/*.test.tsx",
           ".projenrc.ts",
           "projenrc/**/*.ts"
         ],
@@ -209,7 +212,8 @@
           "method"
         ]
       }
-    ]
+    ],
+    "unused-imports/no-unused-imports": "error"
   },
   "overrides": [
     {

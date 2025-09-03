@@ -235,13 +235,13 @@
       },
       "steps": [
         {
-          "exec": "pnpm dlx npm-check-updates@16 --upgrade --target=latest --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@gplassard/projen-extensions,@types/geojson,@types/leaflet,@types/node,@types/react,@types/react-dom,@vitejs/plugin-react,eslint-import-resolver-typescript,eslint-plugin-import,projen,sass,ts-node,typescript,vite,vitest,leaflet,react,react-dom,react-leaflet"
+          "exec": "pnpm dlx npm-check-updates@16 --upgrade --target=latest --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@gplassard/projen-extensions,@types/geojson,@types/leaflet,@types/node,@types/react,@types/react-dom,@vitejs/plugin-react,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-unused-imports,projen,sass,ts-node,typescript,vite,vitest,leaflet,react,react-dom,react-leaflet"
         },
         {
           "exec": "pnpm i --no-frozen-lockfile"
         },
         {
-          "exec": "pnpm update @gplassard/projen-extensions @stylistic/eslint-plugin @types/geojson @types/leaflet @types/node @types/react @types/react-dom @typescript-eslint/eslint-plugin @typescript-eslint/parser @vitejs/plugin-react commit-and-tag-version constructs eslint-import-resolver-typescript eslint-plugin-import eslint projen sass ts-node typescript vite vitest leaflet react react-dom react-leaflet"
+          "exec": "pnpm update @gplassard/projen-extensions @stylistic/eslint-plugin @types/geojson @types/leaflet @types/node @types/react @types/react-dom @typescript-eslint/eslint-plugin @typescript-eslint/parser @vitejs/plugin-react commit-and-tag-version constructs eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-unused-imports eslint projen sass ts-node typescript vite vitest leaflet react react-dom react-leaflet"
         },
         {
           "exec": "npx projen"

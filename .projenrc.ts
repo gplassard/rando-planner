@@ -25,6 +25,9 @@ const project = new TypescriptApplicationProject({
     ],
   },
   tsconfigDev: {
+    compilerOptions: {
+      module: 'nodenext',
+    },
     include: [
       'vite.config.ts',
     ],

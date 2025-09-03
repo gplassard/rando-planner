@@ -62,6 +62,10 @@
       "type": "build"
     },
     {
+      "name": "eslint-plugin-unused-imports",
+      "type": "build"
+    },
+    {
       "name": "eslint",
       "version": "^9",
       "type": "build"
