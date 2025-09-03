@@ -1,5 +1,5 @@
 import { TypescriptApplicationProject } from '@gplassard/projen-extensions';
-import { TypeScriptJsxMode } from 'projen/lib/javascript';
+import { TypeScriptJsxMode, TypeScriptModuleResolution } from 'projen/lib/javascript';
 
 const project = new TypescriptApplicationProject({
   name: 'rando-planner',
@@ -25,6 +25,10 @@ const project = new TypescriptApplicationProject({
     ],
   },
   tsconfigDev: {
+    compilerOptions: {
+      module: 'preserve',
+      moduleResolution: TypeScriptModuleResolution.BUNDLER,
+    },
     include: [
       'vite.config.ts',
     ],
