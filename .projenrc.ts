@@ -26,8 +26,7 @@ const project = new TypescriptApplicationProject({
   },
   tsconfigDev: {
     compilerOptions: {
-      module: 'preserve',
-      moduleResolution: TypeScriptModuleResolution.BUNDLER,
+      module: 'nodenext',
     },
     include: [
       'vite.config.ts',
