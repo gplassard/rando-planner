@@ -22,8 +22,8 @@ importers:
         version: 5.0.0(leaflet@1.9.4)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
     devDependencies:
       '@gplassard/projen-extensions':
-        specifier: ^0.1.12
-        version: 0.1.12(constructs@10.4.2)(projen@0.96.5(constructs@10.4.2))
+        specifier: ^0.1.13
+        version: 0.1.13(constructs@10.4.2)(projen@0.96.5(constructs@10.4.2))
       '@stylistic/eslint-plugin':
         specifier: ^2
         version: 2.13.0(eslint@9.39.0)(typescript@5.9.3)
@@ -411,11 +411,11 @@ packages:
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@gplassard/projen-extensions@0.1.12':
-    resolution: {integrity: sha512-PkvbYxARuVXnsbyYAu7IN9977qhESZkf5v+n6AR3F9WWtIJh4mKdVEDaegpDtOKKNsAyzgf8ivWDewYmWoizdA==, tarball: https://npm.pkg.github.com/download/@gplassard/projen-extensions/0.1.12/83cd60e0596cdfc17a586f33c8d0b16d616c06e4}
+  '@gplassard/projen-extensions@0.1.13':
+    resolution: {integrity: sha512-4LvA1ZSbwuPkwh4w2nGxsAdW156DlRCdqRxd9n7LaT/anGbib+MUOOMPlxm6lfJZ65qiGlUycJLI2nu85y0R9g==, tarball: https://npm.pkg.github.com/download/@gplassard/projen-extensions/0.1.13/6f4b7faaa0302d875f69b8f0bab5ae011ad2ded8}
     peerDependencies:
       constructs: ^10.4.2
-      projen: ^0.96.5
+      projen: ^0.98.6
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -3161,7 +3161,7 @@ snapshots:
       '@eslint/core': 0.17.0
       levn: 0.4.1
 
-  '@gplassard/projen-extensions@0.1.12(constructs@10.4.2)(projen@0.96.5(constructs@10.4.2))':
+  '@gplassard/projen-extensions@0.1.13(constructs@10.4.2)(projen@0.96.5(constructs@10.4.2))':
     dependencies:
       constructs: 10.4.2
       projen: 0.96.5(constructs@10.4.2)
