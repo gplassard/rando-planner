@@ -23,7 +23,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10.20.0
+          version: 10.24.0
       - uses: actions/setup-node@v4
         with:
           node-version: 22.21.1
@@ -101,8 +101,8 @@ jobs:
         run: '[ -s ${{ runner.temp }}/repo.patch ] && git apply ${{ runner.temp }}/repo.patch || echo "Empty patch. Skipping."'
       - name: Set git identity
         run: |-
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Push changes
         env:
           PULL_REQUEST_REF: ${{ github.event.pull_request.head.ref }}
