@@ -32,6 +32,11 @@ const project = new TypescriptApplicationProject({
       'vite.config.ts',
     ],
   },
+  pnpmWorkspace: {
+    allowBuilds: {
+      '@parcel/watcher': false,
+    },
+  },
 });
 project.addScripts( {
   dev: 'vite',
