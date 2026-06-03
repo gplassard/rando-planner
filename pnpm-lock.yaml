@@ -22,8 +22,8 @@ importers:
         version: 5.0.0(leaflet@1.9.4)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
     devDependencies:
       '@gplassard/projen-extensions':
-        specifier: ^0.1.47
-        version: 0.1.47(constructs@10.6.0)(projen@0.99.52(constructs@10.6.0))
+        specifier: ^0.1.56
+        version: 0.1.56(constructs@10.6.0)(projen@0.99.52(constructs@10.6.0))
       '@stylistic/eslint-plugin':
         specifier: ^2
         version: 2.13.0(eslint@9.39.4)(typescript@6.0.3)
@@ -336,11 +336,11 @@ packages:
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@gplassard/projen-extensions@0.1.47':
-    resolution: {integrity: sha512-EPcJzmI+/R9wTOtYfzKAc+fv3tBgKltxIkVgTn+v4Wao1vAkX34E/qx/oUIaB4OjZBFIpBEOmeOKPCQ4wVZNHA==, tarball: https://npm.pkg.github.com/download/@gplassard/projen-extensions/0.1.47/10554d63de7c5942272e15717c6e890a7822914f}
+  '@gplassard/projen-extensions@0.1.56':
+    resolution: {integrity: sha512-Mu9eLi3HpfG8gdJphjzFM4tBZoPIvdrcSVFCKzo0vK2NRONqCtyjVAUC7e1N/XJT5XhN03Y6zmoteuCQhQWYXQ==, tarball: https://npm.pkg.github.com/download/@gplassard/projen-extensions/0.1.56/621cdc1017706dc731b2fe55bc715901813fd5de}
     peerDependencies:
       constructs: ^10.6.0
-      projen: ^0.99.52
+      projen: ^0.99.70
 
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
@@ -1596,6 +1596,10 @@ packages:
     resolution: {integrity: sha512-ej4AhfhfL2Q2zpMmLo7U1Uv9+PyhIZpgQLGT1F9miIGmiCJIoCgSmczFdrc97mWT4kVY72KA+WnnhJ5pghSvSg==}
     engines: {node: '>= 0.4'}
 
+  hasown@2.0.4:
+    resolution: {integrity: sha512-T2UbfbBEF32wiepXIsMlTW9+dDYC6wMh/t/vYA4tuOMKqWz/n3vr1NFSxQiyP+zk2mXsoMA/i/7qV6LKut1t1A==}
+    engines: {node: '>= 0.4'}
+
   hosted-git-info@2.8.9:
     resolution: {integrity: sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==}
 
@@ -2759,8 +2763,8 @@ packages:
     resolution: {integrity: sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==}
     engines: {node: '>=10'}
 
-  ws@8.20.0:
-    resolution: {integrity: sha512-sAt8BhgNbzCtgGbt2OxmpuryO63ZoDk/sqaB/znQm94T4fCEsy/yV+7CdC1kJhOU9lboAEU7R3kquuycDoibVA==}
+  ws@8.21.0:
+    resolution: {integrity: sha512-Vsp28b7DRcimFQvrqu2Wek3z1iYxDCWqHYB8Qsnk/S4RfaCQzPGPyBNuVjJV3cd6UiKtUtp6sNM77gWvzcCH+g==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
@@ -3006,7 +3010,7 @@ snapshots:
       '@eslint/core': 0.17.0
       levn: 0.4.1
 
-  '@gplassard/projen-extensions@0.1.47(constructs@10.6.0)(projen@0.99.52(constructs@10.6.0))':
+  '@gplassard/projen-extensions@0.1.56(constructs@10.6.0)(projen@0.99.52(constructs@10.6.0))':
     dependencies:
       constructs: 10.6.0
       projen: 0.99.52(constructs@10.6.0)
@@ -4204,7 +4208,7 @@ snapshots:
       asynckit: 0.4.0
       combined-stream: 1.0.8
       es-set-tostringtag: 2.1.0
-      hasown: 2.0.3
+      hasown: 2.0.4
       mime-types: 2.1.35
     optional: true
 
@@ -4332,6 +4336,11 @@ snapshots:
   hasown@2.0.3:
     dependencies:
       function-bind: 1.1.2
+
+  hasown@2.0.4:
+    dependencies:
+      function-bind: 1.1.2
+    optional: true
 
   hosted-git-info@2.8.9: {}
 
@@ -4548,7 +4557,7 @@ snapshots:
       whatwg-encoding: 3.1.1
       whatwg-mimetype: 4.0.0
       whatwg-url: 14.2.0
-      ws: 8.20.0
+      ws: 8.21.0
       xml-name-validator: 5.0.0
     transitivePeerDependencies:
       - bufferutil
@@ -5547,7 +5556,7 @@ snapshots:
       string-width: 4.2.3
       strip-ansi: 6.0.1
 
-  ws@8.20.0:
+  ws@8.21.0:
     optional: true
 
   xml-name-validator@5.0.0:
