@@ -35,7 +35,7 @@ const project = new TypescriptApplicationProject({
   pnpmWorkspace: {
     allowBuilds: {
       '@parcel/watcher': false,
-    }
+    },
   },
 });
 project.addScripts( {
