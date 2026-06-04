@@ -56,4 +56,5 @@ junit.xml
 !/.github/workflows/datadog-secret-scanning.yml
 !/.github/workflows/datadog-infra-as-code-security.yml
 install_test_visibility.sh
+!/.github/workflows/deploy-website.yml
 !/.projenrc.ts

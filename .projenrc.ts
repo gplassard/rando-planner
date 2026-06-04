@@ -52,6 +52,12 @@ const deployWebsite = new GithubWorkflow(project.github!, 'deploy-website', {
     cancelInProgress: true,
   },
 });
+deployWebsite.on({
+  push: {
+    branches: ['main'],
+  },
+  workflowDispatch: {},
+});
 deployWebsite.addJob('deploy', {
   name: 'deploy',
   environment: {
