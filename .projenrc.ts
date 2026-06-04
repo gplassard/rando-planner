@@ -69,6 +69,7 @@ deployWebsite.addJob('deploy', {
     contents: JobPermission.READ,
     packages: JobPermission.READ,
     pages: JobPermission.WRITE,
+    idToken: JobPermission.WRITE,
   },
   steps: [
     WorkflowActionsX.checkout({}),
