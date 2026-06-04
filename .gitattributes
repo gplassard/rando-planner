@@ -10,6 +10,7 @@
 /.github/workflows/datadog-secret-scanning.yml linguist-generated
 /.github/workflows/datadog-software-composition-analysis.yml linguist-generated
 /.github/workflows/datadog-static-analysis.yml linguist-generated
+/.github/workflows/deploy-website.yml linguist-generated
 /.github/workflows/pull-request-lint.yml linguist-generated
 /.github/workflows/upgrade.yml linguist-generated
 /.gitignore linguist-generated

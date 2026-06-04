@@ -8,6 +8,7 @@
     ".github/workflows/datadog-secret-scanning.yml",
     ".github/workflows/datadog-software-composition-analysis.yml",
     ".github/workflows/datadog-static-analysis.yml",
+    ".github/workflows/deploy-website.yml",
     ".github/workflows/pull-request-lint.yml",
     ".github/workflows/upgrade.yml",
     ".gitignore",
