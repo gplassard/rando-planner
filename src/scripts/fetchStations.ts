@@ -34,12 +34,12 @@ const PREPARED_DATA_PATH = path.join(process.cwd(), 'data', 'prepared', 'station
 
 async function fetchStations(): Promise<void> {
   console.log('Fetching stations data from data.gouv.fr...');
-  
+
   try {
     // Ensure directories exist
     const rawDir = path.dirname(RAW_DATA_PATH);
     const preparedDir = path.dirname(PREPARED_DATA_PATH);
-    
+
     if (!fs.existsSync(rawDir)) {
       fs.mkdirSync(rawDir, { recursive: true });
     }
@@ -52,19 +52,19 @@ async function fetchStations(): Promise<void> {
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
-    
+
     const rawData: GeoJson = await response.json();
-    
+
     // Write raw data
     fs.writeFileSync(RAW_DATA_PATH, JSON.stringify(rawData, null, 2));
     console.log(`Raw stations data written to ${RAW_DATA_PATH}`);
 
     // Transform data
     const features = rawData.features;
-    
+
     // Filter features where voyageurs == "O"
     const openStations = features.filter(f => f.properties.voyageurs === 'O');
-    
+
     // Group by code_uic
     const grouped = new Map<string, GeoJsonFeature[]>();
     for (const feature of openStations) {
@@ -88,7 +88,7 @@ async function fetchStations(): Promise<void> {
     fs.writeFileSync(PREPARED_DATA_PATH, JSON.stringify(stations, null, 2));
     console.log(`Transformed stations data written to ${PREPARED_DATA_PATH}`);
     console.log(`Processed ${stations.length} stations`);
-    
+
   } catch (error) {
     console.error('Error fetching stations data:', error);
     process.exit(1);

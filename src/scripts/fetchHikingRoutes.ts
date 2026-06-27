@@ -38,11 +38,11 @@ const DATABASE_PATH = path.join(process.cwd(), 'data', 'database.json');
 
 async function fetchHikingRoutes(): Promise<void> {
   console.log('Fetching hiking routes data from data.gouv.fr...');
-  
+
   try {
     // Ensure directories exist
     const rawDir = path.dirname(RAW_DATA_PATH);
-    
+
     if (!fs.existsSync(rawDir)) {
       fs.mkdirSync(rawDir, { recursive: true });
     }
@@ -52,9 +52,9 @@ async function fetchHikingRoutes(): Promise<void> {
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
-    
+
     const rawData: GeoJson = await response.json();
-    
+
     // Write raw data
     fs.writeFileSync(RAW_DATA_PATH, JSON.stringify(rawData, null, 2));
     console.log(`Raw hiking routes data written to ${RAW_DATA_PATH}`);
@@ -83,7 +83,7 @@ async function fetchHikingRoutes(): Promise<void> {
     fs.writeFileSync(DATABASE_PATH, JSON.stringify(database, null, 2));
     console.log(`Full database written to ${DATABASE_PATH}`);
     console.log(`Processed ${database.length} hiking routes for full database`);
-    
+
   } catch (error) {
     console.error('Error fetching hiking routes data:', error);
     process.exit(1);
