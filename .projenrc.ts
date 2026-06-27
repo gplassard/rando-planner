@@ -5,6 +5,7 @@ import { TypeScriptJsxMode } from 'projen/lib/javascript';
 
 const project = new TypescriptApplicationProject({
   name: 'rando-planner',
+  agentConfigurationEnabled: true,
   deps: [
     'leaflet', 'react', 'react-dom', 'react-leaflet',
   ],
