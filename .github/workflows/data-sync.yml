@@ -1,0 +1,121 @@
+name: Data Sync
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: '0 6 1 * *'
+
+jobs:
+  data-sync:
+    name: Data Sync
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      patch_created: ${{ steps.create_patch.outputs.patch_created }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.16.0
+          cache: pnpm
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa
+        with:
+          version: 11.5.1
+
+      - name: Install dependencies
+        run: pnpm i --frozen-lockfile
+
+      - name: Compile TypeScript
+        run: pnpm run compile
+
+      - name: Run data pipeline
+        run: npx ts-node --transpile-only src/scripts/pipeline.ts
+
+      - name: Find mutations
+        id: create_patch
+        run: |
+          git add .
+          git diff --staged --patch --exit-code > repo.patch || echo "patch_created=true" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - name: Upload patch
+        if: steps.create_patch.outputs.patch_created
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: repo.patch
+          path: repo.patch
+          overwrite: true
+          retention-days: 1
+
+  pr:
+    name: Create Pull Request
+    needs: data-sync
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    if: ${{ needs.data-sync.outputs.patch_created }}
+    steps:
+      - name: Generate token
+        id: generate_token
+        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349
+        with:
+          app-id: ${{ secrets.PROJEN_APP_ID }}
+          private-key: ${{ secrets.PROJEN_APP_PRIVATE_KEY }}
+          permission-pull-requests: write
+          permission-contents: write
+          permission-workflows: write
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+
+      - name: Download patch
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: repo.patch
+          path: ${{ runner.temp }}
+
+      - name: Apply patch
+        run: '[ -s ${{ runner.temp }}/repo.patch ] && git apply ${{ runner.temp }}/repo.patch || echo "Empty patch. Skipping."'
+
+      - name: Set git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - name: Create Pull Request
+        id: create-pr
+        uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676
+        with:
+          token: ${{ steps.generate_token.outputs.token }}
+          commit-message: |
+            chore: update data files (${{ steps.date.outputs.date }})
+
+            Updates data files from data.gouv.fr.
+
+            [Workflow Run]: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+          branch: github-actions/data-sync-${{ steps.date.outputs.date }}-${{ github.run_id }}
+          title: "chore: update data files (${{ steps.date.outputs.date }})"
+          labels: data-update,automated,monthly-sync
+          body: |
+            Updates data files from data.gouv.fr.
+
+            [Workflow Run]: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+          author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          signoff: true
+          delete-branch: true
