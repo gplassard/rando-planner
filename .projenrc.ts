@@ -74,7 +74,7 @@ deployWebsite.addJob('deploy', {
   },
   steps: [
     WorkflowActionsX.checkout({}),
-    WorkflowActionsX.setupPnpm({}),
+    WorkflowActionsX.setupPnpm({ install: false }),
     WorkflowActionsX.setupNode({}),
     WorkflowActionsX.installDependencies({}),
     {
