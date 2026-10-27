@@ -22,8 +22,8 @@ importers:
         version: 5.0.0(leaflet@1.9.4)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
     devDependencies:
       '@gplassard/projen-extensions':
-        specifier: ^0.1.80
-        version: 0.1.80(constructs@10.8.1)(projen@0.103.27(constructs@10.8.1))
+        specifier: ^0.1.82
+        version: 0.1.82(constructs@10.8.1)(projen@0.103.27(constructs@10.8.1))
       '@stylistic/eslint-plugin':
         specifier: ^5.10.0
         version: 5.10.0(eslint@9.39.5(supports-color@7.2.0))
@@ -290,8 +290,8 @@ packages:
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@gplassard/projen-extensions@0.1.80':
-    resolution: {integrity: sha512-Wux525PwM3mlOKQHwKiO4HgWpQ2bSk2t19v5kcrQRyzTZ8gJp6ori3rPp6b7Fxt9s0aQRWTMwGwwBx5f7hikWA==, tarball: https://npm.pkg.github.com/download/@gplassard/projen-extensions/0.1.80/53b1be4dfefe39aaf6386eca9d8b8e9b85c63ecb}
+  '@gplassard/projen-extensions@0.1.82':
+    resolution: {integrity: sha512-z+9CnoDTGTjDsnNkMPQ4Lk0JBUdwC1oYhJOqr9UkwQaFl7yFqxUEwhh2RYZuhYefu19dQnJldbbRtb3DODGopA==, tarball: https://npm.pkg.github.com/download/@gplassard/projen-extensions/0.1.82/2a0ee7f806dae647fa5b99e31277337de11a7505}
     peerDependencies:
       constructs: ^10.8.1
       projen: ^0.103.27
@@ -2093,7 +2093,7 @@ snapshots:
       '@eslint/core': 0.17.0
       levn: 0.4.1
 
-  '@gplassard/projen-extensions@0.1.80(constructs@10.8.1)(projen@0.103.27(constructs@10.8.1))':
+  '@gplassard/projen-extensions@0.1.82(constructs@10.8.1)(projen@0.103.27(constructs@10.8.1))':
     dependencies:
       constructs: 10.8.1
       projen: 0.103.27(constructs@10.8.1)
