@@ -53,9 +53,10 @@ project.addScripts( {
 project.gitignore.addPatterns('/data/raw/');
 // database.json is a large pipeline output unused by the app, keep it out of git.
 project.gitignore.addPatterns('/data/database.json');
-// Branch that holds one directory per PR preview environment. Its content is
-// merged into the GitHub Pages artifact on every production deploy, so previews
-// survive deploys of the main site.
+// Branch that holds one directory per PR preview environment. Every preview
+// publish, cleanup and prune deploys the full site (main site + all previews)
+// directly to GitHub Pages, so previews are live immediately after the PR
+// workflow runs, and multiple previews are served in parallel.
 const PREVIEWS_BRANCH = 'previews';
 // Previews that have not been updated for this long are removed by a daily prune job.
 const PREVIEW_TTL_SECONDS = 7 * 24 * 60 * 60;
@@ -109,7 +110,9 @@ deployWebsite.addJob('deploy', {
       run: [
         `REPO_URL="${gitPushUrl}"`,
         `if git ls-remote --exit-code --heads "$REPO_URL" ${PREVIEWS_BRANCH} > /dev/null 2>&1; then`,
-        `  git clone --depth 1 --single-branch --branch ${PREVIEWS_BRANCH} "$REPO_URL" dist/previews`,
+        `  git clone --depth 1 --single-branch --branch ${PREVIEWS_BRANCH} "$REPO_URL" "\${RUNNER_TEMP}/previews"`,
+        '  mkdir -p dist/previews',
+        '  rsync -a --exclude=.git "${RUNNER_TEMP}/previews/" dist/previews/',
         'else',
         "  echo 'No preview environments to include'",
         'fi',
@@ -179,6 +182,74 @@ updateData.addJob('update-data', {
     },
   ],
 });
+// Pushes the current content of preview-site/ to the previews branch, retrying
+// when a concurrent publish has moved the branch in the meantime. `modify` runs
+// inside the freshly cloned preview-site directory; `onNoChange` runs when the
+// modification results in no staged change.
+const publishPreviewsRun = (modify: string[], commitMessage: string, onNoChange: string[]) => [
+  `REPO_URL="${gitPushUrl}"`,
+  'PUSHED=false',
+  'for attempt in 1 2 3 4 5; do',
+  '  rm -rf preview-site',
+  `  if git ls-remote --exit-code --heads "$REPO_URL" ${PREVIEWS_BRANCH} > /dev/null 2>&1; then`,
+  `    git clone --depth 1 --single-branch --branch ${PREVIEWS_BRANCH} "$REPO_URL" preview-site`,
+  '  else',
+  '    mkdir -p preview-site',
+  `    git -C preview-site init -b ${PREVIEWS_BRANCH}`,
+  '    git -C preview-site remote add origin "$REPO_URL"',
+  '  fi',
+  ...modify.map(line => '  ' + line),
+  ...gitIdentity.split('\n').map(cmd => `  git -C preview-site ${cmd.slice('git '.length)}`),
+  '  git -C preview-site add -A',
+  '  if git -C preview-site diff --cached --quiet; then',
+  ...onNoChange,
+  '  fi',
+  `  git -C preview-site commit -m "${commitMessage}"`,
+  '  if git -C preview-site push origin previews; then',
+  '    PUSHED=true',
+  '    break',
+  '  fi',
+  '  echo "Previews branch moved concurrently, retrying (attempt $attempt)"',
+  '  sleep $((attempt * 10))',
+  'done',
+  'if [ "$PUSHED" != "true" ]; then',
+  '  echo "Failed to publish previews branch" >&2',
+  '  exit 1',
+  'fi',
+].join('\n');
+
+// Deploy the full site (main site + all previews) to GitHub Pages.
+const deployPagesSteps = [
+  {
+    name: 'Setup pages',
+    uses: 'actions/configure-pages@v5',
+  },
+  {
+    name: 'Upload artifact',
+    uses: 'actions/upload-pages-artifact@v3',
+    with: {
+      path: './dist',
+    },
+  },
+  {
+    name: 'Deploy to Github Pages',
+    uses: 'actions/deploy-pages@v4',
+  },
+];
+
+const assemblePreviewsStep = {
+  name: 'Assemble previews into site',
+  run: [
+    'mkdir -p dist/previews',
+    'rsync -a --exclude=.git preview-site/ dist/previews/',
+  ].join('\n'),
+};
+
+const checkoutMainStep = {
+  name: 'Checkout main',
+  run: 'git checkout --force origin/main',
+};
+
 const previewWebsite = new GithubWorkflow(project.github!, 'preview-website', {
   limitConcurrency: true,
   concurrencyOptions: {
@@ -209,6 +280,8 @@ previewWebsite.addJob('preview', {
     contents: JobPermission.WRITE,
     packages: JobPermission.READ,
     pullRequests: JobPermission.WRITE,
+    pages: JobPermission.WRITE,
+    idToken: JobPermission.WRITE,
   },
   steps: [
     WorkflowActionsX.checkout({
@@ -219,14 +292,11 @@ previewWebsite.addJob('preview', {
     WorkflowActionsX.setupNode({}),
     WorkflowActionsX.installDependencies({ noFrozenLockfile: true }),
     {
-      name: 'Build',
+      name: 'Build preview',
       env: {
         PR_NUMBER: '${{ github.event.pull_request.number }}',
       },
-      run: [
-        'pnpm exec tsc',
-        'pnpm exec vite build --base=/rando-planner/previews/pr-${PR_NUMBER}/',
-      ].join(' && '),
+      run: 'pnpm exec tsc && pnpm exec vite build --base=/rando-planner/previews/pr-${PR_NUMBER}/ --outDir dist-preview',
     },
     {
       name: 'Publish preview',
@@ -235,26 +305,31 @@ previewWebsite.addJob('preview', {
         PR_NUMBER: '${{ github.event.pull_request.number }}',
         GH_TOKEN: '${{ github.token }}',
       },
-      run: [
-        `REPO_URL="${gitPushUrl}"`,
-        `if git ls-remote --exit-code --heads "$REPO_URL" ${PREVIEWS_BRANCH} > /dev/null 2>&1; then`,
-        `  git clone --depth 1 --single-branch --branch ${PREVIEWS_BRANCH} "$REPO_URL" preview-site`,
-        'else',
-        '  mkdir -p preview-site',
-        `  git -C preview-site init -b ${PREVIEWS_BRANCH}`,
-        '  git -C preview-site remote add origin "$REPO_URL"',
-        'fi',
+      run: publishPreviewsRun([
         'rm -rf "preview-site/pr-${PR_NUMBER}"',
         'mkdir -p "preview-site/pr-${PR_NUMBER}"',
-        'cp -r dist/. "preview-site/pr-${PR_NUMBER}"',
+        'cp -r dist-preview/. "preview-site/pr-${PR_NUMBER}"',
         'date +%s > "preview-site/pr-${PR_NUMBER}/.preview-updated"',
-        ...gitIdentity.split('\n').map(cmd => `git -C preview-site ${cmd.slice('git '.length)}`),
-        'git -C preview-site add -A',
-        'git -C preview-site commit -m "preview: pr-${PR_NUMBER}"',
-        `git -C preview-site push origin ${PREVIEWS_BRANCH}`,
         'echo "url=https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/previews/pr-${PR_NUMBER}/" >> "$GITHUB_OUTPUT"',
-      ].join('\n'),
+      ], 'preview: pr-${PR_NUMBER}', [
+        '    PUSHED=true',
+        '    break',
+      ]),
     },
+    checkoutMainStep,
+    {
+      name: 'Install main dependencies',
+      env: {
+        NODE_AUTH_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
+      },
+      run: 'pnpm i --no-frozen-lockfile',
+    },
+    {
+      name: 'Build main site',
+      run: 'pnpm run build',
+    },
+    assemblePreviewsStep,
+    ...deployPagesSteps,
     {
       name: 'Comment preview url',
       env: {
@@ -265,7 +340,7 @@ previewWebsite.addJob('preview', {
       run: [
         "MARKER='<!-- preview-environment -->'",
         'BODY="Preview environment for PR #${PR_NUMBER}: ${PREVIEW_URL} ${MARKER}"',
-        'COMMENT_ID=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" --paginate --jq ".[] | select(.body | contains(\\"${MARKER}\\")) | .id" | head -n 1)',
+        'COMMENT_ID=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" --paginate --jq ".[] | select(.body | contains(\"${MARKER}\")) | .id" | head -n 1)',
         'if [ -n "$COMMENT_ID" ]; then',
         '  gh api -X PATCH "repos/${GITHUB_REPOSITORY}/issues/comments/${COMMENT_ID}" -f body="$BODY" > /dev/null',
         'else',
@@ -281,32 +356,34 @@ previewWebsite.addJob('cleanup', {
   runsOn: ['ubuntu-latest'],
   permissions: {
     contents: JobPermission.WRITE,
+    packages: JobPermission.READ,
+    pages: JobPermission.WRITE,
+    idToken: JobPermission.WRITE,
   },
   steps: [
+    WorkflowActionsX.checkout({}),
+    WorkflowActionsX.setupPnpm({ install: false }),
+    WorkflowActionsX.setupNode({}),
+    checkoutMainStep,
+    WorkflowActionsX.installDependencies({}),
     {
       name: 'Remove preview',
       env: {
         PR_NUMBER: '${{ github.event.pull_request.number }}',
         GH_TOKEN: '${{ github.token }}',
       },
-      run: [
-        `REPO_URL="${gitPushUrl}"`,
-        `if ! git ls-remote --exit-code --heads "$REPO_URL" ${PREVIEWS_BRANCH} > /dev/null 2>&1; then`,
-        `  echo "No ${PREVIEWS_BRANCH} branch, nothing to clean up"`,
-        '  exit 0',
-        'fi',
-        `git clone --depth 1 --single-branch --branch ${PREVIEWS_BRANCH} "$REPO_URL" preview-site`,
+      run: publishPreviewsRun([
         'rm -rf "preview-site/pr-${PR_NUMBER}"',
-        ...gitIdentity.split('\n').map(cmd => `git -C preview-site ${cmd.slice('git '.length)}`),
-        'git -C preview-site add -A',
-        'if git -C preview-site diff --cached --quiet; then',
-        '  echo "No preview to remove"',
-        '  exit 0',
-        'fi',
-        'git -C preview-site commit -m "preview: remove pr-${PR_NUMBER}"',
-        `git -C preview-site push origin ${PREVIEWS_BRANCH}`,
-      ].join('\n'),
+      ], 'preview: remove pr-${PR_NUMBER}', [
+        '    exit 0',
+      ]),
     },
+    {
+      name: 'Build main site',
+      run: 'pnpm run build',
+    },
+    assemblePreviewsStep,
+    ...deployPagesSteps,
   ],
 });
 previewWebsite.addJob('prune', {
@@ -315,24 +392,25 @@ previewWebsite.addJob('prune', {
   runsOn: ['ubuntu-latest'],
   permissions: {
     contents: JobPermission.WRITE,
+    packages: JobPermission.READ,
+    pages: JobPermission.WRITE,
+    idToken: JobPermission.WRITE,
   },
   steps: [
+    WorkflowActionsX.checkout({}),
+    WorkflowActionsX.setupPnpm({ install: false }),
+    WorkflowActionsX.setupNode({}),
+    checkoutMainStep,
+    WorkflowActionsX.installDependencies({}),
     {
       name: 'Prune expired previews',
       env: {
         GH_TOKEN: '${{ github.token }}',
       },
-      run: [
-        `REPO_URL="${gitPushUrl}"`,
-        `if ! git ls-remote --exit-code --heads "$REPO_URL" ${PREVIEWS_BRANCH} > /dev/null 2>&1; then`,
-        `  echo "No ${PREVIEWS_BRANCH} branch, nothing to prune"`,
-        '  exit 0',
-        'fi',
-        `git clone --depth 1 --single-branch --branch ${PREVIEWS_BRANCH} "$REPO_URL" preview-site`,
-        'cd preview-site',
+      run: publishPreviewsRun([
         'NOW=$(date +%s)',
         `EXPIRY=${PREVIEW_TTL_SECONDS}`,
-        'for stamp in pr-*/.preview-updated; do',
+        'for stamp in preview-site/pr-*/.preview-updated; do',
         '  [ -f "$stamp" ] || continue',
         '  UPDATED=$(cat "$stamp")',
         '  if [ $((NOW - UPDATED)) -ge $EXPIRY ]; then',
@@ -340,16 +418,16 @@ previewWebsite.addJob('prune', {
         '    rm -rf "$(dirname "$stamp")"',
         '  fi',
         'done',
-        'git add -A',
-        'if git diff --cached --quiet; then',
-        '  echo "No expired previews"',
-        '  exit 0',
-        'fi',
-        ...gitIdentity.split('\n'),
-        'git commit -m "preview: prune expired previews"',
-        `git push origin ${PREVIEWS_BRANCH}`,
-      ].join('\n'),
+      ], 'preview: prune expired previews', [
+        '    exit 0',
+      ]),
     },
+    {
+      name: 'Build main site',
+      run: 'pnpm run build',
+    },
+    assemblePreviewsStep,
+    ...deployPagesSteps,
   ],
 });
 project.synth();

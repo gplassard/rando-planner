@@ -21,6 +21,8 @@ jobs:
       contents: write
       packages: read
       pull-requests: write
+      pages: write
+      id-token: write
     environment:
       name: preview-pr-${{ github.event.pull_request.number }}
       url: ${{ steps.publish.outputs.url }}
@@ -52,11 +54,11 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: pnpm i --no-frozen-lockfile
-      - name: Build
-        id: build
+      - name: Build preview
+        id: build_preview
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
-        run: pnpm exec tsc && pnpm exec vite build --base=/rando-planner/previews/pr-${PR_NUMBER}/
+        run: pnpm exec tsc && pnpm exec vite build --base=/rando-planner/previews/pr-${PR_NUMBER}/ --outDir dist-preview
       - name: Publish preview
         id: publish
         env:
@@ -64,23 +66,67 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |-
           REPO_URL="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          if git ls-remote --exit-code --heads "$REPO_URL" previews > /dev/null 2>&1; then
-            git clone --depth 1 --single-branch --branch previews "$REPO_URL" preview-site
-          else
-            mkdir -p preview-site
-            git -C preview-site init -b previews
-            git -C preview-site remote add origin "$REPO_URL"
+          PUSHED=false
+          for attempt in 1 2 3 4 5; do
+            rm -rf preview-site
+            if git ls-remote --exit-code --heads "$REPO_URL" previews > /dev/null 2>&1; then
+              git clone --depth 1 --single-branch --branch previews "$REPO_URL" preview-site
+            else
+              mkdir -p preview-site
+              git -C preview-site init -b previews
+              git -C preview-site remote add origin "$REPO_URL"
+            fi
+            rm -rf "preview-site/pr-${PR_NUMBER}"
+            mkdir -p "preview-site/pr-${PR_NUMBER}"
+            cp -r dist-preview/. "preview-site/pr-${PR_NUMBER}"
+            date +%s > "preview-site/pr-${PR_NUMBER}/.preview-updated"
+            echo "url=https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/previews/pr-${PR_NUMBER}/" >> "$GITHUB_OUTPUT"
+            git -C preview-site config user.name "github-actions[bot]"
+            git -C preview-site config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git -C preview-site add -A
+            if git -C preview-site diff --cached --quiet; then
+              PUSHED=true
+              break
+            fi
+            git -C preview-site commit -m "preview: pr-${PR_NUMBER}"
+            if git -C preview-site push origin previews; then
+              PUSHED=true
+              break
+            fi
+            echo "Previews branch moved concurrently, retrying (attempt $attempt)"
+            sleep $((attempt * 10))
+          done
+          if [ "$PUSHED" != "true" ]; then
+            echo "Failed to publish previews branch" >&2
+            exit 1
           fi
-          rm -rf "preview-site/pr-${PR_NUMBER}"
-          mkdir -p "preview-site/pr-${PR_NUMBER}"
-          cp -r dist/. "preview-site/pr-${PR_NUMBER}"
-          date +%s > "preview-site/pr-${PR_NUMBER}/.preview-updated"
-          git -C preview-site config user.name "github-actions[bot]"
-          git -C preview-site config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git -C preview-site add -A
-          git -C preview-site commit -m "preview: pr-${PR_NUMBER}"
-          git -C preview-site push origin previews
-          echo "url=https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/previews/pr-${PR_NUMBER}/" >> "$GITHUB_OUTPUT"
+      - name: Checkout main
+        id: checkout_main
+        run: git checkout --force origin/main
+      - name: Install main dependencies
+        id: install_main_dependencies
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm i --no-frozen-lockfile
+      - name: Build main site
+        id: build_main_site
+        run: pnpm run build
+      - name: Assemble previews into site
+        id: assemble_previews_into_site
+        run: |-
+          mkdir -p dist/previews
+          rsync -a --exclude=.git preview-site/ dist/previews/
+      - name: Setup pages
+        id: setup_pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d
+      - name: Upload artifact
+        id: upload_artifact
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
+        with:
+          path: ./dist
+      - name: Deploy to Github Pages
+        id: deploy_to_github_pages
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346
       - name: Comment preview url
         id: comment_preview_url
         env:
@@ -90,7 +136,7 @@ jobs:
         run: |-
           MARKER='<!-- preview-environment -->'
           BODY="Preview environment for PR #${PR_NUMBER}: ${PREVIEW_URL} ${MARKER}"
-          COMMENT_ID=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" --paginate --jq ".[] | select(.body | contains(\"${MARKER}\")) | .id" | head -n 1)
+          COMMENT_ID=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" --paginate --jq ".[] | select(.body | contains("${MARKER}")) | .id" | head -n 1)
           if [ -n "$COMMENT_ID" ]; then
             gh api -X PATCH "repos/${GITHUB_REPOSITORY}/issues/comments/${COMMENT_ID}" -f body="$BODY" > /dev/null
           else
@@ -101,8 +147,38 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      packages: read
+      pages: write
+      id-token: write
     if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.head.repo.full_name == github.repository
     steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+      - name: Setup pnpm
+        id: setup_pnpm
+        uses: pnpm/setup@f7d0e5f4b1b3089d2799ef9722859e7ba314c4c8
+        with:
+          version: 12.8.2
+          runtime: node@26.10.0
+          cache: true
+          install: false
+      - id: auto_8ece9c1e
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 26.10.0
+          registry-url: https://npm.pkg.github.com
+          cache: pnpm
+      - name: Checkout main
+        id: checkout_main
+        run: git checkout --force origin/main
+      - name: Install dependencies
+        id: install_dependencies
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm i --frozen-lockfile
       - name: Remove preview
         id: remove_preview
         env:
@@ -110,56 +186,151 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |-
           REPO_URL="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          if ! git ls-remote --exit-code --heads "$REPO_URL" previews > /dev/null 2>&1; then
-            echo "No previews branch, nothing to clean up"
-            exit 0
+          PUSHED=false
+          for attempt in 1 2 3 4 5; do
+            rm -rf preview-site
+            if git ls-remote --exit-code --heads "$REPO_URL" previews > /dev/null 2>&1; then
+              git clone --depth 1 --single-branch --branch previews "$REPO_URL" preview-site
+            else
+              mkdir -p preview-site
+              git -C preview-site init -b previews
+              git -C preview-site remote add origin "$REPO_URL"
+            fi
+            rm -rf "preview-site/pr-${PR_NUMBER}"
+            git -C preview-site config user.name "github-actions[bot]"
+            git -C preview-site config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git -C preview-site add -A
+            if git -C preview-site diff --cached --quiet; then
+              exit 0
+            fi
+            git -C preview-site commit -m "preview: remove pr-${PR_NUMBER}"
+            if git -C preview-site push origin previews; then
+              PUSHED=true
+              break
+            fi
+            echo "Previews branch moved concurrently, retrying (attempt $attempt)"
+            sleep $((attempt * 10))
+          done
+          if [ "$PUSHED" != "true" ]; then
+            echo "Failed to publish previews branch" >&2
+            exit 1
           fi
-          git clone --depth 1 --single-branch --branch previews "$REPO_URL" preview-site
-          rm -rf "preview-site/pr-${PR_NUMBER}"
-          git -C preview-site config user.name "github-actions[bot]"
-          git -C preview-site config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git -C preview-site add -A
-          if git -C preview-site diff --cached --quiet; then
-            echo "No preview to remove"
-            exit 0
-          fi
-          git -C preview-site commit -m "preview: remove pr-${PR_NUMBER}"
-          git -C preview-site push origin previews
+      - name: Build main site
+        id: build_main_site
+        run: pnpm run build
+      - name: Assemble previews into site
+        id: assemble_previews_into_site
+        run: |-
+          mkdir -p dist/previews
+          rsync -a --exclude=.git preview-site/ dist/previews/
+      - name: Setup pages
+        id: setup_pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d
+      - name: Upload artifact
+        id: upload_artifact
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
+        with:
+          path: ./dist
+      - name: Deploy to Github Pages
+        id: deploy_to_github_pages
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346
   prune:
     name: prune
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      packages: read
+      pages: write
+      id-token: write
     if: github.event_name == 'schedule'
     steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+      - name: Setup pnpm
+        id: setup_pnpm
+        uses: pnpm/setup@f7d0e5f4b1b3089d2799ef9722859e7ba314c4c8
+        with:
+          version: 12.8.2
+          runtime: node@26.10.0
+          cache: true
+          install: false
+      - id: auto_8ece9c1e
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 26.10.0
+          registry-url: https://npm.pkg.github.com
+          cache: pnpm
+      - name: Checkout main
+        id: checkout_main
+        run: git checkout --force origin/main
+      - name: Install dependencies
+        id: install_dependencies
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm i --frozen-lockfile
       - name: Prune expired previews
         id: prune_expired_previews
         env:
           GH_TOKEN: ${{ github.token }}
         run: |-
           REPO_URL="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          if ! git ls-remote --exit-code --heads "$REPO_URL" previews > /dev/null 2>&1; then
-            echo "No previews branch, nothing to prune"
-            exit 0
-          fi
-          git clone --depth 1 --single-branch --branch previews "$REPO_URL" preview-site
-          cd preview-site
-          NOW=$(date +%s)
-          EXPIRY=604800
-          for stamp in pr-*/.preview-updated; do
-            [ -f "$stamp" ] || continue
-            UPDATED=$(cat "$stamp")
-            if [ $((NOW - UPDATED)) -ge $EXPIRY ]; then
-              echo "Pruning $(dirname "$stamp") (last updated $(date -u -d "@$UPDATED" +%Y-%m-%dT%H:%MZ))"
-              rm -rf "$(dirname "$stamp")"
+          PUSHED=false
+          for attempt in 1 2 3 4 5; do
+            rm -rf preview-site
+            if git ls-remote --exit-code --heads "$REPO_URL" previews > /dev/null 2>&1; then
+              git clone --depth 1 --single-branch --branch previews "$REPO_URL" preview-site
+            else
+              mkdir -p preview-site
+              git -C preview-site init -b previews
+              git -C preview-site remote add origin "$REPO_URL"
             fi
+            NOW=$(date +%s)
+            EXPIRY=604800
+            for stamp in preview-site/pr-*/.preview-updated; do
+              [ -f "$stamp" ] || continue
+              UPDATED=$(cat "$stamp")
+              if [ $((NOW - UPDATED)) -ge $EXPIRY ]; then
+                echo "Pruning $(dirname "$stamp") (last updated $(date -u -d "@$UPDATED" +%Y-%m-%dT%H:%MZ))"
+                rm -rf "$(dirname "$stamp")"
+              fi
+            done
+            git -C preview-site config user.name "github-actions[bot]"
+            git -C preview-site config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git -C preview-site add -A
+            if git -C preview-site diff --cached --quiet; then
+              exit 0
+            fi
+            git -C preview-site commit -m "preview: prune expired previews"
+            if git -C preview-site push origin previews; then
+              PUSHED=true
+              break
+            fi
+            echo "Previews branch moved concurrently, retrying (attempt $attempt)"
+            sleep $((attempt * 10))
           done
-          git add -A
-          if git diff --cached --quiet; then
-            echo "No expired previews"
-            exit 0
+          if [ "$PUSHED" != "true" ]; then
+            echo "Failed to publish previews branch" >&2
+            exit 1
           fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "preview: prune expired previews"
-          git push origin previews
+      - name: Build main site
+        id: build_main_site
+        run: pnpm run build
+      - name: Assemble previews into site
+        id: assemble_previews_into_site
+        run: |-
+          mkdir -p dist/previews
+          rsync -a --exclude=.git preview-site/ dist/previews/
+      - name: Setup pages
+        id: setup_pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d
+      - name: Upload artifact
+        id: upload_artifact
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
+        with:
+          path: ./dist
+      - name: Deploy to Github Pages
+        id: deploy_to_github_pages
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346

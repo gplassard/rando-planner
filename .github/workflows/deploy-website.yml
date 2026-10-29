@@ -56,7 +56,9 @@ jobs:
         run: |-
           REPO_URL="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           if git ls-remote --exit-code --heads "$REPO_URL" previews > /dev/null 2>&1; then
-            git clone --depth 1 --single-branch --branch previews "$REPO_URL" dist/previews
+            git clone --depth 1 --single-branch --branch previews "$REPO_URL" "${RUNNER_TEMP}/previews"
+            mkdir -p dist/previews
+            rsync -a --exclude=.git "${RUNNER_TEMP}/previews/" dist/previews/
           else
             echo 'No preview environments to include'
           fi
