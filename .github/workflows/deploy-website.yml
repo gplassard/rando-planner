@@ -49,6 +49,17 @@ jobs:
       - name: Build
         id: build
         run: pnpm run build
+      - name: Include preview environments
+        id: include_preview_environments
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |-
+          REPO_URL="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git ls-remote --exit-code --heads "$REPO_URL" previews > /dev/null 2>&1; then
+            git clone --depth 1 --single-branch --branch previews "$REPO_URL" dist/previews
+          else
+            echo 'No preview environments to include'
+          fi
       - name: Setup pages
         id: setup_pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d
