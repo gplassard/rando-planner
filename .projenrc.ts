@@ -42,10 +42,17 @@ const project = new TypescriptApplicationProject({
   },
 });
 project.addScripts( {
-  dev: 'vite',
-  build: 'tsc && vite build',
-  serve: 'vite preview',
+  'dev': 'vite',
+  'build': 'tsc && vite build',
+  'serve': 'vite preview',
+  'data': 'tsx scripts/data/pipeline.ts',
+  'data:fetch': 'tsx scripts/data/fetch.ts',
+  'data:prepare': 'tsx scripts/data/prepare.ts',
 });
+// Raw datasets are downloaded by the data pipeline, they are not committed.
+project.gitignore.addPatterns('/data/raw/');
+// database.json is a large pipeline output unused by the app, keep it out of git.
+project.gitignore.addPatterns('/data/database.json');
 const deployWebsite = new GithubWorkflow(project.github!, 'deploy-website', {
   limitConcurrency: true,
   concurrencyOptions: {
@@ -95,6 +102,53 @@ deployWebsite.addJob('deploy', {
     {
       name: 'Deploy to Github Pages',
       uses: 'actions/deploy-pages@v4',
+    },
+  ],
+});
+const updateData = new GithubWorkflow(project.github!, 'update-data', {
+  limitConcurrency: true,
+  concurrencyOptions: {
+    group: 'update-data',
+    cancelInProgress: true,
+  },
+});
+updateData.on({
+  schedule: [
+    {
+      cron: '0 4 * * 1',
+    },
+  ],
+  workflowDispatch: {},
+});
+updateData.addJob('update-data', {
+  name: 'update-data',
+  runsOn: ['ubuntu-latest'],
+  timeoutMinutes: 30,
+  permissions: {
+    contents: JobPermission.WRITE,
+  },
+  steps: [
+    WorkflowActionsX.checkout({}),
+    WorkflowActionsX.setupPnpm({ install: false }),
+    WorkflowActionsX.setupNode({}),
+    WorkflowActionsX.installDependencies({}),
+    {
+      name: 'Fetch and prepare data',
+      run: 'pnpm run data',
+    },
+    {
+      name: 'Commit and push data updates',
+      run: [
+        'git config user.name "github-actions[bot]"',
+        'git config user.email "41898282+github-actions[bot]@users.noreply.github.com"',
+        'git add data',
+        'if ! git diff --cached --quiet; then',
+        '  git commit -m "chore(data): refresh prepared data"',
+        '  git push',
+        'else',
+        '  echo "No data changes"',
+        'fi',
+      ].join('\n'),
     },
   ],
 });

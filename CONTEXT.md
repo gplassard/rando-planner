@@ -14,6 +14,20 @@ Hiking itinerary planner for France. Users select train stations as start, waypo
 
 Map (Leaflet) and Sidebar (React). Stations loaded from `data/prepared/stations.json`. Hiking routes from `data/small_database.json`. State managed via React hooks in App component.
 
+## Data Pipeline
+
+Raw datasets are downloaded and preprocessed by the pipeline in `scripts/data/` (`pnpm run data`, run weekly by the `update-data` GitHub Actions workflow, which commits refreshed data to `main` and triggers a website deploy):
+
+- Hiking routes: magOSM WFS extract of OpenStreetMap hiking routes
+- Train stations: SNCF "liste des gares" export
+
+Outputs consumed by the app:
+
+- `data/prepared/stations.json`: stations open to travellers, aggregated by UIC code
+- `data/small_database.json`: hiking routes with computed bboxes
+
+Raw downloads land in `data/raw/` (gitignored) and are never committed.
+
 ## File Layout
 
 ```
@@ -23,7 +37,11 @@ src/
 ├── hooks/          # useStations, useHikingRoutes, useItinerary
 └── App.tsx         # Root
 
+scripts/
+└── data/           # Data pipeline: fetch, prepare, pipeline entrypoints
+
 data/
+├── raw/            # Downloaded raw datasets (gitignored)
 ├── prepared/stations.json
 └── small_database.json
 ```

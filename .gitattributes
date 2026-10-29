@@ -14,6 +14,7 @@
 /.github/workflows/datadog-static-analysis.yml linguist-generated
 /.github/workflows/deploy-website.yml linguist-generated
 /.github/workflows/pull-request-lint.yml linguist-generated
+/.github/workflows/update-data.yml linguist-generated
 /.github/workflows/upgrade.yml linguist-generated
 /.gitignore linguist-generated
 /.ncurc.js linguist-generated

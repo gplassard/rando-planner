@@ -12,6 +12,7 @@
     ".github/workflows/datadog-static-analysis.yml",
     ".github/workflows/deploy-website.yml",
     ".github/workflows/pull-request-lint.yml",
+    ".github/workflows/update-data.yml",
     ".github/workflows/upgrade.yml",
     ".gitignore",
     ".ncurc.js",

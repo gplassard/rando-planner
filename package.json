@@ -20,7 +20,10 @@
     "watch": "projen watch",
     "projen": "projen",
     "dev": "vite",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "data": "tsx scripts/data/pipeline.ts",
+    "data:fetch": "tsx scripts/data/fetch.ts",
+    "data:prepare": "tsx scripts/data/prepare.ts"
   },
   "devDependencies": {
     "@gplassard/projen-extensions": "^0.1.83",
