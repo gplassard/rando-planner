@@ -73,6 +73,12 @@ export const Sidebar: FC<SidebarProps> = (props) => {
           )}
         </ul>
       </div>
+
+      <div className="build-info">
+        Built from commit <code>{__BUILD_COMMIT__}</code>
+        <br />
+        {new Date(__BUILD_TIME__).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}
+      </div>
     </div>
   );
 };
