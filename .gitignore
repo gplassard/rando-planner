@@ -68,4 +68,5 @@ install_test_visibility.sh
 /data/database.json
 !/.github/workflows/deploy-website.yml
 !/.github/workflows/update-data.yml
+!/.github/workflows/preview-website.yml
 !/.projenrc.ts
