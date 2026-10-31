@@ -296,10 +296,14 @@ previewWebsite.addJob('preview', {
     WorkflowActionsX.installDependencies({ noFrozenLockfile: true }),
     {
       name: 'Build preview',
+      id: 'build_preview',
       env: {
         PR_NUMBER: '${{ github.event.pull_request.number }}',
       },
-      run: 'pnpm exec tsc && pnpm exec vite build --base=/rando-planner/previews/pr-${PR_NUMBER}/ --outDir dist-preview',
+      run: [
+        'pnpm exec tsc && pnpm exec vite build --base=/rando-planner/previews/pr-${PR_NUMBER}/ --outDir dist-preview',
+        'echo "build_time=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_OUTPUT"',
+      ].join('\n'),
     },
     {
       name: 'Publish preview',
@@ -339,11 +343,24 @@ previewWebsite.addJob('preview', {
         PR_NUMBER: '${{ github.event.pull_request.number }}',
         GH_TOKEN: '${{ github.token }}',
         PREVIEW_URL: '${{ steps.publish.outputs.url }}',
+        COMMIT_SHA: '${{ github.event.pull_request.head.sha }}',
+        BUILD_TIME: '${{ steps.build_preview.outputs.build_time }}',
       },
+      // Always edit the existing marker-tagged comment instead of posting a new one.
       run: [
         "MARKER='<!-- preview-environment -->'",
-        'BODY="Preview environment for PR #${PR_NUMBER}: ${PREVIEW_URL} ${MARKER}"',
-        'COMMENT_ID=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" --paginate --jq ".[] | select(.body | contains(\"${MARKER}\")) | .id" | head -n 1)',
+        // Exported so jq's $ENV.MARKER (used in the --jq filter below) can see it.
+        'export MARKER',
+        'BODY=$(cat <<EOF',
+        'Preview environment for PR #${PR_NUMBER}: ${PREVIEW_URL}',
+        '',
+        '- Commit: [${COMMIT_SHA:0:7}](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/commit/${COMMIT_SHA})',
+        '- Built at: ${BUILD_TIME} (UTC)',
+        '',
+        '${MARKER}',
+        'EOF',
+        ')',
+        'COMMENT_ID=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" --paginate --jq \'.[] | select(.body | contains($ENV.MARKER)) | .id\' | head -n 1)',
         'if [ -n "$COMMENT_ID" ]; then',
         '  gh api -X PATCH "repos/${GITHUB_REPOSITORY}/issues/comments/${COMMENT_ID}" -f body="$BODY" > /dev/null',
         'else',
