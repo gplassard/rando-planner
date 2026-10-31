@@ -26,7 +26,7 @@
     "data:prepare": "tsx scripts/data/prepare.ts"
   },
   "devDependencies": {
-    "@gplassard/projen-extensions": "^0.1.83",
+    "@gplassard/projen-extensions": "^0.1.84",
     "@stylistic/eslint-plugin": "^5.10.0",
     "@types/geojson": "^7946.0.16",
     "@types/leaflet": "^1.9.22",
