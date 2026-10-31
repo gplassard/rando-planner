@@ -11,4 +11,6 @@ export interface ItineraryHandlers {
   setEnd: (station: Station | undefined) => any;
   addStep: (station: Station) => any;
   removeStep: (station: Station) => any;
+  clear: () => any;
+  load: (itinerary: Itinerary) => any;
 }

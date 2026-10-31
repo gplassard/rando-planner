@@ -1,3 +1,42 @@
-.leaflet-container {
-  height: 100vh;
+.Map {
+  position: absolute;
+  inset: 0;
+  // Keep every Leaflet pane/control below the UI overlays (z-index >= 1000).
+  z-index: 0;
+
+  .leaflet-container {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.itinerary-marker {
+  background: transparent;
+  border: none;
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    color: #fff;
+    font-weight: bold;
+    font-size: 13px;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  &.start span {
+    background-color: #28a745;
+  }
+
+  &.step span {
+    background-color: #007bff;
+  }
+
+  &.end span {
+    background-color: #dc3545;
+  }
 }

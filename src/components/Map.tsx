@@ -1,24 +1,28 @@
 import type { Point } from 'geojson';
 import type { Layer } from 'leaflet';
+import { divIcon } from 'leaflet';
 import { leafletLayer, LineSymbolizer } from 'protomaps-leaflet';
 import React, { FC, useEffect } from 'react';
 import {
   LayerGroup,
   MapContainer,
+  Marker,
   TileLayer,
   GeoJSON,
   Tooltip,
-  useMap,
-  useMapEvents,
   Popup,
+  useMap,
 } from 'react-leaflet';
 import hikingRoutesPmtilesUrl from '../../data/prepared/hiking-routes.pmtiles?url';
-import { MapState } from '../model/MapState';
+import { FocusTarget } from '../model/FocusTarget';
+import { Itinerary } from '../model/Itinerary';
 import { Station } from '../model/Station';
 import './Map.scss';
 
-interface Props extends MapListenerProps {
+interface Props {
   stations: Station[];
+  itinerary: Itinerary;
+  focusTarget: FocusTarget | null;
   onSelectStart: (station: Station) => any;
   onSelectEnd: (station: Station) => any;
   onSelectStep: (station: Station) => any;
@@ -49,13 +53,62 @@ const HikingRoutesLayer: FC = () => {
   return null;
 };
 
+/**
+ * Applies focus requests (search bar, timeline, drawer) to the map: the
+ * search is the only user-facing way to center the map (wireframes v1).
+ */
+const FocusController: FC<{ target: FocusTarget | null }> = ({ target }) => {
+  const map = useMap();
+  useEffect(() => {
+    if (!target) {
+      return;
+    }
+    if (target.kind === 'point') {
+      const [lat, lng] = target.center;
+      map.flyTo([lat, lng], target.zoom ?? Math.max(map.getZoom(), 13), { animate: true });
+    } else {
+      const [minLng, minLat, maxLng, maxLat] = target.bounds;
+      map.flyToBounds([[minLat, minLng], [maxLat, maxLng]], { padding: [40, 40], animate: true });
+    }
+  }, [target, map]);
+  return null;
+};
+
+const markerIcon = (kind: 'start' | 'step' | 'end', label: string) => divIcon({
+  className: `itinerary-marker ${kind}`,
+  html: `<span>${label}</span>`,
+  iconSize: [28, 28],
+  iconAnchor: [14, 14],
+});
+
+/** Markers for the selected start / steps / end of the current itinerary. */
+const ItineraryMarkers: FC<{ itinerary: Itinerary }> = ({ itinerary }) => (
+  <LayerGroup>
+    {itinerary.start && (
+      <Marker position={itinerary.start.location} icon={markerIcon('start', 'D')}>
+        <Tooltip direction="top" offset={[0, -14]}>Départ : {itinerary.start.label}</Tooltip>
+      </Marker>
+    )}
+    {itinerary.steps.map((step, index) => (
+      <Marker key={step.id} position={step.location} icon={markerIcon('step', String(index + 1))}>
+        <Tooltip direction="top" offset={[0, -14]}>Étape {index + 1} : {step.label}</Tooltip>
+      </Marker>
+    ))}
+    {itinerary.end && (
+      <Marker position={itinerary.end.location} icon={markerIcon('end', 'A')}>
+        <Tooltip direction="top" offset={[0, -14]}>Arrivée : {itinerary.end.label}</Tooltip>
+      </Marker>
+    )}
+  </LayerGroup>
+);
+
 function stationToGeoJson(station: Station): Point {
   return {
     ...station,
     type: 'Point',
     coordinates: [
-      station.location.lat,
       station.location.lng,
+      station.location.lat,
     ],
   };
 }
@@ -63,12 +116,12 @@ function stationToGeoJson(station: Station): Point {
 export const Map: FC<Props> = (props: Props) => {
   return (
     <div className="Map">
-      <MapContainer center={[44.856614, 2.35]} zoom={7} scrollWheelZoom={false}>
-        <MapListener {...props}></MapListener>
+      <MapContainer center={[46.6, 2.4]} zoom={6}>
         <TileLayer
           attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        <FocusController target={props.focusTarget} />
         <LayerGroup>
           {props.stations.map((station) => (
             <GeoJSON
@@ -85,27 +138,9 @@ export const Map: FC<Props> = (props: Props) => {
             </GeoJSON>
           ))}
         </LayerGroup>
+        <ItineraryMarkers itinerary={props.itinerary} />
         <HikingRoutesLayer />
       </MapContainer>
     </div>
   );
-};
-
-export interface MapListenerProps {
-  onStateChange?: (mapState: MapState) => any;
-}
-const MapListener: FC<MapListenerProps> = (props) => {
-  const map = useMap();
-  useMapEvents({
-    moveend: () => {
-      if (props.onStateChange) {
-        props.onStateChange({
-          boundingBox: map.getBounds(),
-          zoom: map.getZoom(),
-        });
-      }
-    },
-    click: (e) => map.setView(e.latlng, map.getZoom(), { animate: true }),
-  });
-  return null;
 };
