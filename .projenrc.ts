@@ -349,6 +349,8 @@ previewWebsite.addJob('preview', {
       // Always edit the existing marker-tagged comment instead of posting a new one.
       run: [
         "MARKER='<!-- preview-environment -->'",
+        // Exported so jq's $ENV.MARKER (used in the --jq filter below) can see it.
+        'export MARKER',
         'BODY=$(cat <<EOF',
         'Preview environment for PR #${PR_NUMBER}: ${PREVIEW_URL}',
         '',
@@ -358,7 +360,7 @@ previewWebsite.addJob('preview', {
         '${MARKER}',
         'EOF',
         ')',
-        'COMMENT_ID=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" --paginate --jq ".[] | select(.body | contains(\"${MARKER}\")) | .id" | head -n 1)',
+        'COMMENT_ID=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" --paginate --jq \'.[] | select(.body | contains($ENV.MARKER)) | .id\' | head -n 1)',
         'if [ -n "$COMMENT_ID" ]; then',
         '  gh api -X PATCH "repos/${GITHUB_REPOSITORY}/issues/comments/${COMMENT_ID}" -f body="$BODY" > /dev/null',
         'else',
