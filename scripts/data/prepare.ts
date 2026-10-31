@@ -118,6 +118,8 @@ export async function prepareStations(): Promise<PreparedStation[]> {
  * - `data/small_database.json`: id/name/from/to/bbox metadata (the app renders
  *   geometry from `data/prepared/hiking-routes.pmtiles` instead, see tiles.ts)
  * - `data/small.json`: a small sample collection for local development
+ * - `data/prepared/hiking-routes-index.json`: minified id/name/from/to/bbox index,
+ *   lazy-fetched by the app for the route search (not bundled into the JS)
  */
 export async function prepareHikingRoutes(): Promise<PreparedRoute[]> {
   const collection = await readJson(join(RAW_DIR, 'hiking_routes.geojson')) as FeatureCollection;
@@ -143,6 +145,8 @@ export async function prepareHikingRoutes(): Promise<PreparedRoute[]> {
   await writeJson(join(DATA_DIR, 'database.json'), database);
   await writeJson(join(DATA_DIR, 'small_database.json'), routes);
   await writeJson(join(DATA_DIR, 'small.json'), sample);
+  // Minified search index consumed by the app (lazy-fetched, not bundled into the JS).
+  await writeFile(join(PREPARED_DIR, 'hiking-routes-index.json'), JSON.stringify(routes));
   return routes;
 }
 

@@ -1,10 +1,35 @@
 .App {
-  display: flex;
-  .Map {
-    width: 70%;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
+  .overlay {
+    position: absolute;
+    z-index: 1000;
+
+    &.top-left {
+      top: 12px;
+      left: 12px;
+    }
+
+    &.top-right {
+      top: 12px;
+      right: 12px;
+    }
   }
-  .Sidebar {
-    width: 30%;
-    word-wrap: break-word;
+
+  .overlay-button {
+    border: none;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    padding: 9px 14px;
+    font-size: 14px;
+    cursor: pointer;
+
+    &:hover {
+      background: #e7f0ff;
+    }
   }
 }

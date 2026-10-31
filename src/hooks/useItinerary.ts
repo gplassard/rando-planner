@@ -28,6 +28,16 @@ export const useItinerary: UseItinerary = () => {
       removeStep: (station: Station) => setSteps(previous => {
         return previous.filter(p => p.id !== station.id);
       }),
+      clear: () => {
+        setStart(undefined);
+        setEnd(undefined);
+        setSteps([]);
+      },
+      load: (itinerary: Itinerary) => {
+        setStart(itinerary.start);
+        setEnd(itinerary.end);
+        setSteps(itinerary.steps);
+      },
     },
   };
 };
