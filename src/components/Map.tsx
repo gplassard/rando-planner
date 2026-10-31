@@ -30,14 +30,12 @@ interface Props {
 }
 
 /**
- * Zoom from which gare markers are drawn: below it the ~3000 stations are
- * unreadable and a DOM bottleneck.
+ * Zoom from which gare markers are drawn
  */
-const STATIONS_MIN_ZOOM = 11;
+const STATIONS_MIN_ZOOM = 9;
 
 /**
- * Zoom from which hiking route names are labeled along the trace: below it the
- * labels of the ~46k routes would be unreadable clutter.
+ * Zoom from which hiking route names are labeled along the trace
  */
 const ROUTE_LABEL_MIN_ZOOM = 11;
 
