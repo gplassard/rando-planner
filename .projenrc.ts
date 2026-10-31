@@ -3,7 +3,6 @@ import { GithubWorkflow } from 'projen/lib/github';
 import { JobPermission } from 'projen/lib/github/workflows-model';
 import { TypeScriptJsxMode } from 'projen/lib/javascript';
 
-// blah
 const project = new TypescriptApplicationProject({
   name: 'rando-planner',
   deps: [
