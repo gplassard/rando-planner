@@ -39,6 +39,9 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: pnpm i --frozen-lockfile
+      - name: Install tippecanoe (GeoJSON -> PMTiles)
+        id: install_tippecanoe_geojson_-_pmtiles
+        run: sudo apt-get update && sudo apt-get install -y tippecanoe
       - name: Fetch and prepare data
         id: fetch_and_prepare_data
         run: pnpm run data

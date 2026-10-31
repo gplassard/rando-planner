@@ -6,7 +6,7 @@ import { TypeScriptJsxMode } from 'projen/lib/javascript';
 const project = new TypescriptApplicationProject({
   name: 'rando-planner',
   deps: [
-    'leaflet', 'react', 'react-dom', 'react-leaflet',
+    'leaflet', 'protomaps-leaflet', 'react', 'react-dom', 'react-leaflet',
   ],
   devDeps: [
     '@types/leaflet',
@@ -161,6 +161,10 @@ updateData.addJob('update-data', {
     WorkflowActionsX.setupPnpm({ install: false }),
     WorkflowActionsX.setupNode({}),
     WorkflowActionsX.installDependencies({}),
+    {
+      name: 'Install tippecanoe (GeoJSON -> PMTiles)',
+      run: 'sudo apt-get update && sudo apt-get install -y tippecanoe',
+    },
     {
       name: 'Fetch and prepare data',
       run: 'pnpm run data',

@@ -93,6 +93,10 @@
       "type": "runtime"
     },
     {
+      "name": "protomaps-leaflet",
+      "type": "runtime"
+    },
+    {
       "name": "react",
       "type": "runtime"
     },

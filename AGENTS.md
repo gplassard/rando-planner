@@ -16,7 +16,7 @@ Single-context layout with `CONTEXT.md` at the repo root and ADRs in `docs/adr/`
 | Typecheck + bundle | `pnpm build` |
 | Run tests | `pnpm test` |
 | Lint | `npx projen eslint` |
-| Refresh datasets (fetch + prepare) | `pnpm run data` |
+| Refresh datasets (fetch + prepare + PMTiles) | `pnpm run data` (needs `tippecanoe`: `sudo apt-get install -y tippecanoe`) |
 
 ### Generated files (projen)
 

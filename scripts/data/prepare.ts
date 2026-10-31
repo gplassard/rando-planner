@@ -115,7 +115,8 @@ export async function prepareStations(): Promise<PreparedStation[]> {
 /**
  * Transforms the magOSM hiking routes export into:
  * - `data/database.json`: id + full OSM properties (bbox included)
- * - `data/small_database.json`: the subset consumed by the app
+ * - `data/small_database.json`: id/name/from/to/bbox metadata (the app renders
+ *   geometry from `data/prepared/hiking-routes.pmtiles` instead, see tiles.ts)
  * - `data/small.json`: a small sample collection for local development
  */
 export async function prepareHikingRoutes(): Promise<PreparedRoute[]> {

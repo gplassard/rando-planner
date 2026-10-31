@@ -1,5 +1,7 @@
 import type { Point } from 'geojson';
-import React, { FC } from 'react';
+import type { Layer } from 'leaflet';
+import { leafletLayer, LineSymbolizer } from 'protomaps-leaflet';
+import React, { FC, useEffect } from 'react';
 import {
   LayerGroup,
   MapContainer,
@@ -9,20 +11,43 @@ import {
   useMap,
   useMapEvents,
   Popup,
-  Rectangle,
 } from 'react-leaflet';
-import { HikingRoute } from '../model/HikingRoute';
+import hikingRoutesPmtilesUrl from '../../data/prepared/hiking-routes.pmtiles?url';
 import { MapState } from '../model/MapState';
 import { Station } from '../model/Station';
 import './Map.scss';
 
 interface Props extends MapListenerProps {
   stations: Station[];
-  hikingRoutes?: HikingRoute[];
   onSelectStart: (station: Station) => any;
   onSelectEnd: (station: Station) => any;
   onSelectStep: (station: Station) => any;
 }
+
+/**
+ * Full hiking trail geometry, served as a PMTiles archive and rendered as a
+ * canvas vector tile layer (see docs/adr/2026-10-31-hiking-routes-geometry-pmtiles.md).
+ */
+const HikingRoutesLayer: FC = () => {
+  const map = useMap();
+  useEffect(() => {
+    const layer = leafletLayer({
+      url: hikingRoutesPmtilesUrl,
+      backgroundColor: 'transparent',
+      paintRules: [
+        {
+          dataLayer: 'hiking_routes',
+          symbolizer: new LineSymbolizer({ color: '#2e7d32', width: 2, opacity: 0.9 }),
+        },
+      ],
+    });
+    layer.addTo(map);
+    return () => {
+      map.removeLayer(layer as unknown as Layer);
+    };
+  }, [map]);
+  return null;
+};
 
 function stationToGeoJson(station: Station): Point {
   return {
@@ -60,16 +85,7 @@ export const Map: FC<Props> = (props: Props) => {
             </GeoJSON>
           ))}
         </LayerGroup>
-        <LayerGroup>
-          {props.hikingRoutes?.map((route) => (
-            <Rectangle
-              key={route.id}
-              bounds={route.bounds}
-              pathOptions={{ color: 'green', weight: 1 }}>
-              <Tooltip>{route.name || 'Unnamed route'}</Tooltip>
-            </Rectangle>
-          ))}
-        </LayerGroup>
+        <HikingRoutesLayer />
       </MapContainer>
     </div>
   );
