@@ -276,7 +276,7 @@
             "--peer",
             "--no-deprecated",
             "--dep=dev,prod,peer,optional",
-            "--filter=@gplassard/projen-extensions,@stylistic/eslint-plugin,@types/geojson,@types/leaflet,@types/node,@types/react,@types/react-dom,@vitejs/plugin-react,eslint,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-unused-imports,projen,sass,tsx,vite,vitest,leaflet,react,react-dom,react-leaflet"
+            "--filter=@gplassard/projen-extensions,@stylistic/eslint-plugin,@types/geojson,@types/leaflet,@types/node,@types/react,@types/react-dom,@vitejs/plugin-react,eslint,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-unused-imports,projen,sass,tsx,vite,vitest,leaflet,protomaps-leaflet,react,react-dom,react-leaflet"
           ]
         },
         {
@@ -308,6 +308,7 @@
             "vite",
             "vitest",
             "leaflet",
+            "protomaps-leaflet",
             "react",
             "react-dom",
             "react-leaflet"
