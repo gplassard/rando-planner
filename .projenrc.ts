@@ -1,6 +1,4 @@
-import { TypescriptApplicationProject, WorkflowActionsX } from '@gplassard/projen-extensions';
-import { GithubWorkflow } from 'projen/lib/github';
-import { JobPermission } from 'projen/lib/github/workflows-model';
+import { TypescriptApplicationProject } from '@gplassard/projen-extensions';
 import { TypeScriptJsxMode } from 'projen/lib/javascript';
 
 const project = new TypescriptApplicationProject({
