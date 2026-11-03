@@ -1,4 +1,6 @@
-import { TypescriptApplicationProject } from '@gplassard/projen-extensions';
+import { TypescriptApplicationProject, WorkflowActionsX } from '@gplassard/projen-extensions';
+import { GithubWorkflow } from 'projen/lib/github';
+import { JobPermission } from 'projen/lib/github/workflows-model';
 import { TypeScriptJsxMode } from 'projen/lib/javascript';
 
 const project = new TypescriptApplicationProject({
@@ -54,4 +56,57 @@ project.addScripts( {
 project.gitignore.addPatterns('/data/raw/');
 // database.json is a large pipeline output unused by the app, keep it out of git.
 project.gitignore.addPatterns('/data/database.json');
+
+
+const updateData = new GithubWorkflow(project.github!, 'update-data', {
+  limitConcurrency: true,
+  concurrencyOptions: {
+    group: 'update-data',
+    cancelInProgress: true,
+  },
+});
+updateData.on({
+  schedule: [
+    {
+      cron: '0 4 * * 1',
+    },
+  ],
+  workflowDispatch: {},
+});
+updateData.addJob('update-data', {
+  name: 'update-data',
+  runsOn: ['ubuntu-latest'],
+  timeoutMinutes: 30,
+  permissions: {
+    contents: JobPermission.WRITE,
+  },
+  steps: [
+    WorkflowActionsX.checkout({}),
+    WorkflowActionsX.setupPnpm({ install: false }),
+    WorkflowActionsX.setupNode({}),
+    WorkflowActionsX.installDependencies({}),
+    {
+      name: 'Install tippecanoe (GeoJSON -> PMTiles)',
+      run: 'sudo apt-get update && sudo apt-get install -y tippecanoe',
+    },
+    {
+      name: 'Fetch and prepare data',
+      run: 'pnpm run data',
+    },
+    {
+      name: 'Commit and push data updates',
+      run: [
+        'git config user.name "github-actions[bot]"',
+        'git config user.email "41898282+github-actions[bot]@users.noreply.github.com"',
+        'git add data',
+        'if ! git diff --cached --quiet; then',
+        '  git commit -m "chore(data): refresh prepared data"',
+        '  git push',
+        'else',
+        '  echo "No data changes"',
+        'fi',
+      ].join('\n'),
+    },
+  ],
+});
 project.synth();
