@@ -45,6 +45,7 @@ junit.xml
 /dist/
 !/.eslintrc.json
 !/projenrc/tsconfig.json
+!/.github/workflows/deploy-website.yml
 !/.npmrc
 !/.ncurc.js
 .idea
@@ -61,7 +62,4 @@ junit.xml
 install_test_visibility.sh
 /data/raw/
 /data/database.json
-!/.github/workflows/deploy-website.yml
-!/.github/workflows/update-data.yml
-!/.github/workflows/preview-website.yml
 !/.projenrc.ts

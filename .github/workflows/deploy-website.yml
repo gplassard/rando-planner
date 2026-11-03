@@ -8,7 +8,7 @@ on:
   workflow_dispatch: {}
 concurrency:
   group: deploy-website
-  cancel-in-progress: true
+  cancel-in-progress: false
 jobs:
   deploy:
     name: deploy
@@ -46,6 +46,11 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: pnpm i --frozen-lockfile
+      - name: Install dependencies
+        id: install_dependencies_2
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm i --frozen-lockfile
       - name: Build
         id: build
         run: pnpm run build
@@ -56,9 +61,9 @@ jobs:
         run: |-
           REPO_URL="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           if git ls-remote --exit-code --heads "$REPO_URL" previews > /dev/null 2>&1; then
-            git clone --depth 1 --single-branch --branch previews "$REPO_URL" "${RUNNER_TEMP}/previews"
-            mkdir -p dist/previews
-            rsync -a --exclude=.git "${RUNNER_TEMP}/previews/" dist/previews/
+            git clone --depth 1 --single-branch --branch previews "$REPO_URL" "${{ runner.temp }}/previews"
+            mkdir -p ./dist/previews
+            rsync -a --exclude=.git "${{ runner.temp }}/previews/" ./dist/previews/
           else
             echo 'No preview environments to include'
           fi
@@ -71,5 +76,5 @@ jobs:
         with:
           path: ./dist
       - name: Deploy to Github Pages
-        id: deploy_to_github_pages
+        id: deployment
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346
