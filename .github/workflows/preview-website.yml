@@ -60,7 +60,7 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |-
           PR_NUMBER=${{ github.event.pull_request.number }}
-          pnpm exec tsc && pnpm run build --base=/previews/pr-$PR_NUMBER/ --outDir dist-preview
+          pnpm exec tsc && pnpm exec vite build --base=/previews/pr-$PR_NUMBER/ --outDir dist-preview
           echo "build_time=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_OUTPUT"
       - name: Publish preview
         id: publish
