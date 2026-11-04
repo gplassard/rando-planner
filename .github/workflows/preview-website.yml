@@ -24,7 +24,7 @@ jobs:
       pages: write
       id-token: write
     environment:
-      name: preview-pr-${{ github.event.pull_request.number }}
+      name: ${{ format('{0}-{1}', options.environmentNamePrefix, github.event.pull_request.number) }}
       url: ${{ steps.publish.outputs.url }}
     if: github.event_name == 'pull_request' && github.event.action != 'closed' && github.event.pull_request.head.repo.full_name == github.repository
     steps:
@@ -53,13 +53,14 @@ jobs:
         id: install_dependencies
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: pnpm i --no-frozen-lockfile
+        run: pnpm i --frozen-lockfile
       - name: Build preview
         id: build_preview
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |-
-          pnpm exec tsc && pnpm exec vite build --base=/rando-planner/previews/pr-${PR_NUMBER}/ --outDir dist-preview
+          PR_NUMBER=${{ github.event.pull_request.number }}
+          pnpm exec tsc && pnpm exec vite build --base=/previews/pr-$PR_NUMBER/ --outDir dist-preview
           echo "build_time=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_OUTPUT"
       - name: Publish preview
         id: publish
@@ -78,11 +79,11 @@ jobs:
               git -C preview-site init -b previews
               git -C preview-site remote add origin "$REPO_URL"
             fi
-            rm -rf "preview-site/pr-${PR_NUMBER}"
-            mkdir -p "preview-site/pr-${PR_NUMBER}"
-            cp -r dist-preview/. "preview-site/pr-${PR_NUMBER}"
-            date +%s > "preview-site/pr-${PR_NUMBER}/.preview-updated"
-            echo "url=https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/previews/pr-${PR_NUMBER}/" >> "$GITHUB_OUTPUT"
+            rm -rf "preview-site/pr-$PR_NUMBER"
+            mkdir -p "preview-site/pr-$PR_NUMBER"
+            cp -r dist-preview/. "preview-site/pr-$PR_NUMBER"
+            date +%s > "preview-site/pr-$PR_NUMBER/.preview-updated"
+            echo "url=https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/previews/pr-$PR_NUMBER/" >> "$GITHUB_OUTPUT"
             git -C preview-site config user.name "github-actions[bot]"
             git -C preview-site config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git -C preview-site add -A
@@ -90,7 +91,7 @@ jobs:
               PUSHED=true
               break
             fi
-            git -C preview-site commit -m "preview: pr-${PR_NUMBER}"
+            git -C preview-site commit -m "preview: pr-$PR_NUMBER"
             if git -C preview-site push origin previews; then
               PUSHED=true
               break
@@ -102,33 +103,6 @@ jobs:
             echo "Failed to publish previews branch" >&2
             exit 1
           fi
-      - name: Checkout main
-        id: checkout_main
-        run: git checkout --force origin/main
-      - name: Install main dependencies
-        id: install_main_dependencies
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: pnpm i --no-frozen-lockfile
-      - name: Build main site
-        id: build_main_site
-        run: pnpm run build
-      - name: Assemble previews into site
-        id: assemble_previews_into_site
-        run: |-
-          mkdir -p dist/previews
-          rsync -a --exclude=.git preview-site/ dist/previews/
-      - name: Setup pages
-        id: setup_pages
-        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d
-      - name: Upload artifact
-        id: upload_artifact
-        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
-        with:
-          path: ./dist
-      - name: Deploy to Github Pages
-        id: deploy_to_github_pages
-        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346
       - name: Comment preview url
         id: comment_preview_url
         env:
@@ -184,9 +158,6 @@ jobs:
           node-version: 26.9.0
           registry-url: https://npm.pkg.github.com
           cache: pnpm
-      - name: Checkout main
-        id: checkout_main
-        run: git checkout --force origin/main
       - name: Install dependencies
         id: install_dependencies
         env:
@@ -209,14 +180,14 @@ jobs:
               git -C preview-site init -b previews
               git -C preview-site remote add origin "$REPO_URL"
             fi
-            rm -rf "preview-site/pr-${PR_NUMBER}"
+            rm -rf "preview-site/pr-$PR_NUMBER"
             git -C preview-site config user.name "github-actions[bot]"
             git -C preview-site config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git -C preview-site add -A
             if git -C preview-site diff --cached --quiet; then
               exit 0
             fi
-            git -C preview-site commit -m "preview: remove pr-${PR_NUMBER}"
+            git -C preview-site commit -m "preview: remove pr-$PR_NUMBER"
             if git -C preview-site push origin previews; then
               PUSHED=true
               break
@@ -228,25 +199,6 @@ jobs:
             echo "Failed to publish previews branch" >&2
             exit 1
           fi
-      - name: Build main site
-        id: build_main_site
-        run: pnpm run build
-      - name: Assemble previews into site
-        id: assemble_previews_into_site
-        run: |-
-          mkdir -p dist/previews
-          rsync -a --exclude=.git preview-site/ dist/previews/
-      - name: Setup pages
-        id: setup_pages
-        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d
-      - name: Upload artifact
-        id: upload_artifact
-        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
-        with:
-          path: ./dist
-      - name: Deploy to Github Pages
-        id: deploy_to_github_pages
-        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346
   prune:
     name: prune
     runs-on: ubuntu-latest
@@ -276,9 +228,6 @@ jobs:
           node-version: 26.9.0
           registry-url: https://npm.pkg.github.com
           cache: pnpm
-      - name: Checkout main
-        id: checkout_main
-        run: git checkout --force origin/main
       - name: Install dependencies
         id: install_dependencies
         env:
@@ -328,22 +277,3 @@ jobs:
             echo "Failed to publish previews branch" >&2
             exit 1
           fi
-      - name: Build main site
-        id: build_main_site
-        run: pnpm run build
-      - name: Assemble previews into site
-        id: assemble_previews_into_site
-        run: |-
-          mkdir -p dist/previews
-          rsync -a --exclude=.git preview-site/ dist/previews/
-      - name: Setup pages
-        id: setup_pages
-        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d
-      - name: Upload artifact
-        id: upload_artifact
-        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
-        with:
-          path: ./dist
-      - name: Deploy to Github Pages
-        id: deploy_to_github_pages
-        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346
