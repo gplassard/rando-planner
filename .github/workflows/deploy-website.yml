@@ -57,8 +57,8 @@ jobs:
           REPO_URL="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           if git ls-remote --exit-code --heads "$REPO_URL" previews > /dev/null 2>&1; then
             git clone --depth 1 --single-branch --branch previews "$REPO_URL" "${RUNNER_TEMP}/previews"
-            mkdir -p dist/previews
-            rsync -a --exclude=.git "${RUNNER_TEMP}/previews/" dist/previews/
+            mkdir -p ./dist/previews
+            rsync -a --exclude=.git "${RUNNER_TEMP}/previews/" ./dist/previews/
           else
             echo 'No preview environments to include'
           fi
@@ -71,5 +71,5 @@ jobs:
         with:
           path: ./dist
       - name: Deploy to Github Pages
-        id: deploy_to_github_pages
+        id: deployment
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346
