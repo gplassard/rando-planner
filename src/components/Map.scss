@@ -10,6 +10,15 @@
   }
 }
 
+// Hover tooltip over a hiking route (name + endpoints), shown by the
+// protomaps-leaflet layer picking in Map.tsx.
+.hiking-route-tooltip {
+  .route-endpoints {
+    font-size: 11px;
+    color: #444;
+  }
+}
+
 .itinerary-marker {
   background: transparent;
   border: none;
