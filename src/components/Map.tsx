@@ -47,6 +47,15 @@ const ROUTE_LABEL_MIN_ZOOM = 11;
  */
 const SHORT_TRAIL_LABEL_MIN_ZOOM = 10;
 
+/**
+ * Max zoom inside the hiking routes PMTiles archive (tippecanoe
+ * `--maximum-zoom` in scripts/data/tiles.ts). protomaps-leaflet assumes data
+ * tiles up to z15 unless told otherwise: past Leaflet zoom 14 it would request
+ * nonexistent z14+ tiles and the trails would disappear. With this cap it
+ * overzooms the z13 tiles instead.
+ */
+const ROUTE_DATA_MAX_ZOOM = 13;
+
 /** Brush radius (screen px) used to pick a hiking route under the cursor. */
 const ROUTE_HOVER_BRUSH_PX = 14;
 
@@ -81,6 +90,7 @@ const HikingRoutesLayer: FC = () => {
   useEffect(() => {
     const layer = leafletLayer({
       url: hikingRoutesPmtilesUrl,
+      maxDataZoom: ROUTE_DATA_MAX_ZOOM,
       backgroundColor: 'transparent',
       paintRules: [
         {
