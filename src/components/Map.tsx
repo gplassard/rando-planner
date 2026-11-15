@@ -1,9 +1,9 @@
 import type { Point } from 'geojson';
-import type { LatLng, Layer, LeafletMouseEvent } from 'leaflet';
+import type { LatLng, Layer, LeafletMouseEvent, PopupEvent } from 'leaflet';
 import { divIcon, popup as leafletPopup, tooltip as leafletTooltip } from 'leaflet';
 import { leafletLayer, LineSymbolizer } from 'protomaps-leaflet';
 import type { JsonObject, PickedFeature } from 'protomaps-leaflet';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import {
   LayerGroup,
   MapContainer,
@@ -60,6 +60,20 @@ const ROUTE_DATA_MAX_ZOOM = 13;
 /** Brush radius (screen px) used to pick a hiking route under the cursor. */
 const ROUTE_PICK_BRUSH_PX = 14;
 
+/** Trace color of the default (unselected) hiking routes. */
+const ROUTE_COLOR = '#2e7d32';
+
+/**
+ * Trace color and width of the selected route (the one whose info popup is
+ * open): drawn on top of the base trace, thicker and in a contrasting accent.
+ */
+const ROUTE_SELECTED_COLOR = '#f57c00';
+const ROUTE_SELECTED_WIDTH = 4;
+
+/** Route id read from tile properties (see `--include id` in scripts/data/tiles.ts). */
+const routeIdOf = (props: JsonObject): string | null =>
+  typeof props.id === 'string' ? props.id : null;
+
 /** Builds the hover tooltip content (name + endpoints) without HTML injection. */
 const routeTooltipContent = (props: JsonObject): HTMLElement => {
   const info = routeInfo(props);
@@ -112,10 +126,29 @@ const routePopupContent = (props: JsonObject): HTMLElement => {
  * (from ROUTE_LABEL_MIN_ZOOM, GR codes from SHORT_TRAIL_LABEL_MIN_ZOOM), a
  * tooltip shows name + endpoints on hover and clicking a route opens a popup
  * with the details available in the tiles (name, ref, endpoints, distance,
- * duration, loop), see routePopupContent.
+ * duration, loop), see routePopupContent. While that popup is open, every
+ * tile fragment of the clicked route is re-drawn on top of the base trace in
+ * the accent color, thicker (bold).
  */
 const HikingRoutesLayer: FC = () => {
   const map = useMap();
+  /**
+   * Id of the selected route (tile property `id`). Kept in a ref, not state:
+   * the paint-rule filter below is built once per layer and must read the
+   * current selection without being re-created.
+   */
+  const selectedRouteRef = useRef<string | null>(null);
+  const layerRef = useRef<ReturnType<typeof leafletLayer> | null>(null);
+
+  /** Repaints the loaded tiles after the selected route changed. */
+  const setSelectedRoute = (id: string | null): void => {
+    if (selectedRouteRef.current === id) {
+      return;
+    }
+    selectedRouteRef.current = id;
+    layerRef.current?.rerenderTiles();
+  };
+
   useEffect(() => {
     const layer = leafletLayer({
       url: hikingRoutesPmtilesUrl,
@@ -124,7 +157,17 @@ const HikingRoutesLayer: FC = () => {
       paintRules: [
         {
           dataLayer: 'hiking_routes',
-          symbolizer: new LineSymbolizer({ color: '#2e7d32', width: 2, opacity: 0.9 }),
+          symbolizer: new LineSymbolizer({ color: ROUTE_COLOR, width: 2, opacity: 0.9 }),
+        },
+        {
+          dataLayer: 'hiking_routes',
+          filter: (_zoom, feature) => selectedRouteRef.current !== null
+            && feature.props.id === selectedRouteRef.current,
+          symbolizer: new LineSymbolizer({
+            color: ROUTE_SELECTED_COLOR,
+            width: ROUTE_SELECTED_WIDTH,
+            opacity: 1,
+          }),
         },
       ],
       labelRules: [
@@ -142,6 +185,7 @@ const HikingRoutesLayer: FC = () => {
         },
       ],
     });
+    layerRef.current = layer;
     layer.addTo(map);
 
     // The layer renders to canvas, so hover and click picking go through its
@@ -191,10 +235,11 @@ const HikingRoutesLayer: FC = () => {
       map.getContainer().style.cursor = 'pointer';
     };
 
-    // Clicking a route opens its info popup. Clicks that landed on an
-    // interactive layer (gare markers, which have their own popup) keep their
-    // default behavior; clicking away from any route simply lets Leaflet
-    // close the popup (closePopupOnClick).
+    // Clicking a route opens its info popup and selects it (bold accent trace
+    // until the popup closes). Clicks that landed on an interactive layer (gare
+    // markers, which have their own popup) keep their default behavior; clicking
+    // away from any route simply lets Leaflet close the popup
+    // (closePopupOnClick).
     const onMapClick = (e: LeafletMouseEvent) => {
       const target = e.originalEvent.target as Element | null;
       if (target?.closest?.('.leaflet-interactive')) {
@@ -205,9 +250,18 @@ const HikingRoutesLayer: FC = () => {
       if (!best) {
         return;
       }
+      setSelectedRoute(routeIdOf(best.feature.props));
       routePopup.setContent(routePopupContent(best.feature.props));
       routePopup.setLatLng(e.latlng);
       routePopup.openOn(map);
+    };
+
+    // Closing the route popup (Close button, click away, or another popup such
+    // as a gare's taking its place) clears the selection highlight.
+    const onPopupClose = (e: PopupEvent) => {
+      if (e.popup === routePopup) {
+        setSelectedRoute(null);
+      }
     };
 
     // Coalesce mousemove events into one picking query per frame, and skip
@@ -235,6 +289,7 @@ const HikingRoutesLayer: FC = () => {
 
     map.on('mousemove', onMouseMove);
     map.on('click', onMapClick);
+    map.on('popupclose', onPopupClose);
     map.on('mouseout', hideTooltip);
     map.on('zoomstart', hideTooltip);
     return () => {
@@ -243,6 +298,7 @@ const HikingRoutesLayer: FC = () => {
       }
       map.off('mousemove', onMouseMove);
       map.off('click', onMapClick);
+      map.off('popupclose', onPopupClose);
       map.off('mouseout', hideTooltip);
       map.off('zoomstart', hideTooltip);
       hideTooltip();
@@ -250,6 +306,7 @@ const HikingRoutesLayer: FC = () => {
         map.removeLayer(routePopup);
       }
       map.removeLayer(layer as unknown as Layer);
+      layerRef.current = null;
     };
   }, [map]);
   return null;

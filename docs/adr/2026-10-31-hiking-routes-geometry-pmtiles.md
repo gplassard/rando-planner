@@ -103,3 +103,17 @@ tags in the archive: `ref`, `distance`, `duration`, `roundtrip`. These are
 short strings from the magOSM route extract, so the archive size impact is
 minimal. OSM tags every field sparsely, so `routeInfo` treats each one as
 optional and the popup only shows what the tagged data provides.
+
+## Addendum 2026-11-15 — route id for the selection highlight
+
+Selecting a hiking route (clicking it — i.e. opening its info popup) now
+re-draws the whole route on top of the base trace in a contrasting accent
+color and thicker, until the popup closes (`HikingRoutesLayer` in
+`src/components/Map.tsx`, via a paint-rule filter on the selected id and a
+`rerenderTiles()` repaint). Tile properties had no route id: the magOSM
+extract carries it as the top-level GeoJSON `id`, tippecanoe cannot emit
+string ids as MVT feature ids, and protomaps-leaflet only exposes tile
+*properties* to paint-rule filters and feature picking anyway. So
+`scripts/data/tiles.ts` now copies the GeoJSON id into a regular `id`
+property (dropping the top-level id) and keeps it in the archive with
+`--include id` (~10% archive size increase, to ~64 MB).
