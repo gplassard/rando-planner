@@ -14,9 +14,13 @@
   "customizations": {
     "codespaces": {
       "repositories": {
+        "gplassard/projen-extensions": {
+          "permissions": {
+            "packages": "read"
+          }
+        },
         "gplassard/rando-planner": {
           "permissions": {
-            "packages": "read",
             "contents": "write"
           }
         }
