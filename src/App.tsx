@@ -1,5 +1,4 @@
 import React, { useState, FC } from 'react';
-import { ItinerariesDrawer } from './components/ItinerariesDrawer';
 import { Map } from './components/Map';
 import { RecapPanel } from './components/RecapPanel';
 import { SearchBar } from './components/SearchBar';
@@ -19,8 +18,7 @@ export const App: FC = () => {
   const { itinerary, handlers } = useItinerary();
   const saved = useSavedItineraries(stations);
   const [focusTarget, setFocusTarget] = useState<FocusTarget | null>(null);
-  const [recapOpen, setRecapOpen] = useState(false);
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [panelOpen, setPanelOpen] = useState(false);
 
   const focusStation = (station: Station) => {
     setFocusTarget({ kind: 'point', center: [station.location.lat, station.location.lng] });
@@ -36,7 +34,7 @@ export const App: FC = () => {
       return;
     }
     handlers.load(resolved);
-    setDrawerOpen(false);
+    setPanelOpen(false);
     const points = [resolved.start, ...resolved.steps, resolved.end]
       .filter((s): s is Station => s !== undefined)
       .map(s => s.location);
@@ -65,10 +63,6 @@ export const App: FC = () => {
         onSelectEnd={handlers.setEnd}
       />
 
-      <div className="overlay top-left">
-        <button className="overlay-button" onClick={() => setDrawerOpen(true)}>☰ Mes itinéraires</button>
-      </div>
-
       <SearchBar
         stations={stations}
         routes={routes}
@@ -79,7 +73,7 @@ export const App: FC = () => {
       />
 
       <div className="overlay top-right">
-        <button className="overlay-button" onClick={() => setRecapOpen(true)}>≡ Récap</button>
+        <button className="overlay-button" onClick={() => setPanelOpen(true)}>☰ Mon itinéraire</button>
       </div>
 
       <Timeline
@@ -93,18 +87,13 @@ export const App: FC = () => {
       <RecapPanel
         itinerary={itinerary}
         handlers={handlers}
-        open={recapOpen}
-        onClose={() => setRecapOpen(false)}
-      />
-
-      <ItinerariesDrawer
-        open={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
         saved={saved.saved}
         canSave={canSave}
         onSave={name => saved.saveCurrent(itinerary, name)}
         onLoad={loadSaved}
         onDelete={saved.remove}
+        open={panelOpen}
+        onClose={() => setPanelOpen(false)}
       />
     </div>
   );

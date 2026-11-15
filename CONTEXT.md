@@ -13,8 +13,8 @@ Hiking itinerary planner for France. Users select train stations as start, waypo
 
 Map-first UI (wireframes v1): a full-screen Leaflet map with floating overlays —
 `SearchBar` (the only way to center the map: gare or sentier), `Timeline`
-(itinerary steps pinned to the bottom), `RecapPanel` (sliding panel on the right),
-`ItinerariesDrawer` (« Mes itinéraires », left drawer, localStorage).
+(itinerary steps pinned to the bottom), `RecapPanel` (sliding panel on the right:
+recap of the current itinerary plus saved itineraries, localStorage).
 
 Stations loaded from `data/prepared/stations.json`; the route search index is
 lazy-fetched from `data/prepared/hiking-routes-index.json`. Hiking route geometry
@@ -48,7 +48,7 @@ Raw downloads land in `data/raw/` (gitignored) and are never committed.
 src/
 ├── model/          # Domain types
 ├── lib/            # Pure helpers: search, itineraryStorage (localStorage)
-├── components/     # Map, SearchBar, Timeline, RecapPanel, ItinerariesDrawer
+├── components/     # Map, SearchBar, Timeline, RecapPanel
 ├── hooks/          # useStations, useItinerary, useHikingRoutesIndex, useSavedItineraries
 └── App.tsx         # Root
 
