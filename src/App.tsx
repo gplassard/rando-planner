@@ -1,4 +1,5 @@
 import React, { useState, FC } from 'react';
+import { EnvBanner } from './components/EnvBanner';
 import { Map } from './components/Map';
 import { RecapPanel } from './components/RecapPanel';
 import { SearchBar } from './components/SearchBar';
@@ -54,6 +55,8 @@ export const App: FC = () => {
 
   return (
     <div className="App">
+      <EnvBanner/>
+
       <Map
         stations={stations}
         itinerary={itinerary}
