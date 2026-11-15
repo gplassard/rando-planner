@@ -1,7 +1,7 @@
 import type { Point } from 'geojson';
 import type { Layer, LeafletMouseEvent } from 'leaflet';
 import { divIcon, tooltip as leafletTooltip } from 'leaflet';
-import { leafletLayer, LineLabelPlacement, LineLabelSymbolizer, LineSymbolizer } from 'protomaps-leaflet';
+import { leafletLayer, LineSymbolizer } from 'protomaps-leaflet';
 import type { JsonObject } from 'protomaps-leaflet';
 import React, { FC, useEffect, useState } from 'react';
 import {
@@ -14,6 +14,7 @@ import {
   Popup,
   useMap,
 } from 'react-leaflet';
+import { isShortTrailName, TrailNameSymbolizer } from './TrailNameSymbolizer';
 import hikingRoutesPmtilesUrl from '../../data/prepared/hiking-routes.pmtiles?url';
 import { FocusTarget } from '../model/FocusTarget';
 import { Itinerary } from '../model/Itinerary';
@@ -35,9 +36,16 @@ interface Props {
 const STATIONS_MIN_ZOOM = 9;
 
 /**
- * Zoom from which hiking route names are labeled along the trace
+ * Zoom from which long hiking route names are labeled near the trace (short
+ * names — GR codes and the like — are labeled earlier, from
+ * SHORT_TRAIL_LABEL_MIN_ZOOM)
  */
 const ROUTE_LABEL_MIN_ZOOM = 11;
+
+/**
+ * Zoom from which short hiking route names (GR codes) are labeled
+ */
+const SHORT_TRAIL_LABEL_MIN_ZOOM = 10;
 
 /** Brush radius (screen px) used to pick a hiking route under the cursor. */
 const ROUTE_HOVER_BRUSH_PX = 14;
@@ -64,8 +72,9 @@ const routeTooltipContent = (props: JsonObject): HTMLElement => {
 /**
  * Full hiking trail geometry, served as a PMTiles archive and rendered as a
  * canvas vector tile layer (see docs/adr/2026-10-31-hiking-routes-geometry-pmtiles.md).
- * Besides the trace, route names are labeled along the line from
- * ROUTE_LABEL_MIN_ZOOM and a tooltip shows name + endpoints on hover.
+ * Besides the trace, route names are labeled at the midpoint of the trail
+ * (from ROUTE_LABEL_MIN_ZOOM, GR codes from SHORT_TRAIL_LABEL_MIN_ZOOM) and a
+ * tooltip shows name + endpoints on hover.
  */
 const HikingRoutesLayer: FC = () => {
   const map = useMap();
@@ -82,18 +91,15 @@ const HikingRoutesLayer: FC = () => {
       labelRules: [
         {
           dataLayer: 'hiking_routes',
+          minzoom: SHORT_TRAIL_LABEL_MIN_ZOOM,
+          filter: (_zoom, feature) => isShortTrailName(feature),
+          symbolizer: new TrailNameSymbolizer(),
+        },
+        {
+          dataLayer: 'hiking_routes',
           minzoom: ROUTE_LABEL_MIN_ZOOM,
-          symbolizer: new LineLabelSymbolizer({
-            labelProps: ['name'],
-            fill: '#1b5e20',
-            stroke: 'rgba(255, 255, 255, 0.85)',
-            width: 3,
-            fontSize: 11,
-            fontWeight: 600,
-            maxLabelChars: 40,
-            repeatDistance: 250,
-            position: LineLabelPlacement.Center,
-          }),
+          filter: (_zoom, feature) => !isShortTrailName(feature),
+          symbolizer: new TrailNameSymbolizer(),
         },
       ],
     });
