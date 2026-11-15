@@ -21,7 +21,8 @@ lazy-fetched from `data/prepared/hiking-routes-index.json`. Hiking route geometr
 rendered from `data/prepared/hiking-routes.pmtiles` (PMTiles vector tile layer, see
 `docs/adr/2026-10-31-hiking-routes-geometry-pmtiles.md`): trace at every zoom, route
 names labeled at the trail midpoint (`TrailNameSymbolizer`: GR codes from zoom 10,
-full names from zoom 11) and hover tooltip (name, from → to) from zoom 11.
+full names from zoom 11), a hover tooltip (name, from → to) and a click info
+popup (name, ref, from → to, distance, duration, loop — see `src/lib/routeInfo.ts`).
 Gare markers are only drawn from zoom 11 (below that ~3000 stations are unreadable).
 State managed via React hooks in the App component.
 
