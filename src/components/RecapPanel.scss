@@ -117,6 +117,112 @@
     }
   }
 
+  .saved {
+    margin-top: 20px;
+    padding-top: 4px;
+    border-top: 2px solid #dee2e6;
+
+    h3 {
+      margin: 0 0 12px;
+      color: #343a40;
+      font-size: 1.05em;
+    }
+  }
+
+  .warning {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 6px;
+    color: #664d03;
+    padding: 10px;
+    font-size: 0.85em;
+  }
+
+  .save-form {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 8px;
+
+    input {
+      flex: 1;
+      min-width: 0;
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 14px;
+    }
+
+    button {
+      border: none;
+      background: #28a745;
+      color: #fff;
+      border-radius: 6px;
+      padding: 0 12px;
+      cursor: pointer;
+
+      &:disabled {
+        background: #adb5bd;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .hint {
+    color: #6c757d;
+    font-size: 0.8em;
+    font-style: italic;
+  }
+
+  .saved-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 0;
+
+    li {
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      margin-bottom: 10px;
+
+      .name {
+        font-weight: bold;
+        overflow-wrap: anywhere;
+      }
+
+      .date {
+        font-size: 0.8em;
+        color: #6c757d;
+        margin: 4px 0 8px;
+      }
+
+      .actions {
+        display: flex;
+        gap: 6px;
+
+        button {
+          border: 1px solid #007bff;
+          background: #fff;
+          color: #007bff;
+          border-radius: 6px;
+          padding: 4px 10px;
+          font-size: 13px;
+          cursor: pointer;
+        }
+
+        .delete {
+          border-color: #dc3545;
+          color: #dc3545;
+
+          &:hover {
+            background: #dc3545;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+
   .note {
     margin-top: 16px;
     color: #6c757d;
