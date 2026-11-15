@@ -1,5 +1,1781 @@
 [
   {
+    "id": "hiking_foot_routes_line.21953185",
+    "name": "Sentier des Berges du Gers",
+    "from": null,
+    "to": null,
+    "bbox": [
+      0.615,
+      43.5631,
+      0.6171,
+      43.5811
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21952432",
+    "name": "Tours en Minervois",
+    "from": "Saint-Chinian",
+    "to": "Faugères",
+    "bbox": [
+      2.7235,
+      43.2838,
+      2.8711,
+      43.3539
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21951369",
+    "name": null,
+    "from": null,
+    "to": null,
+    "bbox": [
+      5.4033,
+      45.6096,
+      5.4042,
+      45.6137
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21940932",
+    "name": "Hameau des Gouas - Les Pasques",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.579,
+      44.7059,
+      6.5865,
+      44.7088
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21940931",
+    "name": "Le Ponteil - Les Pasques",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.5692,
+      44.7064,
+      6.5789,
+      44.7097
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21940920",
+    "name": null,
+    "from": null,
+    "to": null,
+    "bbox": [
+      1.6259,
+      42.82,
+      1.6363,
+      42.8247
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21940885",
+    "name": "Saint-Crépin - Thurifère Elephant",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.6056,
+      44.7083,
+      6.607,
+      44.7135
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21940884",
+    "name": "Les Guions - Thurifère Elephant",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.6049,
+      44.7135,
+      6.6066,
+      44.7185
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21937529",
+    "name": "Circuit du Clot de la Carbonnière",
+    "from": null,
+    "to": null,
+    "bbox": [
+      1.6265,
+      42.825,
+      1.6396,
+      42.8374
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21928423",
+    "name": "Merlette O.T. - Queyrelet",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3219,
+      44.6963,
+      6.3261,
+      44.6972
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21928422",
+    "name": "Maison de l'Enfant - Merlette O.T.",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3219,
+      44.6963,
+      6.3292,
+      44.6987
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21928361",
+    "name": "Casse Blanche - Piou Piou",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3264,
+      44.6952,
+      6.3291,
+      44.6967
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21928360",
+    "name": "Maison de l'Enfant - Piou Piou",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3284,
+      44.6967,
+      6.3292,
+      44.6986
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21922048",
+    "name": "Les Sorbiers - Peyrousses",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3169,
+      44.6932,
+      6.3208,
+      44.6941
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21919495",
+    "name": "Forest des Marches - La Muande",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3,
+      44.6934,
+      6.3165,
+      44.6957
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21919291",
+    "name": "Le Palais des Sports - Les Sorbiers",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3207,
+      44.6941,
+      6.3209,
+      44.6956
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21919290",
+    "name": "Les Gardettes - Le Palais des Sports",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.32,
+      44.6955,
+      6.3209,
+      44.6961
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21919289",
+    "name": "Cro Magnon - Les Gardettes",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3194,
+      44.6955,
+      6.32,
+      44.6961
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21919288",
+    "name": "Cro Magnon - La Muande",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3165,
+      44.6953,
+      6.3194,
+      44.6956
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21918817",
+    "name": "Lac Laramon - Lac Serpent",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.5537,
+      45.0489,
+      6.5609,
+      45.0514
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21918230",
+    "name": "Sentier des explorateurs",
+    "from": null,
+    "to": null,
+    "bbox": [
+      3.0214,
+      44.0912,
+      3.0232,
+      44.0942
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21917009",
+    "name": "Sentier du Mont Kokereel",
+    "from": null,
+    "to": null,
+    "bbox": [
+      2.6898,
+      50.783,
+      2.7212,
+      50.7998
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21916922",
+    "name": "Tours en Monts & Lacs en Haut-Languedoc - Entre Gijou et Raviège",
+    "from": null,
+    "to": null,
+    "bbox": [
+      2.5609,
+      43.5985,
+      2.7159,
+      43.7302
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21916237",
+    "name": "Oratoire Ste Roseline - Parking Rabou",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.0069,
+      44.5946,
+      6.0074,
+      44.5964
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21915114",
+    "name": "À la découverte du Diouris et du Naount",
+    "from": null,
+    "to": null,
+    "bbox": [
+      -4.4599,
+      48.5705,
+      -4.4262,
+      48.587
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21911325",
+    "name": "Sente de la Cappadoce",
+    "from": null,
+    "to": null,
+    "bbox": [
+      3.1565,
+      45.6781,
+      3.1593,
+      45.679
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21910828",
+    "name": null,
+    "from": null,
+    "to": null,
+    "bbox": [
+      3.158,
+      45.6763,
+      3.1607,
+      45.6795
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21909314",
+    "name": "La Végétale",
+    "from": null,
+    "to": null,
+    "bbox": [
+      2.4634,
+      48.7688,
+      2.4648,
+      48.7696
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21894361",
+    "name": "Parcours historique de Monton",
+    "from": null,
+    "to": null,
+    "bbox": [
+      3.154,
+      45.6763,
+      3.1607,
+      45.679
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21853942",
+    "name": "Garnaudenq - Les Veyers",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.324,
+      44.6928,
+      6.3269,
+      44.6932
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21853941",
+    "name": "Garnaudenq - Montcheny",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3269,
+      44.6863,
+      6.3351,
+      44.6933
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21853940",
+    "name": "Garnaudenq - Les Estaris",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3265,
+      44.6929,
+      6.3301,
+      44.6945
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21853939",
+    "name": "Les Veyers - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3221,
+      44.6928,
+      6.324,
+      44.6956
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21853938",
+    "name": "Les Sorbiers - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3208,
+      44.6941,
+      6.3221,
+      44.6956
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21853937",
+    "name": "Les Eaux Claires - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3221,
+      44.6956,
+      6.3233,
+      44.6963
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21853936",
+    "name": "Les Eaux Claires - Merlette O.T.",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3219,
+      44.6963,
+      6.3233,
+      44.6968
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21853935",
+    "name": "Les Sorbiers - Le Palais des Sports",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3207,
+      44.6941,
+      6.3209,
+      44.6956
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21853895",
+    "name": "Prapic - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3681,
+      44.6933,
+      6.3714,
+      44.703
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21853894",
+    "name": "Lac des Pisses - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3695,
+      44.703,
+      6.3837,
+      44.7216
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21853893",
+    "name": "Le Balet - Prapic",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.35,
+      44.6925,
+      6.3701,
+      44.697
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21853892",
+    "name": "Le Balet - Près la Beaume",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.338,
+      44.6967,
+      6.35,
+      44.7056
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21853891",
+    "name": "Les Huttes - Sentier de Joseph",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3311,
+      44.6975,
+      6.3312,
+      44.6985
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21853890",
+    "name": "Les Huttes - Les Estaris",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3301,
+      44.6945,
+      6.3311,
+      44.6975
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21847622",
+    "name": "Les haras",
+    "from": null,
+    "to": null,
+    "bbox": [
+      0.2941,
+      48.065,
+      0.326,
+      48.08
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21846734",
+    "name": "Saut du Laïre - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3755,
+      44.6674,
+      6.3949,
+      44.6894
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21846733",
+    "name": "Prapic - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3701,
+      44.6894,
+      6.3756,
+      44.6933
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21846732",
+    "name": "Basset - Saut du Laïre",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3705,
+      44.6656,
+      6.3947,
+      44.6762
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21846731",
+    "name": "Basset - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3706,
+      44.6762,
+      6.376,
+      44.6894
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21846675",
+    "name": "Corbières - Les Ricous",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.2552,
+      44.6769,
+      6.2597,
+      44.6799
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21846674",
+    "name": "La Coche - St Nicolas",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.2377,
+      44.6782,
+      6.2467,
+      44.6828
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21845836",
+    "name": "Les Michauds - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.1573,
+      44.6591,
+      6.168,
+      44.6604
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21845783",
+    "name": "St Julien - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.1292,
+      44.6573,
+      6.14,
+      44.6602
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21844665",
+    "name": "? - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.18,
+      44.6002,
+      6.1806,
+      44.6042
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21844640",
+    "name": "Riou Paret - Les Forests",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.1612,
+      44.6224,
+      6.1635,
+      44.623
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21824830",
+    "name": "À la découverte du Zorn",
+    "from": null,
+    "to": null,
+    "bbox": [
+      -4.4799,
+      48.6157,
+      -4.448,
+      48.6265
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21816139",
+    "name": "À la découverte du pont du Diable",
+    "from": null,
+    "to": null,
+    "bbox": [
+      -4.5001,
+      48.5736,
+      -4.4708,
+      48.5893
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21812056",
+    "name": "À la découverte de Saint Laurent",
+    "from": null,
+    "to": null,
+    "bbox": [
+      -4.5117,
+      48.6149,
+      -4.4813,
+      48.6256
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21802038",
+    "name": "Mont Major",
+    "from": null,
+    "to": null,
+    "bbox": [
+      5.7899,
+      43.6154,
+      5.8048,
+      43.6332
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21801790",
+    "name": "À la découverte de Saint Michel et du Korejou",
+    "from": null,
+    "to": null,
+    "bbox": [
+      -4.5267,
+      48.6276,
+      -4.506,
+      48.6348
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21800884",
+    "name": "À la découverte du Spins",
+    "from": null,
+    "to": null,
+    "bbox": [
+      -4.546,
+      48.6241,
+      -4.5316,
+      48.6369
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21799945",
+    "name": "boucle du bois des frétys",
+    "from": null,
+    "to": null,
+    "bbox": [
+      3.4026,
+      46.8461,
+      3.4253,
+      46.8665
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21799929",
+    "name": "boucle de saint-germain-chassenay",
+    "from": null,
+    "to": null,
+    "bbox": [
+      3.389,
+      46.7567,
+      3.4096,
+      46.7873
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21799917",
+    "name": "boucle de cossaye",
+    "from": null,
+    "to": null,
+    "bbox": [
+      3.481,
+      46.7343,
+      3.513,
+      46.7679
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21799076",
+    "name": "balade du vieux glaut",
+    "from": null,
+    "to": null,
+    "bbox": [
+      3.3214,
+      46.83,
+      3.3388,
+      46.8393
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21799028",
+    "name": "circuit les Appelettes",
+    "from": null,
+    "to": null,
+    "bbox": [
+      3.5459,
+      46.7807,
+      3.5776,
+      46.8071
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21794113",
+    "name": "À la découverte de Lilia",
+    "from": null,
+    "to": null,
+    "bbox": [
+      -4.5695,
+      48.6085,
+      -4.5507,
+      48.6257
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21792473",
+    "name": "À la découverte du Traon",
+    "from": null,
+    "to": null,
+    "bbox": [
+      -4.5423,
+      48.5927,
+      -4.5111,
+      48.6051
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21790850",
+    "name": "Maugarot - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.196,
+      44.4969,
+      6.1999,
+      44.4992
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21790849",
+    "name": "Maugarot - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.1946,
+      44.499,
+      6.196,
+      44.5035
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21790848",
+    "name": "? - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.1952,
+      44.5035,
+      6.2167,
+      44.5175
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21789678",
+    "name": "La Sarragou - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.2513,
+      44.5257,
+      6.2627,
+      44.53
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21789613",
+    "name": "Les Magres - Les Massots",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.2376,
+      44.5383,
+      6.2456,
+      44.5436
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21789612",
+    "name": "Hameau de Fontclaire - Les Massots",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.2203,
+      44.5368,
+      6.2376,
+      44.5398
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21789611",
+    "name": "Hameau de Fontclaire - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.2089,
+      44.5378,
+      6.223,
+      44.5471
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21789610",
+    "name": "Le Villard - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.2012,
+      44.5324,
+      6.2143,
+      44.5439
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21789609",
+    "name": "Le Villard - Forest de Borel",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.1928,
+      44.529,
+      6.2018,
+      44.5324
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21788842",
+    "name": "Montgardin - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.2409,
+      44.5497,
+      6.2433,
+      44.5501
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21788841",
+    "name": "Les Magres - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.2433,
+      44.5436,
+      6.2457,
+      44.5497
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21788840",
+    "name": "Le Poet - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.2433,
+      44.5463,
+      6.2476,
+      44.5497
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21788813",
+    "name": "? - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.279,
+      44.5171,
+      6.2901,
+      44.5242
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21767671",
+    "name": null,
+    "from": "Malons-et-Elze",
+    "to": "Aujac",
+    "bbox": [
+      3.9793,
+      44.3483,
+      4.0222,
+      44.4154
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21767670",
+    "name": null,
+    "from": "Bordezac",
+    "to": "Malons-et-Elze",
+    "bbox": [
+      4.0175,
+      44.3138,
+      4.0775,
+      44.4154
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21767669",
+    "name": null,
+    "from": "Aujac",
+    "to": "Bordezac",
+    "bbox": [
+      4.014,
+      44.2994,
+      4.0773,
+      44.3486
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21757887",
+    "name": "La Croix Grignard",
+    "from": null,
+    "to": null,
+    "bbox": [
+      -2.0755,
+      48.1087,
+      -2.0659,
+      48.1139
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21744723",
+    "name": "L'étang de Baye",
+    "from": null,
+    "to": null,
+    "bbox": [
+      3.6084,
+      47.164,
+      3.6215,
+      47.1806
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21736545",
+    "name": "Crêtes et vallée du Semnon",
+    "from": null,
+    "to": null,
+    "bbox": [
+      -1.6188,
+      47.854,
+      -1.5624,
+      47.8812
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21735093",
+    "name": "Echelle des 16 écluses",
+    "from": null,
+    "to": null,
+    "bbox": [
+      3.6612,
+      47.1757,
+      3.7017,
+      47.1939
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21709184",
+    "name": "Entre Allier et Puy Saint-Romain",
+    "from": null,
+    "to": null,
+    "bbox": [
+      3.2213,
+      45.6596,
+      3.247,
+      45.6811
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21709183",
+    "name": "Le vallon des Bouys",
+    "from": null,
+    "to": null,
+    "bbox": [
+      3.2267,
+      45.6709,
+      3.2382,
+      45.6806
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21706133",
+    "name": "Du Drapeau à la Mer",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.4766,
+      43.1563,
+      6.4846,
+      43.1648
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21706107",
+    "name": "Sentier du littoral – Rayol-Canadel",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.4484,
+      43.1543,
+      6.4909,
+      43.1586
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21706106",
+    "name": null,
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.4484,
+      43.1544,
+      6.4542,
+      43.1561
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21700679",
+    "name": "La Clouisse - Prunières",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3339,
+      44.5422,
+      6.3388,
+      44.546
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21700333",
+    "name": "Pré Riand - La Clouisse",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3321,
+      44.5453,
+      6.342,
+      44.5511
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21700332",
+    "name": "Prunières - Le Serre",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3284,
+      44.5422,
+      6.334,
+      44.5483
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21700317",
+    "name": "Le Pomeyret - Font Bénie",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3156,
+      44.5598,
+      6.3243,
+      44.5647
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21700316",
+    "name": "Les Gourres - Pré Riand",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3229,
+      44.5508,
+      6.3321,
+      44.5558
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21699847",
+    "name": "Pré Riand - Le Résian",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3313,
+      44.5511,
+      6.3334,
+      44.5555
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21699846",
+    "name": "Le Résian - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3275,
+      44.5552,
+      6.3315,
+      44.5555
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21699845",
+    "name": "Les Gourres - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3229,
+      44.5549,
+      6.3275,
+      44.5558
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21699844",
+    "name": "Le Pomeyret - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3243,
+      44.5554,
+      6.3306,
+      44.5598
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21693339",
+    "name": "Costes des Jouffres - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3558,
+      44.547,
+      6.3668,
+      44.5527
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21693338",
+    "name": "? - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3558,
+      44.543,
+      6.369,
+      44.547
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21693007",
+    "name": "Costes des Jouffres - L'Auche",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3624,
+      44.5527,
+      6.3669,
+      44.5558
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21693006",
+    "name": "Costes des Jouffres - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3668,
+      44.5437,
+      6.3744,
+      44.553
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21693005",
+    "name": "Roubeyère- ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.369,
+      44.5399,
+      6.3772,
+      44.5437
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21692944",
+    "name": "Torrent de la Pisse - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3477,
+      44.5955,
+      6.3648,
+      44.6029
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21692886",
+    "name": "L'Oussella - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3427,
+      44.6029,
+      6.3482,
+      44.6155
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21692885",
+    "name": "Torrent de la Sauche - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3457,
+      44.6028,
+      6.3477,
+      44.6034
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21692884",
+    "name": "Torrent de la Sauche - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3432,
+      44.603,
+      6.3457,
+      44.6042
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21692883",
+    "name": "Ravin de Jougres - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3366,
+      44.6042,
+      6.3432,
+      44.6109
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21692882",
+    "name": "Ravin de Jougres - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.3347,
+      44.6109,
+      6.3366,
+      44.6149
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21675934",
+    "name": "Les Jubeaux",
+    "from": null,
+    "to": null,
+    "bbox": [
+      -0.6264,
+      47.3816,
+      -0.5992,
+      47.407
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21647018",
+    "name": "Tour du lac de Sainte-Croix Jour 6 : Aiguines - Moustiers-Sainte-Marie",
+    "from": "Aiguines",
+    "to": "Moustiers-Sainte-Marie",
+    "bbox": [
+      6.2167,
+      43.7753,
+      6.2499,
+      43.8448
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21647009",
+    "name": "Tour du lac de Sainte-Croix Jour 5 : Les Salles sur Verdon - Aiguines",
+    "from": "Les Salles sur Verdon",
+    "to": "Aiguines",
+    "bbox": [
+      6.2093,
+      43.7713,
+      6.2433,
+      43.7797
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21646985",
+    "name": "Tour du lac de Sainte-Croix Jour 4 : Bauduen - Les-Salles-sur-Verdon",
+    "from": "Bauduen",
+    "to": "Les-Salles-sur-Verdon",
+    "bbox": [
+      6.1735,
+      43.7341,
+      6.2168,
+      43.7737
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21646937",
+    "name": "Tour du lac de Sainte-Croix Jour 3 : Baudinard - Bauduen",
+    "from": "Baudinard",
+    "to": "Bauduen",
+    "bbox": [
+      6.1342,
+      43.7163,
+      6.1876,
+      43.7368
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21646869",
+    "name": "Tour du lac de Sainte-Croix Jour 2 : Sainte-Croix - Baudinard",
+    "from": "Sainte-Croix-du-Verdon",
+    "to": "Baudinard",
+    "bbox": [
+      6.101,
+      43.7163,
+      6.1506,
+      43.7636
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21646753",
+    "name": "Tour du lac de Sainte-Croix Jour 1 : Moustiers-Sainte-Marie - Sainte-Croix",
+    "from": "Moustiers-Sainte-Marie",
+    "to": "Sainte-Croix",
+    "bbox": [
+      6.1506,
+      43.7583,
+      6.2259,
+      43.8471
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21643562",
+    "name": "Sentier des planètes dans le Jardin des Deux Rives",
+    "from": null,
+    "to": null,
+    "bbox": [
+      7.7989,
+      48.5684,
+      7.8,
+      48.5686
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21642101",
+    "name": null,
+    "from": null,
+    "to": null,
+    "bbox": [
+      2.3974,
+      42.527,
+      2.402,
+      42.5281
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21641035",
+    "name": null,
+    "from": null,
+    "to": null,
+    "bbox": [
+      2.3128,
+      42.4813,
+      2.3247,
+      42.507
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21628940",
+    "name": "J4",
+    "from": "Jupilles",
+    "to": "Jupilles",
+    "bbox": [
+      0.3867,
+      47.779,
+      0.4517,
+      47.8075
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21628807",
+    "name": "J3",
+    "from": "Jupilles",
+    "to": "Jupilles",
+    "bbox": [
+      0.4107,
+      47.7747,
+      0.4402,
+      47.7947
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21628780",
+    "name": "J2",
+    "from": "Jupilles",
+    "to": "Jupilles",
+    "bbox": [
+      0.4088,
+      47.7702,
+      0.4293,
+      47.7947
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21627243",
+    "name": "Circuit Malbrouck",
+    "from": null,
+    "to": null,
+    "bbox": [
+      3.8488,
+      50.3289,
+      3.9016,
+      50.3562
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21625612",
+    "name": "J1",
+    "from": "Jupilles",
+    "to": "Jupilles",
+    "bbox": [
+      0.393,
+      47.7858,
+      0.4128,
+      47.7934
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21624209",
+    "name": "Promenade Natura 2000 Frameries Boucle B",
+    "from": null,
+    "to": null,
+    "bbox": [
+      3.8436,
+      50.3539,
+      3.864,
+      50.3577
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21610643",
+    "name": "Circuit de la Flume",
+    "from": null,
+    "to": null,
+    "bbox": [
+      -1.7688,
+      48.1044,
+      -1.7403,
+      48.1136
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21610642",
+    "name": "Circuit du Pont Lagot",
+    "from": null,
+    "to": null,
+    "bbox": [
+      -1.7493,
+      48.1185,
+      -1.724,
+      48.1273
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21610641",
+    "name": "Boucle de Vezin",
+    "from": null,
+    "to": null,
+    "bbox": [
+      -1.768,
+      48.1077,
+      -1.7349,
+      48.1237
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21606430",
+    "name": "Ronde du Palet de Gargantua",
+    "from": null,
+    "to": null,
+    "bbox": [
+      0.3623,
+      48.1176,
+      0.3967,
+      48.1377
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21606386",
+    "name": "Sentier des Gruettes",
+    "from": null,
+    "to": null,
+    "bbox": [
+      -1.9196,
+      46.7453,
+      -1.9051,
+      46.7784
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21605847",
+    "name": "Chemin Panoramique Foulques Nerra",
+    "from": null,
+    "to": null,
+    "bbox": [
+      1.1851,
+      47.3432,
+      1.1876,
+      47.3452
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21604895",
+    "name": null,
+    "from": "Montignez",
+    "to": "Buix",
+    "bbox": [
+      7.0365,
+      47.4889,
+      7.0553,
+      47.4984
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21604800",
+    "name": null,
+    "from": "?",
+    "to": "La France",
+    "bbox": [
+      7.0367,
+      47.4982,
+      7.0368,
+      47.4992
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21604015",
+    "name": "La Bonne Eau - Dessus Vière",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.551,
+      44.5141,
+      6.5594,
+      44.5153
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21603980",
+    "name": "Le Chef Lieu - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.551,
+      44.5097,
+      6.557,
+      44.5131
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21603979",
+    "name": "? - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.5538,
+      44.5061,
+      6.5563,
+      44.5097
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21603719",
+    "name": "La Bonne Eau - École du Bas Forest",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.5594,
+      44.515,
+      6.5642,
+      44.516
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21603185",
+    "name": "Le Pas - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.7249,
+      44.5993,
+      6.7334,
+      44.6066
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21603184",
+    "name": "Col de Serenne - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.7334,
+      44.5714,
+      6.7547,
+      44.5993
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21603183",
+    "name": "Col de la Coulette - ?",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.7168,
+      44.599,
+      6.7334,
+      44.6018
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21603132",
+    "name": "Le Pas - Col de la Coulette",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.7168,
+      44.6018,
+      6.7249,
+      44.6066
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21603131",
+    "name": "Col de la Coulette - Le Crepoun",
+    "from": null,
+    "to": null,
+    "bbox": [
+      6.7121,
+      44.5993,
+      6.7168,
+      44.6018
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21591583",
+    "name": "Promenade Natura 2000 Honnelles Boucle C",
+    "from": null,
+    "to": null,
+    "bbox": [
+      3.6941,
+      50.3202,
+      3.7382,
+      50.3415
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21591581",
+    "name": "Promenade Natura 2000 Honnelles Boucle B",
+    "from": null,
+    "to": null,
+    "bbox": [
+      3.7345,
+      50.3491,
+      3.7614,
+      50.362
+    ]
+  },
+  {
+    "id": "hiking_foot_routes_line.21591580",
+    "name": "Circuit d'Erquennes",
+    "from": null,
+    "to": null,
+    "bbox": [
+      3.7916,
+      50.3401,
+      3.8248,
+      50.3583
+    ]
+  },
+  {
     "id": "hiking_foot_routes_line.21568895",
     "name": "Sentier d'interprétation de l'Ingressin",
     "from": null,
@@ -446,8 +2222,8 @@
   {
     "id": "hiking_foot_routes_line.21430502",
     "name": "Entre Morvois et brie champenoise",
-    "from": "Eglise de Chalautre-la-Grande",
-    "to": "Eglise de Chalautre-la-Grande",
+    "from": "Chalautre-la-Grande",
+    "to": null,
     "bbox": [
       3.4188,
       48.5302,
@@ -458,8 +2234,8 @@
   {
     "id": "hiking_foot_routes_line.21428501",
     "name": "La randonnée des amoureux",
-    "from": "Mairie de Cerneux",
-    "to": "Mairie de Cerneux",
+    "from": "Cerneux",
+    "to": null,
     "bbox": [
       3.3337,
       48.6934,
@@ -470,8 +2246,8 @@
   {
     "id": "hiking_foot_routes_line.21428399",
     "name": "Les berges de l’Aubetin",
-    "from": "Eglise de Beton-Bazoches",
-    "to": "Eglise de Beton-Bazoches",
+    "from": "Beton-Bazoches",
+    "to": null,
     "bbox": [
       3.2043,
       48.6975,
@@ -482,8 +2258,8 @@
   {
     "id": "hiking_foot_routes_line.21427878",
     "name": "Sur les côteaux de la Voulzie",
-    "from": "Office de Tourisme de Provins",
-    "to": "Office de Tourisme de Provins",
+    "from": "Provins",
+    "to": null,
     "bbox": [
       3.2485,
       48.5165,
@@ -846,7 +2622,7 @@
     "to": null,
     "bbox": [
       6.6168,
-      44.3912,
+      44.3911,
       6.6279,
       44.3924
     ]
@@ -1982,11 +3758,11 @@
   {
     "id": "hiking_foot_routes_line.21365877",
     "name": "Aux portes de Provins",
-    "from": "Office de Tourisme de Provins",
-    "to": "Office de Tourisme de Provins",
+    "from": "Provins",
+    "to": null,
     "bbox": [
       3.2612,
-      48.5608,
+      48.561,
       3.303,
       48.5945
     ]
@@ -3367,7 +5143,7 @@
     "bbox": [
       6.4354,
       43.9619,
-      6.4377,
+      6.4372,
       43.966
     ]
   },
@@ -3474,7 +5250,7 @@
     "to": null,
     "bbox": [
       5.5838,
-      43.9194,
+      43.919,
       5.5877,
       43.9232
     ]
@@ -4733,7 +6509,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      6.381,
+      6.3809,
       44.4522,
       6.3974,
       44.4589
@@ -5297,7 +7073,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      5.5691,
+      5.5775,
       43.9186,
       5.6118,
       43.9643
@@ -5515,7 +7291,7 @@
     "bbox": [
       4.1858,
       45.0512,
-      4.2002,
+      4.2001,
       45.0621
     ]
   },
@@ -5634,7 +7410,7 @@
     "to": null,
     "bbox": [
       5.5306,
-      43.9497,
+      43.9496,
       5.5632,
       43.9796
     ]
@@ -5645,10 +7421,10 @@
     "from": null,
     "to": null,
     "bbox": [
-      5.5304,
-      43.9451,
+      5.5306,
+      43.9496,
       5.5632,
-      43.9797
+      43.9796
     ]
   },
   {
@@ -6091,7 +7867,7 @@
     "bbox": [
       5.9199,
       44.136,
-      5.957,
+      5.9571,
       44.1485
     ]
   },
@@ -7529,7 +9305,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      6.2336,
+      6.2337,
       44.3599,
       6.2628,
       44.3847
@@ -8633,7 +10409,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      6.3046,
+      6.3047,
       44.5238,
       6.3086,
       44.529
@@ -9641,10 +11417,10 @@
     "from": null,
     "to": null,
     "bbox": [
-      2.8937,
+      2.882,
       42.93,
-      2.9101,
-      42.9321
+      2.9125,
+      42.9383
     ]
   },
   {
@@ -11084,7 +12860,7 @@
       7.038,
       47.8803,
       7.0507,
-      47.8845
+      47.8842
     ]
   },
   {
@@ -11717,10 +13493,10 @@
     "from": null,
     "to": null,
     "bbox": [
-      6.131,
+      6.1211,
       48.695,
       6.1495,
-      48.7007
+      48.7031
     ]
   },
   {
@@ -14083,7 +15859,7 @@
     "bbox": [
       5.9588,
       47.3451,
-      5.9866,
+      5.9867,
       47.3601
     ]
   },
@@ -17808,18 +19584,6 @@
     ]
   },
   {
-    "id": "hiking_foot_routes_line.20669955",
-    "name": "Entre Lavoirs et Fontaines",
-    "from": null,
-    "to": null,
-    "bbox": [
-      2.2116,
-      43.3397,
-      2.2491,
-      43.3775
-    ]
-  },
-  {
     "id": "hiking_foot_routes_line.20669382",
     "name": "N°22 Saint-Maurice-aux-Riches-Hommes Les bornes armoriées",
     "from": null,
@@ -17995,7 +19759,7 @@
     "bbox": [
       3.3943,
       48.1903,
-      3.4229,
+      3.423,
       48.213
     ]
   },
@@ -18033,18 +19797,6 @@
       48.1138,
       3.4287,
       48.1657
-    ]
-  },
-  {
-    "id": "hiking_foot_routes_line.20630284",
-    "name": "La Fontaine des Trois Évèques",
-    "from": null,
-    "to": null,
-    "bbox": [
-      2.5641,
-      43.4085,
-      2.6012,
-      43.443
     ]
   },
   {
@@ -18161,7 +19913,7 @@
     "from": "La Montagne de Neuteu Sud",
     "to": "Les Houches",
     "bbox": [
-      6.7272,
+      6.7273,
       45.8897,
       6.8435,
       46.3474
@@ -20600,7 +22352,7 @@
       5.7765,
       46.1037,
       5.7865,
-      46.1094
+      46.1129
     ]
   },
   {
@@ -26108,7 +27860,7 @@
       5.7213,
       45.8765,
       5.7236,
-      45.8788
+      45.8787
     ]
   },
   {
@@ -26142,7 +27894,7 @@
     "to": null,
     "bbox": [
       5.6168,
-      45.8904,
+      45.8905,
       5.6295,
       45.9106
     ]
@@ -26156,7 +27908,7 @@
       5.6169,
       45.8751,
       5.6244,
-      45.8904
+      45.8905
     ]
   },
   {
@@ -26370,8 +28122,8 @@
     "to": null,
     "bbox": [
       5.7197,
-      45.8788,
-      5.7213,
+      45.8787,
+      5.7214,
       45.8793
     ]
   },
@@ -26381,7 +28133,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      5.7213,
+      5.7214,
       45.8779,
       5.7263,
       45.8812
@@ -27680,7 +29432,7 @@
       5.7423,
       45.8325,
       5.7438,
-      45.834
+      45.8341
     ]
   },
   {
@@ -29358,7 +31110,7 @@
     "to": "Lycée J. Prévost",
     "bbox": [
       0.1809,
-      49.5469,
+      49.547,
       0.189,
       49.5478
     ]
@@ -30450,8 +32202,8 @@
     "to": null,
     "bbox": [
       2.4473,
-      48.7704,
-      2.4582,
+      48.7688,
+      2.4648,
       48.7829
     ]
   },
@@ -35132,7 +36884,7 @@
       6.9411,
       47.2616,
       7.0217,
-      47.3039
+      47.304
     ]
   },
   {
@@ -36293,7 +38045,7 @@
     "from": "Dunkerque",
     "to": "Kruibeke",
     "bbox": [
-      2.5455,
+      2.5456,
       50.7686,
       3.138,
       51.0891
@@ -38105,7 +39857,7 @@
     "from": "Col Amic",
     "to": "Croix Zimmermann",
     "bbox": [
-      7.1279,
+      7.1278,
       47.8709,
       7.1583,
       47.8735
@@ -44875,7 +46627,7 @@
     "bbox": [
       6.6575,
       45.9501,
-      6.6603,
+      6.6604,
       45.9564
     ]
   },
@@ -51937,7 +53689,7 @@
   },
   {
     "id": "hiking_foot_routes_line.19607967",
-    "name": null,
+    "name": "La ronde des pommiers",
     "from": null,
     "to": null,
     "bbox": [
@@ -51965,7 +53717,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      0.2918,
+      0.2917,
       47.7332,
       0.3339,
       47.7585
@@ -52157,7 +53909,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      0.2654,
+      0.2657,
       47.7424,
       0.2769,
       47.7599
@@ -56189,7 +57941,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      6.5769,
+      6.5768,
       44.5129,
       6.5822,
       44.5132
@@ -57433,11 +59185,11 @@
   },
   {
     "id": "hiking_foot_routes_line.19514656",
-    "name": null,
+    "name": "Pont du Fossé - ?",
     "from": null,
     "to": null,
     "bbox": [
-      6.2282,
+      6.2276,
       44.6663,
       6.2342,
       44.6678
@@ -60156,18 +61908,6 @@
     ]
   },
   {
-    "id": "hiking_foot_routes_line.19442853",
-    "name": "Montgardin - Gare SNCF",
-    "from": null,
-    "to": null,
-    "bbox": [
-      6.2409,
-      44.5446,
-      6.2698,
-      44.5501
-    ]
-  },
-  {
     "id": "hiking_foot_routes_line.19442851",
     "name": "Clot Charmentier - Clot Clavary",
     "from": null,
@@ -62509,12 +64249,12 @@
   },
   {
     "id": "hiking_foot_routes_line.19414088",
-    "name": "Merlette O.T. - ?",
+    "name": "Merlette O.T. - Le Palais des Sports",
     "from": null,
     "to": null,
     "bbox": [
-      6.3207,
-      44.6941,
+      6.3209,
+      44.6956,
       6.3219,
       44.6965
     ]
@@ -62569,14 +64309,14 @@
   },
   {
     "id": "hiking_foot_routes_line.19413856",
-    "name": "Merlette O.T. - Piou Piou",
+    "name": "Casse Blanche - Les Eaux Claires",
     "from": null,
     "to": null,
     "bbox": [
-      6.3219,
+      6.3233,
       44.6952,
-      6.3291,
-      44.6968
+      6.3264,
+      44.6964
     ]
   },
   {
@@ -65881,7 +67621,7 @@
   },
   {
     "id": "hiking_foot_routes_line.19343424",
-    "name": "Les Sièyes - ?",
+    "name": "Les Sièyes - La Cantonnée",
     "from": null,
     "to": null,
     "bbox": [
@@ -65893,7 +67633,7 @@
   },
   {
     "id": "hiking_foot_routes_line.19343423",
-    "name": "Le Mélézet - ?",
+    "name": "Le Mélézet - La Cantonnée",
     "from": null,
     "to": null,
     "bbox": [
@@ -65905,14 +67645,14 @@
   },
   {
     "id": "hiking_foot_routes_line.19343422",
-    "name": null,
+    "name": "Le Mélézet - ?",
     "from": null,
     "to": null,
     "bbox": [
-      6.551,
+      6.5527,
       44.5053,
-      6.557,
-      44.5131
+      6.5542,
+      44.5061
     ]
   },
   {
@@ -66031,7 +67771,7 @@
     "bbox": [
       6.5689,
       44.5124,
-      6.5769,
+      6.5768,
       44.5131
     ]
   },
@@ -67760,7 +69500,7 @@
       1.5241,
       43.6462,
       1.5326,
-      43.6473
+      43.6474
     ]
   },
   {
@@ -70141,7 +71881,7 @@
   },
   {
     "id": "hiking_foot_routes_line.19257689",
-    "name": null,
+    "name": "Les Gourniers - Les Tomelles",
     "from": null,
     "to": null,
     "bbox": [
@@ -70153,19 +71893,19 @@
   },
   {
     "id": "hiking_foot_routes_line.19257688",
-    "name": null,
+    "name": "Les Gourniers - ?",
     "from": null,
     "to": null,
     "bbox": [
       6.3334,
       44.6149,
-      6.3346,
+      6.3347,
       44.6153
     ]
   },
   {
     "id": "hiking_foot_routes_line.19257687",
-    "name": null,
+    "name": "Les Gourniers - ?",
     "from": null,
     "to": null,
     "bbox": [
@@ -70177,7 +71917,7 @@
   },
   {
     "id": "hiking_foot_routes_line.19257686",
-    "name": null,
+    "name": "? - ?",
     "from": null,
     "to": null,
     "bbox": [
@@ -70189,7 +71929,7 @@
   },
   {
     "id": "hiking_foot_routes_line.19257685",
-    "name": null,
+    "name": "? - ?",
     "from": null,
     "to": null,
     "bbox": [
@@ -70201,7 +71941,7 @@
   },
   {
     "id": "hiking_foot_routes_line.19257684",
-    "name": null,
+    "name": "? - ?",
     "from": null,
     "to": null,
     "bbox": [
@@ -70213,7 +71953,7 @@
   },
   {
     "id": "hiking_foot_routes_line.19257683",
-    "name": null,
+    "name": "L'Oussella - ?",
     "from": null,
     "to": null,
     "bbox": [
@@ -70229,7 +71969,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      6.3346,
+      6.3347,
       44.6141,
       6.3359,
       44.6179
@@ -70237,7 +71977,7 @@
   },
   {
     "id": "hiking_foot_routes_line.19257681",
-    "name": null,
+    "name": "Les Tomelles - Les Usclas",
     "from": null,
     "to": null,
     "bbox": [
@@ -78965,10 +80705,10 @@
     "from": null,
     "to": null,
     "bbox": [
-      6.7213,
+      6.7212,
       44.9691,
       6.7228,
-      44.9813
+      44.9818
     ]
   },
   {
@@ -80696,7 +82436,7 @@
       -4.4935,
       48.3789,
       -4.4743,
-      48.3896
+      48.3899
     ]
   },
   {
@@ -82309,7 +84049,7 @@
   },
   {
     "id": "hiking_foot_routes_line.18916470",
-    "name": "PR",
+    "name": null,
     "from": null,
     "to": null,
     "bbox": [
@@ -82321,7 +84061,7 @@
   },
   {
     "id": "hiking_foot_routes_line.18916469",
-    "name": "PR",
+    "name": null,
     "from": null,
     "to": null,
     "bbox": [
@@ -88225,7 +89965,7 @@
   },
   {
     "id": "hiking_foot_routes_line.18815168",
-    "name": null,
+    "name": "name=[SC 01 : Port-la-Nouvelle - Durban-Corbières]",
     "from": null,
     "to": null,
     "bbox": [
@@ -88237,7 +89977,7 @@
   },
   {
     "id": "hiking_foot_routes_line.18815167",
-    "name": null,
+    "name": "SC 01 : Port-la-Nouvelle - Durban-Corbières",
     "from": null,
     "to": null,
     "bbox": [
@@ -88783,7 +90523,7 @@
     "bbox": [
       5.7349,
       45.6095,
-      5.7457,
+      5.7456,
       45.6113
     ]
   },
@@ -88877,8 +90617,8 @@
     "from": null,
     "to": null,
     "bbox": [
-      5.6308,
-      45.6104,
+      5.629,
+      45.5995,
       5.6347,
       45.611
     ]
@@ -89449,7 +91189,7 @@
   },
   {
     "id": "hiking_foot_routes_line.18782754",
-    "name": null,
+    "name": "Torrent de la Pisse - Réallon (La Place)",
     "from": null,
     "to": null,
     "bbox": [
@@ -89569,14 +91309,14 @@
   },
   {
     "id": "hiking_foot_routes_line.18778836",
-    "name": "Pré Riand - ?",
+    "name": "Le Résian - ?",
     "from": null,
     "to": null,
     "bbox": [
-      6.3321,
-      44.5511,
+      6.3315,
+      44.5545,
       6.3517,
-      44.5559
+      44.5573
     ]
   },
   {
@@ -91169,7 +92909,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      6.1954,
+      6.1953,
       44.618,
       6.2006,
       44.62
@@ -91949,10 +93689,10 @@
     "from": null,
     "to": null,
     "bbox": [
-      6.18,
+      6.1803,
       44.5909,
       6.2103,
-      44.6042
+      44.6002
     ]
   },
   {
@@ -92490,7 +94230,7 @@
     "to": null,
     "bbox": [
       5.6912,
-      45.6145,
+      45.6144,
       5.6919,
       45.6155
     ]
@@ -97172,7 +98912,7 @@
       6.684,
       48.0252,
       6.7089,
-      48.047
+      48.0469
     ]
   },
   {
@@ -101683,7 +103423,7 @@
     "bbox": [
       4.9177,
       44.3184,
-      4.9487,
+      4.9488,
       44.3334
     ]
   },
@@ -108581,7 +110321,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      1.4396,
+      1.4395,
       43.4324,
       1.4554,
       43.4429
@@ -119297,7 +121037,7 @@
     "from": "Hohlandsbourg",
     "to": "Pflixbourg",
     "bbox": [
-      7.2547,
+      7.2546,
       48.0575,
       7.2704,
       48.0677
@@ -120534,7 +122274,7 @@
     "to": "Wettolsheim",
     "bbox": [
       7.2767,
-      48.0522,
+      48.0521,
       7.2988,
       48.0634
     ]
@@ -121075,7 +122815,7 @@
     "bbox": [
       7.2647,
       48.0497,
-      7.2762,
+      7.2763,
       48.0532
     ]
   },
@@ -121601,10 +123341,10 @@
     "from": null,
     "to": null,
     "bbox": [
-      2.7471,
+      2.6284,
       43.0771,
-      2.7945,
-      43.1102
+      2.864,
+      43.1106
     ]
   },
   {
@@ -122168,7 +123908,7 @@
       7.2207,
       47.9587,
       7.2941,
-      47.9937
+      47.9938
     ]
   },
   {
@@ -124290,7 +126030,7 @@
     "to": null,
     "bbox": [
       1.2056,
-      46.4987,
+      46.4988,
       1.2527,
       46.5379
     ]
@@ -124865,7 +126605,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      2.0914,
+      2.0912,
       48.9446,
       2.1323,
       48.9676
@@ -124914,7 +126654,7 @@
     "to": null,
     "bbox": [
       2.3648,
-      49.1153,
+      49.1152,
       2.4289,
       49.1498
     ]
@@ -125155,7 +126895,7 @@
     "bbox": [
       2.5448,
       48.5552,
-      2.5927,
+      2.5926,
       48.5804
     ]
   },
@@ -126317,7 +128057,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      -2.6348,
+      -2.6347,
       47.5748,
       -2.5968,
       47.5931
@@ -130361,7 +132101,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      -1.0925,
+      -1.0924,
       47.5467,
       -1.0421,
       47.5679
@@ -132005,7 +133745,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      -1.3494,
+      -1.3496,
       47.2215,
       -1.3032,
       47.2407
@@ -137275,7 +139015,7 @@
     "bbox": [
       4.5959,
       44.6004,
-      4.6043,
+      4.6044,
       44.6182
     ]
   },
@@ -137285,7 +139025,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      4.6043,
+      4.6044,
       44.6164,
       4.6085,
       44.6186
@@ -141907,8 +143647,8 @@
     "bbox": [
       5.6044,
       45.1306,
-      5.6259,
-      45.1495
+      5.6258,
+      45.1494
     ]
   },
   {
@@ -145987,7 +147727,7 @@
     "bbox": [
       5.4439,
       44.7457,
-      5.446,
+      5.4461,
       44.7517
     ]
   },
@@ -145997,7 +147737,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      5.4421,
+      5.442,
       44.7328,
       5.4513,
       44.7457
@@ -149537,10 +151277,10 @@
     "from": null,
     "to": null,
     "bbox": [
-      5.7333,
-      45.5594,
+      5.7317,
+      45.5593,
       5.7336,
-      45.5606
+      45.5608
     ]
   },
   {
@@ -150558,7 +152298,7 @@
     "to": null,
     "bbox": [
       5.4446,
-      44.7318,
+      44.7317,
       5.4588,
       44.7438
     ]
@@ -152297,7 +154037,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      0.6522,
+      0.6523,
       47.0542,
       0.7099,
       47.0955
@@ -155635,7 +157375,7 @@
     "bbox": [
       6.2587,
       46.918,
-      6.2817,
+      6.2816,
       46.9299
     ]
   },
@@ -156092,7 +157832,7 @@
       5.3067,
       45.0432,
       5.3232,
-      45.0509
+      45.0513
     ]
   },
   {
@@ -158765,9 +160505,9 @@
     "from": null,
     "to": null,
     "bbox": [
-      3.9905,
+      3.9904,
       50.2175,
-      4.0806,
+      4.0807,
       50.2477
     ]
   },
@@ -158791,7 +160531,7 @@
     "bbox": [
       3.972,
       50.232,
-      4.0168,
+      4.0169,
       50.2576
     ]
   },
@@ -158803,7 +160543,7 @@
     "bbox": [
       3.9674,
       50.2429,
-      3.994,
+      3.9941,
       50.2636
     ]
   },
@@ -158813,7 +160553,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      3.8593,
+      3.8591,
       50.252,
       3.8688,
       50.2693
@@ -159151,7 +160891,7 @@
     "bbox": [
       5.7467,
       47.2795,
-      5.7892,
+      5.7891,
       47.3142
     ]
   },
@@ -170564,7 +172304,7 @@
       4.0048,
       46.9508,
       4.0107,
-      46.9648
+      46.9646
     ]
   },
   {
@@ -175710,7 +177450,7 @@
     "to": null,
     "bbox": [
       5.629,
-      45.1616,
+      45.1615,
       5.6302,
       45.1654
     ]
@@ -175724,7 +177464,7 @@
       5.623,
       45.1535,
       5.6302,
-      45.1616
+      45.1615
     ]
   },
   {
@@ -175734,8 +177474,8 @@
     "to": null,
     "bbox": [
       5.6258,
-      45.1495,
-      5.627,
+      45.1494,
+      5.6271,
       45.1535
     ]
   },
@@ -175747,7 +177487,7 @@
     "bbox": [
       5.6192,
       45.1535,
-      5.627,
+      5.6271,
       45.1563
     ]
   },
@@ -176274,7 +178014,7 @@
     "to": null,
     "bbox": [
       5.6229,
-      45.1148,
+      45.1149,
       5.6254,
       45.123
     ]
@@ -176370,7 +178110,7 @@
     "to": null,
     "bbox": [
       5.6297,
-      45.1707,
+      45.1708,
       5.6307,
       45.1719
     ]
@@ -176394,7 +178134,7 @@
     "to": null,
     "bbox": [
       5.6302,
-      45.1616,
+      45.1615,
       5.6309,
       45.163
     ]
@@ -178472,7 +180212,7 @@
       5.5336,
       45.1908,
       5.537,
-      45.1957
+      45.1956
     ]
   },
   {
@@ -178506,7 +180246,7 @@
     "to": null,
     "bbox": [
       5.544,
-      45.2006,
+      45.2005,
       5.5556,
       45.213
     ]
@@ -184925,7 +186665,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      6.7372,
+      6.7371,
       46.0218,
       6.749,
       46.0345
@@ -189896,7 +191636,7 @@
       6.7192,
       46.075,
       6.7274,
-      46.0764
+      46.0763
     ]
   },
   {
@@ -190325,7 +192065,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      6.7272,
+      6.7273,
       46.0763,
       6.7348,
       46.084
@@ -194838,7 +196578,7 @@
     "to": null,
     "bbox": [
       0.4824,
-      47.1463,
+      47.1462,
       0.5235,
       47.1645
     ]
@@ -198510,7 +200250,7 @@
     "to": null,
     "bbox": [
       4.5839,
-      49.8708,
+      49.8706,
       4.6266,
       49.9231
     ]
@@ -200023,7 +201763,7 @@
     "bbox": [
       7.5815,
       48.0952,
-      7.5844,
+      7.5854,
       48.105
     ]
   },
@@ -202409,7 +204149,7 @@
     "from": "Frais",
     "to": "Frais",
     "bbox": [
-      6.9699,
+      6.97,
       47.6368,
       6.9871,
       47.6581
@@ -212143,7 +213883,7 @@
     "bbox": [
       6.9284,
       45.4696,
-      6.9374,
+      6.9375,
       45.4737
     ]
   },
@@ -214745,7 +216485,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      0.5388,
+      0.5452,
       47.2648,
       0.593,
       47.2825
@@ -215155,7 +216895,7 @@
     "bbox": [
       7.3222,
       48.5573,
-      7.3288,
+      7.3289,
       48.5605
     ]
   },
@@ -215802,7 +217542,7 @@
     "to": "Maison forestière Hohensteinwald",
     "bbox": [
       7.2826,
-      48.5572,
+      48.5573,
       7.3224,
       48.5864
     ]
@@ -215850,7 +217590,7 @@
     "to": "Carrefour de l'Etoile",
     "bbox": [
       7.3408,
-      48.5331,
+      48.533,
       7.3658,
       48.5452
     ]
@@ -219773,7 +221513,7 @@
     "from": "Disque rouge",
     "to": "Disque bleu",
     "bbox": [
-      7.4256,
+      7.4255,
       48.4663,
       7.4291,
       48.469
@@ -220961,7 +222701,7 @@
     "from": "Hultehouse",
     "to": null,
     "bbox": [
-      7.2598,
+      7.2597,
       48.7015,
       7.2715,
       48.7143
@@ -221046,7 +222786,7 @@
     "to": null,
     "bbox": [
       5.4134,
-      45.6038,
+      45.6036,
       5.4245,
       45.6108
     ]
@@ -221286,8 +223026,8 @@
     "to": "Col entre les deux Donons",
     "bbox": [
       7.1703,
-      48.5001,
-      7.2014,
+      48.5002,
+      7.2015,
       48.5166
     ]
   },
@@ -221333,7 +223073,7 @@
     "from": "Raon-lès-Leau",
     "to": "GR5",
     "bbox": [
-      7.0982,
+      7.0981,
       48.5129,
       7.1703,
       48.5348
@@ -223087,7 +224827,7 @@
     "bbox": [
       7.0861,
       48.4785,
-      7.113,
+      7.1131,
       48.5107
     ]
   },
@@ -223195,7 +224935,7 @@
     "bbox": [
       7.0697,
       48.4902,
-      7.0934,
+      7.0933,
       48.501
     ]
   },
@@ -223230,7 +224970,7 @@
     "to": "Raon-sur-Plaine",
     "bbox": [
       7.045,
-      48.4929,
+      48.493,
       7.0949,
       48.5107
     ]
@@ -223243,7 +224983,7 @@
     "bbox": [
       7.0689,
       48.4906,
-      7.0724,
+      7.0725,
       48.4912
     ]
   },
@@ -223255,7 +224995,7 @@
     "bbox": [
       7.0706,
       48.4905,
-      7.0724,
+      7.0725,
       48.4908
     ]
   },
@@ -223350,8 +225090,8 @@
     "to": "Croix Brignon",
     "bbox": [
       7.045,
-      48.4853,
-      7.105,
+      48.4854,
+      7.1051,
       48.4946
     ]
   },
@@ -223362,7 +225102,7 @@
     "to": "Etoile I",
     "bbox": [
       7.045,
-      48.4837,
+      48.4838,
       7.1315,
       48.494
     ]
@@ -223376,7 +225116,7 @@
       7.1145,
       48.4762,
       7.2174,
-      48.4976
+      48.4974
     ]
   },
   {
@@ -223409,7 +225149,7 @@
     "from": "Lutzelbourg",
     "to": null,
     "bbox": [
-      7.2312,
+      7.2313,
       48.7278,
       7.2503,
       48.7328
@@ -223434,7 +225174,7 @@
     "to": null,
     "bbox": [
       0.8591,
-      48.0736,
+      48.0737,
       0.8823,
       48.1012
     ]
@@ -225344,7 +227084,7 @@
       7.0515,
       48.4494,
       7.0877,
-      48.4698
+      48.4697
     ]
   },
   {
@@ -225715,7 +227455,7 @@
     "bbox": [
       7.2807,
       48.7771,
-      7.292,
+      7.2921,
       48.7859
     ]
   },
@@ -227647,7 +229387,7 @@
     "bbox": [
       7.3302,
       48.7206,
-      7.348,
+      7.3481,
       48.7335
     ]
   },
@@ -230010,7 +231750,7 @@
     "to": null,
     "bbox": [
       3.2146,
-      48.1977,
+      48.1978,
       3.2578,
       48.2147
     ]
@@ -232541,7 +234281,7 @@
     "from": "D 426",
     "to": "Mont Sainte Odile",
     "bbox": [
-      7.3754,
+      7.3751,
       48.4237,
       7.4004,
       48.4323
@@ -232903,8 +234643,8 @@
     "bbox": [
       7.3945,
       48.4103,
-      7.4053,
-      48.4154
+      7.4054,
+      48.4155
     ]
   },
   {
@@ -233227,7 +234967,7 @@
     "bbox": [
       1.8389,
       44.9079,
-      1.8849,
+      1.885,
       44.9264
     ]
   },
@@ -234127,7 +235867,7 @@
     "bbox": [
       3.0448,
       45.9792,
-      3.0954,
+      3.0917,
       46.1153
     ]
   },
@@ -235097,7 +236837,7 @@
     "from": "La Petite Raon",
     "to": "Col de Dialtrepoix",
     "bbox": [
-      6.9849,
+      6.985,
       48.4064,
       6.996,
       48.4257
@@ -235351,7 +237091,7 @@
     "bbox": [
       7.1171,
       48.3853,
-      7.151,
+      7.1514,
       48.4057
     ]
   },
@@ -235879,7 +237619,7 @@
     "bbox": [
       7.174,
       48.4107,
-      7.1909,
+      7.191,
       48.4213
     ]
   },
@@ -236129,7 +237869,7 @@
     "from": "Lubine",
     "to": "Lubine",
     "bbox": [
-      7.1501,
+      7.15,
       48.2959,
       7.1761,
       48.3164
@@ -236347,7 +238087,7 @@
     "bbox": [
       7.3992,
       48.3958,
-      7.4145,
+      7.4144,
       48.4054
     ]
   },
@@ -236599,7 +238339,7 @@
     "bbox": [
       7.3146,
       48.4229,
-      7.3327,
+      7.3328,
       48.429
     ]
   },
@@ -236609,10 +238349,10 @@
     "from": "Welschbruch",
     "to": "Neuntelstein",
     "bbox": [
-      7.3331,
+      7.3332,
       48.4142,
       7.3506,
-      48.4247
+      48.4248
     ]
   },
   {
@@ -236671,7 +238411,7 @@
     "bbox": [
       7.2956,
       48.4036,
-      7.3327,
+      7.3328,
       48.4362
     ]
   },
@@ -236683,7 +238423,7 @@
     "bbox": [
       7.3149,
       48.4036,
-      7.3327,
+      7.3328,
       48.429
     ]
   },
@@ -237788,7 +239528,7 @@
       7.2918,
       48.4036,
       7.3312,
-      48.4178
+      48.4177
     ]
   },
   {
@@ -238951,7 +240691,7 @@
     "bbox": [
       4.999,
       47.3183,
-      5.0337,
+      5.0335,
       47.3309
     ]
   },
@@ -240221,8 +241961,8 @@
     "from": null,
     "to": null,
     "bbox": [
-      5.6946,
-      43.3619,
+      5.6936,
+      43.3612,
       5.708,
       43.3739
     ]
@@ -241531,7 +243271,7 @@
     "bbox": [
       5.5876,
       43.9332,
-      5.5882,
+      5.5881,
       43.9336
     ]
   },
@@ -245636,7 +247376,7 @@
       7.3746,
       48.4197,
       7.3999,
-      48.4293
+      48.4294
     ]
   },
   {
@@ -246223,7 +247963,7 @@
     "bbox": [
       7.3809,
       48.414,
-      7.4076,
+      7.4075,
       48.424
     ]
   },
@@ -247169,7 +248909,7 @@
     "from": "Auberge du Moenkalb",
     "to": "Auberge du Moenkalb",
     "bbox": [
-      7.4215,
+      7.4214,
       48.4108,
       7.4319,
       48.4166
@@ -248393,7 +250133,7 @@
     "from": "Capestang",
     "to": "Pouzols-Minervois",
     "bbox": [
-      2.8243,
+      2.8242,
       43.2819,
       3.0462,
       43.3552
@@ -248551,7 +250291,7 @@
     "bbox": [
       2.5862,
       43.2737,
-      2.8243,
+      2.8242,
       43.2985
     ]
   },
@@ -251298,7 +253038,7 @@
     "to": "GR5",
     "bbox": [
       7.2926,
-      48.4044,
+      48.4043,
       7.2994,
       48.4133
     ]
@@ -252305,7 +254045,7 @@
     "from": "Dieffenbach",
     "to": "Dieffenbach",
     "bbox": [
-      7.405,
+      7.4048,
       48.3083,
       7.4171,
       48.3126
@@ -253405,7 +255145,7 @@
   },
   {
     "id": "hiking_foot_routes_line.15651426",
-    "name": "PR",
+    "name": null,
     "from": null,
     "to": null,
     "bbox": [
@@ -253460,7 +255200,7 @@
       6.9909,
       47.2847,
       7.0217,
-      47.3039
+      47.304
     ]
   },
   {
@@ -255473,7 +257213,7 @@
     "from": "Dabo",
     "to": null,
     "bbox": [
-      7.2082,
+      7.2081,
       48.6535,
       7.2361,
       48.6674
@@ -255617,7 +257357,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      6.4071,
+      6.4076,
       45.983,
       6.4185,
       45.9853
@@ -255630,7 +257370,7 @@
     "to": null,
     "bbox": [
       6.4058,
-      45.9843,
+      45.9841,
       6.411,
       45.9955
     ]
@@ -255931,7 +257671,7 @@
     "bbox": [
       7.1973,
       48.672,
-      7.2486,
+      7.2487,
       48.6819
     ]
   },
@@ -256157,7 +257897,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      6.418,
+      6.4181,
       45.9704,
       6.4218,
       45.9784
@@ -256171,7 +257911,7 @@
     "bbox": [
       6.4193,
       45.968,
-      6.4262,
+      6.4263,
       45.9709
     ]
   },
@@ -256217,7 +257957,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      6.418,
+      6.4181,
       45.9669,
       6.4598,
       45.9897
@@ -256411,7 +258151,7 @@
     "bbox": [
       7.3231,
       48.2198,
-      7.334,
+      7.3339,
       48.2298
     ]
   },
@@ -256433,10 +258173,10 @@
     "from": "Rodern",
     "to": "Kohlenmingen",
     "bbox": [
-      7.3383,
+      7.3382,
       48.225,
       7.3537,
-      48.2316
+      48.2315
     ]
   },
   {
@@ -256470,8 +258210,8 @@
     "to": "Schaentzel",
     "bbox": [
       7.3265,
-      48.2347,
-      7.3546,
+      48.2346,
+      7.3544,
       48.2452
     ]
   },
@@ -258281,7 +260021,7 @@
     "from": "De Panne",
     "to": "Knokke",
     "bbox": [
-      2.5455,
+      2.5456,
       51.0818,
       2.559,
       51.0933
@@ -259517,10 +261257,10 @@
     "from": "Dabo",
     "to": null,
     "bbox": [
-      7.2023,
+      7.2024,
       48.6535,
       7.2361,
-      48.6715
+      48.6714
     ]
   },
   {
@@ -263731,7 +265471,7 @@
     "bbox": [
       7.2141,
       48.6835,
-      7.2374,
+      7.2372,
       48.7027
     ]
   },
@@ -264331,7 +266071,7 @@
     "bbox": [
       7.1092,
       48.3392,
-      7.188,
+      7.1881,
       48.3515
     ]
   },
@@ -264991,8 +266731,8 @@
     "bbox": [
       6.9739,
       48.2843,
-      6.9862,
-      48.2886
+      6.9864,
+      48.2887
     ]
   },
   {
@@ -265567,7 +267307,7 @@
     "bbox": [
       7.1044,
       48.2927,
-      7.1489,
+      7.1491,
       48.3172
     ]
   },
@@ -265590,7 +267330,7 @@
     "to": "Lusse",
     "bbox": [
       7.0989,
-      48.2722,
+      48.2721,
       7.1594,
       48.291
     ]
@@ -266167,7 +267907,7 @@
     "bbox": [
       7.2227,
       48.6831,
-      7.2374,
+      7.2373,
       48.6919
     ]
   },
@@ -267149,10 +268889,10 @@
     "from": null,
     "to": "Saint-Fulrad",
     "bbox": [
-      7.3149,
+      7.3148,
       48.2433,
       7.3182,
-      48.2472
+      48.2473
     ]
   },
   {
@@ -268637,7 +270377,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      6.3339,
+      6.334,
       44.1003,
       6.3584,
       44.1247
@@ -272108,7 +273848,7 @@
       7.2891,
       48.2833,
       7.3022,
-      48.293
+      48.2931
     ]
   },
   {
@@ -277086,7 +278826,7 @@
     "to": "GR532",
     "bbox": [
       7.2217,
-      48.2268,
+      48.2266,
       7.2313,
       48.2385
     ]
@@ -277385,7 +279125,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      5.7177,
+      5.7176,
       45.6667,
       5.7195,
       45.6722
@@ -281081,7 +282821,7 @@
     "from": "Urbeis",
     "to": "Col de Schlingoutte",
     "bbox": [
-      7.2248,
+      7.2249,
       48.3091,
       7.2348,
       48.3232
@@ -281825,7 +283565,7 @@
     "from": "Lalaye",
     "to": "Col de Schlingoutte",
     "bbox": [
-      7.2248,
+      7.2249,
       48.3091,
       7.2644,
       48.3297
@@ -283231,7 +284971,7 @@
     "bbox": [
       -3.4167,
       48.5105,
-      -3.1612,
+      -3.1609,
       48.5923
     ]
   },
@@ -283337,7 +285077,7 @@
     "from": "Sainte-Marie-aux-Mines",
     "to": "Sainte-Marie-aux-Mines",
     "bbox": [
-      7.1652,
+      7.1651,
       48.2438,
       7.1797,
       48.2585
@@ -287465,7 +289205,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      6.102,
+      6.1019,
       45.7925,
       6.1047,
       45.7972
@@ -287514,7 +289254,7 @@
     "to": null,
     "bbox": [
       2.0788,
-      48.5354,
+      48.53,
       2.1387,
       48.5575
     ]
@@ -287714,8 +289454,8 @@
   {
     "id": "hiking_foot_routes_line.14965899",
     "name": "Cité médiévale de Provins",
-    "from": "Gare SNCF de Provins",
-    "to": "Gare SNCF de Provins",
+    "from": "Provins",
+    "to": null,
     "bbox": [
       3.2812,
       48.556,
@@ -288019,7 +289759,7 @@
     "bbox": [
       1.6728,
       49.1453,
-      1.7589,
+      1.761,
       49.192
     ]
   },
@@ -288788,7 +290528,7 @@
       1.6151,
       49.0794,
       1.6609,
-      49.1062
+      49.1087
     ]
   },
   {
@@ -303593,7 +305333,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      5.689,
+      5.688,
       45.6155,
       5.6913,
       45.6165
@@ -303872,7 +305612,7 @@
       7.2833,
       48.1673,
       7.2946,
-      48.1884
+      48.1883
     ]
   },
   {
@@ -304589,10 +306329,10 @@
     "from": null,
     "to": null,
     "bbox": [
-      2.6529,
-      48.3997,
+      2.651,
+      48.3984,
       2.6631,
-      48.4042
+      48.405
     ]
   },
   {
@@ -309138,7 +310878,7 @@
     "to": null,
     "bbox": [
       4.401,
-      44.8194,
+      44.8193,
       4.4282,
       44.8426
     ]
@@ -309978,7 +311718,7 @@
     "to": "Roche des Chiens",
     "bbox": [
       6.883,
-      48.0928,
+      48.0929,
       6.9369,
       48.1213
     ]
@@ -311129,7 +312869,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      4.7564,
+      4.7563,
       43.7375,
       4.7644,
       43.7407
@@ -317994,7 +319734,7 @@
     "to": null,
     "bbox": [
       5.651,
-      45.1698,
+      45.1697,
       5.6645,
       45.1723
     ]
@@ -319205,7 +320945,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      5.6605,
+      5.6606,
       45.211,
       5.6618,
       45.2114
@@ -320420,7 +322160,7 @@
       7.5298,
       48.9246,
       7.5345,
-      48.9266
+      48.9265
     ]
   },
   {
@@ -320455,7 +322195,7 @@
     "bbox": [
       7.5314,
       48.9105,
-      7.538,
+      7.5381,
       48.9224
     ]
   },
@@ -320466,9 +322206,9 @@
     "to": null,
     "bbox": [
       7.5244,
-      48.912,
+      48.9122,
       7.5521,
-      48.9186
+      48.9185
     ]
   },
   {
@@ -320479,7 +322219,7 @@
     "bbox": [
       7.5202,
       48.9119,
-      7.5348,
+      7.5349,
       48.9376
     ]
   },
@@ -320489,7 +322229,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      7.5252,
+      7.5253,
       48.9099,
       7.5314,
       48.9124
@@ -320525,7 +322265,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      7.5134,
+      7.5135,
       48.922,
       7.5281,
       48.9413
@@ -320885,9 +322625,9 @@
     "from": null,
     "to": null,
     "bbox": [
-      7.4707,
+      7.4711,
       48.8953,
-      7.4928,
+      7.4929,
       48.9069
     ]
   },
@@ -320899,7 +322639,7 @@
     "bbox": [
       7.483,
       48.8947,
-      7.4997,
+      7.4996,
       48.9033
     ]
   },
@@ -320909,7 +322649,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      7.4956,
+      7.4955,
       48.8984,
       7.5015,
       48.9009
@@ -320921,7 +322661,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      7.5128,
+      7.5127,
       48.9009,
       7.5177,
       48.9029
@@ -320933,9 +322673,9 @@
     "from": null,
     "to": null,
     "bbox": [
-      7.4958,
+      7.4959,
       48.9006,
-      7.5132,
+      7.5131,
       48.9085
     ]
   },
@@ -321605,7 +323345,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      7.5029,
+      7.503,
       48.9029,
       7.5242,
       48.9126
@@ -321905,9 +323645,9 @@
     "from": null,
     "to": null,
     "bbox": [
-      7.502,
+      7.5019,
       48.9051,
-      7.5265,
+      7.5264,
       48.9173
     ]
   },
@@ -321917,9 +323657,9 @@
     "from": null,
     "to": null,
     "bbox": [
-      7.5029,
+      7.503,
       48.9029,
-      7.5147,
+      7.5148,
       48.9126
     ]
   },
@@ -324091,8 +325831,8 @@
     "bbox": [
       6.8527,
       46.2921,
-      6.8556,
-      46.2977
+      6.8552,
+      46.2938
     ]
   },
   {
@@ -324234,8 +325974,8 @@
     "to": "Église Saint-Quirin",
     "bbox": [
       7.0644,
-      48.6058,
-      7.0736,
+      48.6065,
+      7.0732,
       48.612
     ]
   },
@@ -325074,8 +326814,8 @@
     "to": null,
     "bbox": [
       7.4805,
-      48.9144,
-      7.502,
+      48.9143,
+      7.5019,
       48.9251
     ]
   },
@@ -325086,7 +326826,7 @@
     "to": null,
     "bbox": [
       7.5086,
-      48.9197,
+      48.9196,
       7.5126,
       48.9215
     ]
@@ -325147,7 +326887,7 @@
     "bbox": [
       5.6559,
       45.211,
-      5.6605,
+      5.6606,
       45.215
     ]
   },
@@ -325241,10 +326981,10 @@
     "from": null,
     "to": null,
     "bbox": [
-      7.5169,
+      7.5168,
       48.9051,
       7.5272,
-      48.9112
+      48.9113
     ]
   },
   {
@@ -325253,10 +326993,10 @@
     "from": null,
     "to": null,
     "bbox": [
-      7.5082,
-      48.9125,
+      7.5083,
+      48.9124,
       7.5215,
-      48.9173
+      48.9174
     ]
   },
   {
@@ -325280,7 +327020,7 @@
       7.4834,
       48.9067,
       7.5242,
-      48.9305
+      48.9304
     ]
   },
   {
@@ -326238,9 +327978,9 @@
     "to": null,
     "bbox": [
       7.4815,
-      48.9144,
-      7.502,
-      48.9237
+      48.9143,
+      7.5019,
+      48.9236
     ]
   },
   {
@@ -328207,7 +329947,7 @@
     "bbox": [
       5.6917,
       45.2155,
-      5.6968,
+      5.6967,
       45.22
     ]
   },
@@ -328217,7 +329957,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      5.6968,
+      5.6967,
       45.2096,
       5.7105,
       45.2155
@@ -330714,7 +332454,7 @@
     "to": "GR 533",
     "bbox": [
       6.9063,
-      48.0417,
+      48.0416,
       6.9216,
       48.0519
     ]
@@ -335885,9 +337625,9 @@
     "from": "La Rayée",
     "to": "Grouvelin",
     "bbox": [
-      6.8899,
-      48.0417,
-      6.9128,
+      6.8898,
+      48.0416,
+      6.9129,
       48.0532
     ]
   },
@@ -339473,8 +341213,8 @@
     "from": null,
     "to": null,
     "bbox": [
-      5.9023,
-      46.6077,
+      5.9021,
+      46.6079,
       5.9038,
       46.6081
     ]
@@ -339485,9 +341225,9 @@
     "from": null,
     "to": null,
     "bbox": [
-      5.8936,
+      5.8935,
       46.6028,
-      5.9023,
+      5.9021,
       46.6084
     ]
   },
@@ -339500,7 +341240,7 @@
       5.8953,
       46.6028,
       5.9024,
-      46.6077
+      46.6079
     ]
   },
   {
@@ -340937,7 +342677,7 @@
     "from": "Sentheim",
     "to": "Mortzwiller",
     "bbox": [
-      7.0291,
+      7.0292,
       47.7423,
       7.0519,
       47.756
@@ -342621,18 +344361,6 @@
       45.8974,
       5.6825,
       45.9049
-    ]
-  },
-  {
-    "id": "hiking_foot_routes_line.14158856",
-    "name": null,
-    "from": null,
-    "to": null,
-    "bbox": [
-      5.6756,
-      45.8947,
-      5.6825,
-      45.8969
     ]
   },
   {
@@ -345091,7 +346819,7 @@
     "bbox": [
       6.9053,
       47.9018,
-      6.9234,
+      6.9235,
       47.917
     ]
   },
@@ -345163,7 +346891,7 @@
     "bbox": [
       6.8718,
       47.9118,
-      6.8788,
+      6.8789,
       47.9158
     ]
   },
@@ -347731,7 +349459,7 @@
     "bbox": [
       7.0739,
       47.987,
-      7.0893,
+      7.0894,
       48.0066
     ]
   },
@@ -348979,7 +350707,7 @@
     "bbox": [
       5.4028,
       46.4691,
-      5.4138,
+      5.4139,
       46.4928
     ]
   },
@@ -350310,7 +352038,7 @@
     "to": "Refuge du Hilsen AWS",
     "bbox": [
       7.0926,
-      47.9459,
+      47.946,
       7.1283,
       47.9638
     ]
@@ -352220,7 +353948,7 @@
       5.4741,
       46.4629,
       5.477,
-      46.4706
+      46.4707
     ]
   },
   {
@@ -352651,8 +354379,8 @@
     "bbox": [
       7.07,
       47.9354,
-      7.071,
-      47.9361
+      7.0711,
+      47.9363
     ]
   },
   {
@@ -358434,7 +360162,7 @@
     "to": null,
     "bbox": [
       5.474,
-      46.7154,
+      46.7157,
       5.4937,
       46.7216
     ]
@@ -360726,7 +362454,7 @@
     "to": "Estialescq - Les Marlères",
     "bbox": [
       -0.57,
-      43.2094,
+      43.2092,
       -0.5576,
       43.2149
     ]
@@ -360739,7 +362467,7 @@
     "bbox": [
       -0.5912,
       43.2003,
-      -0.5646,
+      -0.5645,
       43.2157
     ]
   },
@@ -364363,7 +366091,7 @@
     "bbox": [
       1.862,
       50.9177,
-      2.5455,
+      2.5456,
       51.0891
     ]
   },
@@ -364481,7 +366209,7 @@
     "from": "Cernay",
     "to": "Cantine Zeller",
     "bbox": [
-      7.1742,
+      7.1743,
       47.809,
       7.1818,
       47.8592
@@ -366848,7 +368576,7 @@
       -3.9793,
       48.384,
       -3.9224,
-      48.416
+      48.4161
     ]
   },
   {
@@ -371958,7 +373686,7 @@
     "to": null,
     "bbox": [
       5.9218,
-      46.7592,
+      46.7593,
       5.9276,
       46.7612
     ]
@@ -371970,7 +373698,7 @@
     "to": null,
     "bbox": [
       5.923,
-      46.7566,
+      46.7563,
       5.9333,
       46.7639
     ]
@@ -374540,7 +376268,7 @@
       5.7698,
       46.3056,
       5.7762,
-      46.314
+      46.3137
     ]
   },
   {
@@ -374549,9 +376277,9 @@
     "from": null,
     "to": null,
     "bbox": [
-      5.774,
-      46.314,
-      5.782,
+      5.7739,
+      46.3137,
+      5.7821,
       46.3263
     ]
   },
@@ -374597,8 +376325,8 @@
     "from": null,
     "to": null,
     "bbox": [
-      5.774,
-      46.314,
+      5.7739,
+      46.3137,
       5.7887,
       46.3281
     ]
@@ -380621,7 +382349,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      5.9419,
+      5.942,
       46.2957,
       5.9474,
       46.2971
@@ -391529,7 +393257,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      5.37,
+      5.3659,
       45.7383,
       5.3712,
       45.7474
@@ -394423,8 +396151,8 @@
     "bbox": [
       7.4662,
       44.13,
-      7.4797,
-      44.1613
+      7.4752,
+      44.1482
     ]
   },
   {
@@ -394890,7 +396618,7 @@
     "to": null,
     "bbox": [
       5.1565,
-      45.7718,
+      45.7719,
       5.169,
       45.7736
     ]
@@ -398455,7 +400183,7 @@
     "bbox": [
       1.8119,
       46.0989,
-      1.906,
+      1.9059,
       46.1713
     ]
   },
@@ -400831,8 +402559,8 @@
     "bbox": [
       5.8404,
       45.2012,
-      5.8406,
-      45.2012
+      5.8405,
+      45.2013
     ]
   },
   {
@@ -400841,10 +402569,10 @@
     "from": null,
     "to": null,
     "bbox": [
-      5.84,
+      5.8399,
       45.2012,
       5.8404,
-      45.2015
+      45.2014
     ]
   },
   {
@@ -400855,8 +402583,8 @@
     "bbox": [
       5.8363,
       45.199,
-      5.84,
-      45.2015
+      5.8399,
+      45.2014
     ]
   },
   {
@@ -404286,7 +406014,7 @@
     "to": null,
     "bbox": [
       5.819,
-      45.1316,
+      45.1315,
       5.8245,
       45.1361
     ]
@@ -404429,7 +406157,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      5.8264,
+      5.8263,
       45.1522,
       5.8385,
       45.1555
@@ -417714,8 +419442,8 @@
     "to": null,
     "bbox": [
       5.7878,
-      45.812,
-      5.7881,
+      45.8122,
+      5.7883,
       45.8128
     ]
   },
@@ -418373,10 +420101,10 @@
     "from": null,
     "to": null,
     "bbox": [
-      5.7881,
+      5.7883,
       45.8094,
       5.7903,
-      45.8121
+      45.8122
     ]
   },
   {
@@ -424111,7 +425839,7 @@
     "bbox": [
       5.6235,
       46.778,
-      5.6268,
+      5.6267,
       46.789
     ]
   },
@@ -426751,8 +428479,8 @@
     "bbox": [
       5.7845,
       47.0337,
-      5.7961,
-      47.0709
+      5.7963,
+      47.0711
     ]
   },
   {
@@ -427266,7 +428994,7 @@
     "to": null,
     "bbox": [
       1.4276,
-      43.4507,
+      43.4508,
       1.434,
       43.455
     ]
@@ -430411,8 +432139,8 @@
     "bbox": [
       5.8051,
       47.0079,
-      5.8138,
-      47.0342
+      5.8139,
+      47.0343
     ]
   },
   {
@@ -430736,7 +432464,7 @@
       5.8077,
       47.0033,
       5.8223,
-      47.0342
+      47.0343
     ]
   },
   {
@@ -430769,8 +432497,8 @@
     "from": null,
     "to": null,
     "bbox": [
-      5.8138,
-      47.0342,
+      5.8139,
+      47.0343,
       5.8149,
       47.0399
     ]
@@ -430796,7 +432524,7 @@
       5.8259,
       47.0049,
       5.852,
-      47.0219
+      47.0218
     ]
   },
   {
@@ -431048,7 +432776,7 @@
       6.1224,
       47.0362,
       6.1483,
-      47.0474
+      47.0477
     ]
   },
   {
@@ -431131,7 +432859,7 @@
     "bbox": [
       6.1559,
       47.0989,
-      6.1769,
+      6.1767,
       47.1114
     ]
   },
@@ -431153,8 +432881,8 @@
     "from": null,
     "to": null,
     "bbox": [
-      6.1579,
-      47.0585,
+      6.1578,
+      47.0586,
       6.1778,
       47.1007
     ]
@@ -431333,9 +433061,9 @@
     "from": "Devant le cimetière de Sarrant",
     "to": "Devant le cimetière de Sarrant",
     "bbox": [
-      0.8935,
+      0.8934,
       43.7645,
-      0.9296,
+      0.9297,
       43.776
     ]
   },
@@ -431358,8 +433086,8 @@
     "to": "Chateau d'eau de Mauvezin",
     "bbox": [
       0.8849,
-      43.7138,
-      0.9204,
+      43.7137,
+      0.9206,
       43.7276
     ]
   },
@@ -433176,18 +434904,6 @@
     ]
   },
   {
-    "id": "hiking_foot_routes_line.13338135",
-    "name": null,
-    "from": null,
-    "to": null,
-    "bbox": [
-      0.2288,
-      43.0107,
-      0.2338,
-      43.0118
-    ]
-  },
-  {
     "id": "hiking_foot_routes_line.13338113",
     "name": "Lac de Darbon",
     "from": null,
@@ -433759,7 +435475,7 @@
     "bbox": [
       -2.1021,
       48.1132,
-      -2.0659,
+      -2.0654,
       48.1291
     ]
   },
@@ -435504,18 +437220,6 @@
     ]
   },
   {
-    "id": "hiking_foot_routes_line.13268167",
-    "name": "ancien GR77",
-    "from": null,
-    "to": null,
-    "bbox": [
-      2.7419,
-      43.2609,
-      2.8284,
-      43.3414
-    ]
-  },
-  {
     "id": "hiking_foot_routes_line.13267969",
     "name": "Le sentier vigneron des Corbières",
     "from": null,
@@ -435781,14 +437485,14 @@
   },
   {
     "id": "hiking_foot_routes_line.13236300",
-    "name": null,
+    "name": "Circuit de l'hameau de Lujat",
     "from": null,
     "to": null,
     "bbox": [
       1.6377,
       42.8213,
       1.6553,
-      42.8405
+      42.8406
     ]
   },
   {
@@ -436077,18 +437781,6 @@
       43.5273,
       2.4874,
       43.5396
-    ]
-  },
-  {
-    "id": "hiking_foot_routes_line.13202383",
-    "name": "PR",
-    "from": null,
-    "to": null,
-    "bbox": [
-      2.4976,
-      43.5098,
-      2.5232,
-      43.5233
     ]
   },
   {
@@ -436842,7 +438534,7 @@
     "to": "Mairie Saint-Quirin",
     "bbox": [
       7.0653,
-      48.5985,
+      48.5984,
       7.1094,
       48.6141
     ]
@@ -437348,7 +439040,7 @@
       7.0895,
       48.564,
       7.1194,
-      48.5745
+      48.5746
     ]
   },
   {
@@ -437431,7 +439123,7 @@
     "bbox": [
       7.2807,
       48.7744,
-      7.292,
+      7.2921,
       48.7859
     ]
   },
@@ -439206,8 +440898,8 @@
     "to": "Port Bourgenay",
     "bbox": [
       -1.8208,
-      46.441,
-      -1.6767,
+      46.4414,
+      -1.6776,
       46.5586
     ]
   },
@@ -439698,7 +441390,7 @@
     "to": "Chalet Club Vosgien",
     "bbox": [
       7.2669,
-      48.713,
+      48.7129,
       7.294,
       48.73
     ]
@@ -439759,7 +441451,7 @@
     "bbox": [
       7.1972,
       48.6753,
-      7.2381,
+      7.238,
       48.6864
     ]
   },
@@ -439805,10 +441497,10 @@
     "from": "Dabo Place de l'Eglise",
     "to": "Dabo Place de l'Eglise",
     "bbox": [
-      7.2023,
+      7.2024,
       48.6535,
       7.2361,
-      48.6715
+      48.6714
     ]
   },
   {
@@ -441294,7 +442986,7 @@
     "to": "Saint-Jacut",
     "bbox": [
       -2.4533,
-      47.6366,
+      47.636,
       -2.2147,
       47.7003
     ]
@@ -441499,7 +443191,7 @@
     "bbox": [
       -1.5538,
       47.1963,
-      -1.5363,
+      -1.533,
       47.2993
     ]
   },
@@ -442711,7 +444403,7 @@
     "bbox": [
       3.5799,
       43.8626,
-      3.5967,
+      3.5969,
       43.8726
     ]
   },
@@ -444089,7 +445781,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      5.7428,
+      5.7429,
       45.1604,
       5.7479,
       45.1612
@@ -444680,7 +446372,7 @@
       6.9274,
       48.3989,
       6.9412,
-      48.4137
+      48.4138
     ]
   },
   {
@@ -444822,7 +446514,7 @@
     "to": "La Trouche",
     "bbox": [
       6.8728,
-      48.3963,
+      48.3962,
       6.9049,
       48.4169
     ]
@@ -449585,7 +451277,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      -1.8957,
+      -1.8951,
       48.6915,
       -1.8435,
       48.7095
@@ -450403,7 +452095,7 @@
     "bbox": [
       5.5994,
       45.1264,
-      5.5999,
+      5.6,
       45.1271
     ]
   },
@@ -450485,7 +452177,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      6.2633,
+      6.2632,
       45.8069,
       6.3133,
       45.8433
@@ -452132,7 +453824,7 @@
       6.7898,
       45.2043,
       6.8148,
-      45.2088
+      45.2085
     ]
   },
   {
@@ -452971,8 +454663,8 @@
     "bbox": [
       6.5482,
       45.1086,
-      6.554,
-      45.1118
+      6.5552,
+      45.1115
     ]
   },
   {
@@ -453787,7 +455479,7 @@
     "bbox": [
       6.5131,
       45.1252,
-      6.5349,
+      6.5348,
       45.1312
     ]
   },
@@ -454243,7 +455935,7 @@
     "bbox": [
       -3.3283,
       47.8743,
-      -3.3074,
+      -3.3073,
       47.8903
     ]
   },
@@ -456007,7 +457699,7 @@
     "bbox": [
       0.0834,
       48.5348,
-      0.0962,
+      0.096,
       48.5405
     ]
   },
@@ -460159,7 +461851,7 @@
     "bbox": [
       1.4316,
       43.5846,
-      1.432,
+      1.4321,
       43.5855
     ]
   },
@@ -462089,7 +463781,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      6.7211,
+      6.721,
       45.3668,
       6.7276,
       45.3763
@@ -462115,7 +463807,7 @@
     "bbox": [
       7.0795,
       47.8518,
-      7.1279,
+      7.1278,
       47.8752
     ]
   },
@@ -470150,8 +471842,8 @@
   {
     "id": "hiking_foot_routes_line.12089490",
     "name": null,
-    "from": null,
-    "to": null,
+    "from": "La Carriérette",
+    "to": "Balandra",
     "bbox": [
       1.4186,
       43.4889,
@@ -470162,11 +471854,11 @@
   {
     "id": "hiking_foot_routes_line.12089489",
     "name": null,
-    "from": null,
-    "to": null,
+    "from": "Le Bugat",
+    "to": "Balandra",
     "bbox": [
       1.419,
-      43.4836,
+      43.4837,
       1.4217,
       43.4889
     ]
@@ -470174,13 +471866,13 @@
   {
     "id": "hiking_foot_routes_line.12089488",
     "name": null,
-    "from": null,
-    "to": null,
+    "from": "Croisée de la Carrerrasse",
+    "to": "Le Bugat",
     "bbox": [
       1.4153,
       43.4822,
       1.4213,
-      43.4836
+      43.4837
     ]
   },
   {
@@ -470942,8 +472634,8 @@
   {
     "id": "hiking_foot_routes_line.12084178",
     "name": null,
-    "from": null,
-    "to": null,
+    "from": "Bois de la Pounte",
+    "to": "La Carriérette",
     "bbox": [
       1.4186,
       43.4922,
@@ -472171,7 +473863,7 @@
     "bbox": [
       6.1361,
       44.5148,
-      6.1557,
+      6.1558,
       44.5322
     ]
   },
@@ -473090,8 +474782,8 @@
   {
     "id": "hiking_foot_routes_line.12017325",
     "name": null,
-    "from": null,
-    "to": null,
+    "from": "Pont-D'Auzil",
+    "to": "Le Pastel",
     "bbox": [
       1.4369,
       43.5146,
@@ -473102,8 +474794,8 @@
   {
     "id": "hiking_foot_routes_line.12017324",
     "name": null,
-    "from": null,
-    "to": null,
+    "from": "Pont d'Auzil",
+    "to": "Auzil",
     "bbox": [
       1.4339,
       43.5112,
@@ -473462,8 +475154,8 @@
   {
     "id": "hiking_foot_routes_line.12012784",
     "name": null,
-    "from": null,
-    "to": null,
+    "from": "Saint-Martin",
+    "to": "Croisée de la Carrerrasse",
     "bbox": [
       1.4151,
       43.4755,
@@ -473474,8 +475166,8 @@
   {
     "id": "hiking_foot_routes_line.12012656",
     "name": null,
-    "from": null,
-    "to": null,
+    "from": "Croisée de la Carrerrasse",
+    "to": "Ramier de Goyrans",
     "bbox": [
       1.4134,
       43.4822,
@@ -473486,8 +475178,8 @@
   {
     "id": "hiking_foot_routes_line.12012514",
     "name": null,
-    "from": null,
-    "to": null,
+    "from": "Ramier de Goyrans",
+    "to": "Le Vieux Pont",
     "bbox": [
       1.4099,
       43.489,
@@ -473498,8 +475190,8 @@
   {
     "id": "hiking_foot_routes_line.12012513",
     "name": null,
-    "from": null,
-    "to": null,
+    "from": "Le Vieux Pont",
+    "to": "Tindo l'Esclop",
     "bbox": [
       1.4098,
       43.497,
@@ -473510,8 +475202,8 @@
   {
     "id": "hiking_foot_routes_line.12012485",
     "name": null,
-    "from": null,
-    "to": null,
+    "from": "Tindo l'Esclop",
+    "to": "La Carriérette",
     "bbox": [
       1.4098,
       43.4922,
@@ -473534,32 +475226,20 @@
   {
     "id": "hiking_foot_routes_line.12012369",
     "name": null,
-    "from": null,
-    "to": null,
+    "from": "Aymard",
+    "to": "La Gleysette",
     "bbox": [
-      1.4277,
+      1.4268,
       43.4984,
       1.434,
       43.5
     ]
   },
   {
-    "id": "hiking_foot_routes_line.12012361",
-    "name": null,
-    "from": null,
-    "to": null,
-    "bbox": [
-      1.4268,
-      43.4992,
-      1.4277,
-      43.4994
-    ]
-  },
-  {
     "id": "hiking_foot_routes_line.12012360",
     "name": null,
-    "from": null,
-    "to": null,
+    "from": "Sainte-Christine",
+    "to": "Aymard",
     "bbox": [
       1.4145,
       43.4994,
@@ -473630,8 +475310,8 @@
   {
     "id": "hiking_foot_routes_line.12012162",
     "name": null,
-    "from": null,
-    "to": null,
+    "from": "Roche-Fleurie",
+    "to": "Le Pastel",
     "bbox": [
       1.4325,
       43.5198,
@@ -473642,8 +475322,8 @@
   {
     "id": "hiking_foot_routes_line.12010341",
     "name": null,
-    "from": null,
-    "to": null,
+    "from": "Le Confluent",
+    "to": "Roche-Fleurie",
     "bbox": [
       1.4251,
       43.5178,
@@ -473654,8 +475334,8 @@
   {
     "id": "hiking_foot_routes_line.12010340",
     "name": null,
-    "from": null,
-    "to": null,
+    "from": "Le Confluent",
+    "to": "Auzil",
     "bbox": [
       1.4251,
       43.5125,
@@ -473666,8 +475346,8 @@
   {
     "id": "hiking_foot_routes_line.12010307",
     "name": null,
-    "from": null,
-    "to": null,
+    "from": "Le Réganel",
+    "to": "Auzil",
     "bbox": [
       1.4327,
       43.5015,
@@ -473714,8 +475394,8 @@
   {
     "id": "hiking_foot_routes_line.12010125",
     "name": null,
-    "from": null,
-    "to": null,
+    "from": "Le Réganel",
+    "to": "la Gleysette",
     "bbox": [
       1.434,
       43.4984,
@@ -473726,8 +475406,8 @@
   {
     "id": "hiking_foot_routes_line.12010124",
     "name": null,
-    "from": null,
-    "to": null,
+    "from": "Le Réganel",
+    "to": "Campagne",
     "bbox": [
       1.4352,
       43.4995,
@@ -477953,7 +479633,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      6.7749,
+      6.775,
       49.156,
       6.8055,
       49.1683
@@ -478795,7 +480475,7 @@
     "bbox": [
       6.1139,
       47.2102,
-      6.1419,
+      6.142,
       47.226
     ]
   },
@@ -482898,7 +484578,7 @@
     "to": null,
     "bbox": [
       2.6729,
-      45.8681,
+      45.8682,
       2.7019,
       45.8824
     ]
@@ -482971,7 +484651,7 @@
     "bbox": [
       2.7942,
       45.9073,
-      2.8122,
+      2.8123,
       45.9225
     ]
   },
@@ -483427,7 +485107,7 @@
     "bbox": [
       3.0234,
       45.8435,
-      3.0505,
+      3.0504,
       45.8641
     ]
   },
@@ -483437,7 +485117,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      3.0474,
+      3.0472,
       45.8493,
       3.1119,
       45.8719
@@ -484296,30 +485976,6 @@
     ]
   },
   {
-    "id": "hiking_foot_routes_line.11215788",
-    "name": "Le Haut Briant / Pouchard",
-    "from": null,
-    "to": null,
-    "bbox": [
-      -1.6123,
-      47.8566,
-      -1.581,
-      47.8669
-    ]
-  },
-  {
-    "id": "hiking_foot_routes_line.11215787",
-    "name": "Sourg / Pouchard",
-    "from": null,
-    "to": null,
-    "bbox": [
-      -1.5969,
-      47.854,
-      -1.5812,
-      47.8632
-    ]
-  },
-  {
     "id": "hiking_foot_routes_line.11214851",
     "name": "La Citadelle de Buron",
     "from": null,
@@ -485089,14 +486745,14 @@
   },
   {
     "id": "hiking_foot_routes_line.11198189",
-    "name": "Le Bourg / Les Brûlons / Le Haut Briant",
+    "name": "Le Bourg /Le Briant",
     "from": null,
     "to": null,
     "bbox": [
-      -1.6189,
+      -1.6099,
       47.8661,
-      -1.5949,
-      47.8812
+      -1.5996,
+      47.8706
     ]
   },
   {
@@ -485417,7 +487073,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      3.222,
+      3.2212,
       45.6893,
       3.2542,
       45.7103
@@ -485976,18 +487632,6 @@
     ]
   },
   {
-    "id": "hiking_foot_routes_line.11178825",
-    "name": "Le Plessis / La Touche Morel",
-    "from": null,
-    "to": null,
-    "bbox": [
-      -1.5682,
-      47.8609,
-      -1.5623,
-      47.8766
-    ]
-  },
-  {
     "id": "hiking_foot_routes_line.11178810",
     "name": "De Saint Vérand à Bagnols",
     "from": null,
@@ -486021,18 +487665,6 @@
       48.2724,
       -1.636,
       48.2965
-    ]
-  },
-  {
-    "id": "hiking_foot_routes_line.11177645",
-    "name": "Les Brûlons / Le Plessis",
-    "from": null,
-    "to": null,
-    "bbox": [
-      -1.5967,
-      47.8758,
-      -1.5608,
-      47.8802
     ]
   },
   {
@@ -486341,7 +487973,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      -1.6837,
+      -1.6836,
       47.7294,
       -1.6394,
       47.7511
@@ -487794,7 +489426,7 @@
     "to": null,
     "bbox": [
       1.9542,
-      44.3857,
+      44.3856,
       1.9968,
       44.4264
     ]
@@ -490543,7 +492175,7 @@
     "bbox": [
       -2.0995,
       48.1078,
-      -2.0659,
+      -2.0654,
       48.1198
     ]
   },
@@ -490589,10 +492221,10 @@
     "from": "Les Molières",
     "to": "Roche des Fées",
     "bbox": [
-      6.9812,
+      6.9813,
       48.3028,
       6.9906,
-      48.3131
+      48.3129
     ]
   },
   {
@@ -490892,7 +492524,7 @@
       6.657,
       48.0273,
       6.6737,
-      48.0345
+      48.0346
     ]
   },
   {
@@ -490904,7 +492536,7 @@
       6.6328,
       48.0164,
       6.6737,
-      48.0345
+      48.0346
     ]
   },
   {
@@ -490916,7 +492548,7 @@
       6.6392,
       48.0169,
       6.6737,
-      48.0345
+      48.0346
     ]
   },
   {
@@ -490927,7 +492559,7 @@
     "bbox": [
       6.6416,
       48.0318,
-      6.6591,
+      6.659,
       48.0468
     ]
   },
@@ -491633,7 +493265,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      5.8264,
+      5.8263,
       45.1522,
       5.8406,
       45.1579
@@ -492390,7 +494022,7 @@
     "to": "Sallent de Gállego",
     "bbox": [
       -0.2956,
-      42.807,
+      42.8104,
       -0.2747,
       42.8178
     ]
@@ -492786,9 +494418,9 @@
     "to": null,
     "bbox": [
       7.4354,
-      48.9239,
+      48.9238,
       7.4552,
-      48.9311
+      48.931
     ]
   },
   {
@@ -496056,18 +497688,6 @@
     ]
   },
   {
-    "id": "hiking_foot_routes_line.10058013",
-    "name": "Balade le long de la Grande Honnelle",
-    "from": null,
-    "to": null,
-    "bbox": [
-      3.7264,
-      50.3368,
-      3.7357,
-      50.3475
-    ]
-  },
-  {
     "id": "hiking_foot_routes_line.10054896",
     "name": "Col de Bavella<->Croix de Leccia",
     "from": "Col de Bavella",
@@ -497316,18 +498936,6 @@
     ]
   },
   {
-    "id": "hiking_foot_routes_line.9890423",
-    "name": "Tour du Lac Sainte-Croix",
-    "from": null,
-    "to": null,
-    "bbox": [
-      6.101,
-      43.7179,
-      6.2499,
-      43.847
-    ]
-  },
-  {
     "id": "hiking_foot_routes_line.9890306",
     "name": "Vaumougne",
     "from": null,
@@ -498078,7 +499686,7 @@
     "to": null,
     "bbox": [
       -1.6967,
-      48.1415,
+      48.1418,
       -1.6736,
       48.1584
     ]
@@ -498665,7 +500273,7 @@
     "from": "Chèvre Roche",
     "to": "Chèvre Roche",
     "bbox": [
-      6.6945,
+      6.6946,
       48.0369,
       6.7152,
       48.0489
@@ -499170,9 +500778,9 @@
     "to": null,
     "bbox": [
       7.4917,
-      48.9031,
+      48.903,
       7.4961,
-      48.9058
+      48.9057
     ]
   },
   {
@@ -499230,7 +500838,7 @@
     "to": null,
     "bbox": [
       7.338,
-      48.8587,
+      48.8588,
       7.3501,
       48.8633
     ]
@@ -499313,7 +500921,7 @@
     "from": "Mont Saint-Michel",
     "to": "Ernolsheim-lès-Saverne",
     "bbox": [
-      7.3543,
+      7.3544,
       48.7749,
       7.3803,
       48.7907
@@ -499435,7 +501043,7 @@
     "bbox": [
       7.2606,
       48.7512,
-      7.2803,
+      7.2875,
       48.8195
     ]
   },
@@ -499541,7 +501149,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      7.338,
+      7.3381,
       48.7999,
       7.4056,
       48.8408
@@ -499554,7 +501162,7 @@
     "to": null,
     "bbox": [
       7.3537,
-      48.8243,
+      48.8242,
       7.3616,
       48.8307
     ]
@@ -500286,7 +501894,7 @@
     "to": null,
     "bbox": [
       6.9586,
-      48.443,
+      48.4429,
       7.0084,
       48.4778
     ]
@@ -500323,7 +501931,7 @@
     "bbox": [
       6.936,
       48.4361,
-      6.9786,
+      6.9785,
       48.4543
     ]
   },
@@ -500360,7 +501968,7 @@
       6.9583,
       48.4377,
       6.9663,
-      48.4402
+      48.4403
     ]
   },
   {
@@ -500369,7 +501977,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      6.968,
+      6.9682,
       48.4389,
       7.0031,
       48.4423
@@ -501966,7 +503574,7 @@
     "to": "Magny-en-Vexin",
     "bbox": [
       1.7892,
-      49.156,
+      49.1561,
       2.0831,
       49.4324
     ]
@@ -502051,7 +503659,7 @@
     "bbox": [
       -0.2603,
       44.4921,
-      -0.1903,
+      -0.1877,
       44.562
     ]
   },
@@ -502640,7 +504248,7 @@
       7.3294,
       48.8239,
       7.4056,
-      48.8579
+      48.858
     ]
   },
   {
@@ -502649,10 +504257,10 @@
     "from": null,
     "to": null,
     "bbox": [
-      7.3401,
+      7.3403,
       48.8217,
       7.4056,
-      48.8579
+      48.858
     ]
   },
   {
@@ -502662,8 +504270,8 @@
     "to": null,
     "bbox": [
       7.3351,
-      48.8579,
-      7.3409,
+      48.858,
+      7.3408,
       48.8605
     ]
   },
@@ -502771,7 +504379,7 @@
     "bbox": [
       7.3755,
       48.876,
-      7.4388,
+      7.4386,
       48.8812
     ]
   },
@@ -502903,7 +504511,7 @@
     "bbox": [
       7.4423,
       48.9209,
-      7.5498,
+      7.5497,
       48.9681
     ]
   },
@@ -503132,7 +504740,7 @@
       7.5067,
       48.9786,
       7.5329,
-      48.9928
+      48.9927
     ]
   },
   {
@@ -503420,7 +505028,7 @@
       7.38,
       49.0002,
       7.4446,
-      49.0395
+      49.0399
     ]
   },
   {
@@ -504980,7 +506588,7 @@
       6.9389,
       48.3989,
       6.9727,
-      48.4096
+      48.4095
     ]
   },
   {
@@ -505015,7 +506623,7 @@
     "bbox": [
       6.9045,
       48.3796,
-      7.0515,
+      7.0516,
       48.493
     ]
   },
@@ -505220,7 +506828,7 @@
       6.684,
       48.0252,
       6.7089,
-      48.047
+      48.0469
     ]
   },
   {
@@ -505914,7 +507522,7 @@
     "to": null,
     "bbox": [
       1.6924,
-      49.7266,
+      49.726,
       1.7305,
       49.7558
     ]
@@ -506689,7 +508297,7 @@
   },
   {
     "id": "hiking_foot_routes_line.8423226",
-    "name": "Promenade autour de Vezin",
+    "name": "PDIPR - Boucle de Vezin",
     "from": null,
     "to": null,
     "bbox": [
@@ -507113,7 +508721,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      1.5567,
+      1.5557,
       49.9704,
       1.6165,
       50.005
@@ -507385,26 +508993,14 @@
   },
   {
     "id": "hiking_foot_routes_line.8331855",
-    "name": "Tour du bourg de Plescop par l'Est",
-    "from": null,
-    "to": null,
-    "bbox": [
-      -2.814,
-      47.6763,
-      -2.7951,
-      47.7071
-    ]
-  },
-  {
-    "id": "hiking_foot_routes_line.8331854",
-    "name": "Tour du bourg de Plescop par l'Ouest",
+    "name": "Tour du bourg de Plescop",
     "from": null,
     "to": null,
     "bbox": [
       -2.8165,
-      47.6871,
-      -2.8007,
-      47.7067
+      47.6895,
+      -2.7951,
+      47.7071
     ]
   },
   {
@@ -510450,8 +512046,8 @@
     "to": "Allarmont",
     "bbox": [
       7.0203,
-      48.4724,
-      7.0463,
+      48.4721,
+      7.0467,
       48.4911
     ]
   },
@@ -511602,7 +513198,7 @@
     "to": null,
     "bbox": [
       2.6353,
-      45.1384,
+      45.1385,
       2.6675,
       45.1656
     ]
@@ -512179,7 +513775,7 @@
     "bbox": [
       2.9258,
       45.9101,
-      2.9393,
+      2.9392,
       45.92
     ]
   },
@@ -512634,7 +514230,7 @@
     "to": null,
     "bbox": [
       2.3366,
-      45.3487,
+      45.3479,
       2.3605,
       45.3859
     ]
@@ -512743,7 +514339,7 @@
     "bbox": [
       3.0123,
       48.3273,
-      3.0401,
+      3.0402,
       48.3448
     ]
   },
@@ -512798,7 +514394,7 @@
   {
     "id": "hiking_foot_routes_line.7554322",
     "name": "Tour des Roches de Saffres",
-    "from": null,
+    "from": "Vitteaux",
     "to": null,
     "bbox": [
       4.5404,
@@ -514938,7 +516534,7 @@
     "to": null,
     "bbox": [
       6.6161,
-      44.3912,
+      44.3911,
       6.6281,
       44.3983
     ]
@@ -518549,7 +520145,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      -3.103,
+      -3.1031,
       48.4813,
       -3.0745,
       48.4908
@@ -520219,7 +521815,7 @@
     "bbox": [
       -0.5623,
       47.0772,
-      -0.5428,
+      -0.545,
       47.0858
     ]
   },
@@ -521323,7 +522919,7 @@
     "bbox": [
       5.9073,
       44.1169,
-      5.9568,
+      5.9569,
       44.1375
     ]
   },
@@ -521335,7 +522931,7 @@
     "bbox": [
       5.9199,
       44.1369,
-      5.9568,
+      5.9569,
       44.1485
     ]
   },
@@ -522894,7 +524490,7 @@
     "to": null,
     "bbox": [
       4.6567,
-      47.076,
+      47.0761,
       4.6784,
       47.1061
     ]
@@ -523685,7 +525281,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      2.5455,
+      2.5456,
       51.0891,
       2.559,
       51.0933
@@ -523783,7 +525379,7 @@
     "bbox": [
       5.6728,
       46.2201,
-      5.7035,
+      5.7036,
       46.2521
     ]
   },
@@ -524322,8 +525918,8 @@
     "to": "Cocheren",
     "bbox": [
       7.0468,
-      49.1117,
-      7.0582,
+      49.1115,
+      7.0583,
       49.1196
     ]
   },
@@ -526529,7 +528125,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      -0.2066,
+      -0.2067,
       48.4352,
       -0.1656,
       48.4599
@@ -526897,7 +528493,7 @@
   },
   {
     "id": "hiking_foot_routes_line.5543597",
-    "name": null,
+    "name": "Streek-GR Heuvelland",
     "from": null,
     "to": null,
     "bbox": [
@@ -529037,7 +530633,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      6.1685,
+      6.1684,
       42.9954,
       6.2031,
       43.0071
@@ -529541,7 +531137,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      0.9124,
+      0.9121,
       49.5054,
       0.9432,
       49.5365
@@ -529555,7 +531151,7 @@
     "bbox": [
       0.8799,
       49.5115,
-      0.917,
+      0.9178,
       49.5362
     ]
   },
@@ -529613,9 +531209,9 @@
     "from": null,
     "to": null,
     "bbox": [
-      0.8752,
-      49.481,
-      0.8984,
+      0.8733,
+      49.4803,
+      0.8985,
       49.4875
     ]
   },
@@ -531288,18 +532884,6 @@
     ]
   },
   {
-    "id": "hiking_foot_routes_line.4762590",
-    "name": "Tour de la Haute vallée de la Cèze",
-    "from": null,
-    "to": null,
-    "bbox": [
-      4.0177,
-      44.3689,
-      4.0339,
-      44.3934
-    ]
-  },
-  {
     "id": "hiking_foot_routes_line.4758935",
     "name": "Sentier des radeliers",
     "from": "La Vieille-Loye",
@@ -531499,7 +533083,7 @@
     "bbox": [
       1.8021,
       49.0368,
-      1.8514,
+      1.8519,
       49.0623
     ]
   },
@@ -531881,8 +533465,8 @@
     "from": "Saint-Jean-pied-de-port via Luzaide",
     "to": "Orreaga / Roncevalles",
     "bbox": [
-      -1.3211,
-      43.0474,
+      -1.3107,
+      43.059,
       -1.2493,
       43.1551
     ]
@@ -532572,18 +534156,6 @@
     ]
   },
   {
-    "id": "hiking_foot_routes_line.4308577",
-    "name": "Ronde Au Coeur Des Corbières Etape 5",
-    "from": null,
-    "to": null,
-    "bbox": [
-      2.8121,
-      42.932,
-      2.8707,
-      43.0149
-    ]
-  },
-  {
     "id": "hiking_foot_routes_line.4308573",
     "name": "Ronde Au Coeur Des Corbières Etape 4",
     "from": null,
@@ -532650,7 +534222,7 @@
     "to": null,
     "bbox": [
       2.6419,
-      42.955,
+      42.9545,
       2.6625,
       42.979
     ]
@@ -532833,18 +534405,6 @@
       43.3341,
       2.4233,
       43.3614
-    ]
-  },
-  {
-    "id": "hiking_foot_routes_line.4273082",
-    "name": "Entre Château et Rigole",
-    "from": null,
-    "to": null,
-    "bbox": [
-      2.1415,
-      43.3582,
-      2.2019,
-      43.3871
     ]
   },
   {
@@ -534498,7 +536058,7 @@
     "to": null,
     "bbox": [
       0.1148,
-      48.8909,
+      48.8811,
       0.1338,
       48.8977
     ]
@@ -535181,7 +536741,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      -2.8711,
+      -2.8721,
       47.8344,
       -2.8582,
       47.8411
@@ -535615,7 +537175,7 @@
     "bbox": [
       2.551,
       44.5404,
-      2.5671,
+      2.5669,
       44.559
     ]
   },
@@ -536047,7 +537607,7 @@
     "bbox": [
       5.7594,
       47.046,
-      5.7672,
+      5.7673,
       47.0499
     ]
   },
@@ -536070,7 +537630,7 @@
     "to": null,
     "bbox": [
       0.5385,
-      48.7152,
+      48.715,
       0.5688,
       48.7369
     ]
@@ -536093,7 +537653,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      0.6537,
+      0.6532,
       48.4839,
       0.6995,
       48.5289
@@ -536155,7 +537715,7 @@
     "bbox": [
       2.5346,
       51.0855,
-      2.5455,
+      2.5456,
       51.0891
     ]
   },
@@ -537485,8 +539045,8 @@
     "from": "Saint-Jean-Pied-de-Port",
     "to": "Roncesvalles",
     "bbox": [
-      -1.3211,
-      43.0474,
+      -1.3107,
+      43.059,
       -1.2372,
       43.1624
     ]
@@ -537558,7 +539118,7 @@
     "to": null,
     "bbox": [
       2.1909,
-      48.8875,
+      48.8874,
       2.2001,
       48.8994
     ]
@@ -539694,7 +541254,7 @@
     "to": "Saut du Doubs",
     "bbox": [
       6.7143,
-      47.0788,
+      47.0787,
       6.7268,
       47.0875
     ]
@@ -539994,7 +541554,7 @@
     "to": "Béhérobie",
     "bbox": [
       -1.4267,
-      43.0221,
+      43.0248,
       -1.1948,
       43.0982
     ]
@@ -540608,7 +542168,7 @@
       -1.6714,
       47.265,
       -1.6527,
-      47.2744
+      47.2745
     ]
   },
   {
@@ -540824,7 +542384,7 @@
       1.7693,
       45.2426,
       2.3389,
-      45.5467
+      45.5469
     ]
   },
   {
@@ -542933,7 +544493,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      6.102,
+      6.1019,
       45.7382,
       6.2659,
       45.9081
@@ -543017,10 +544577,10 @@
     "from": null,
     "to": null,
     "bbox": [
-      8.8621,
+      8.8676,
       42.1537,
       9.0722,
-      42.4788
+      42.4665
     ]
   },
   {
@@ -543321,18 +544881,6 @@
       48.3136,
       2.6946,
       48.4448
-    ]
-  },
-  {
-    "id": "hiking_foot_routes_line.2748437",
-    "name": "Tour du Lauragais",
-    "from": null,
-    "to": null,
-    "bbox": [
-      1.7216,
-      43.1932,
-      2.1018,
-      43.4231
     ]
   },
   {
@@ -543998,10 +545546,10 @@
   {
     "id": "hiking_foot_routes_line.2629186",
     "name": "GR 5A Wandelronde van Vlaanderen (Zuid)",
-    "from": "Kruibeke",
-    "to": "De Panne",
+    "from": null,
+    "to": null,
     "bbox": [
-      2.5455,
+      2.5456,
       50.7686,
       3.138,
       51.0933
@@ -545012,7 +546560,7 @@
       5.6258,
       45.1407,
       5.6293,
-      45.1495
+      45.1494
     ]
   },
   {
@@ -545129,7 +546677,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      -3.8556,
+      -3.8535,
       48.6587,
       -3.8387,
       48.6966
@@ -546392,7 +547940,7 @@
       2.1124,
       48.5727,
       2.1348,
-      48.5922
+      48.5944
     ]
   },
   {
@@ -546669,18 +548217,6 @@
       43.6052,
       7.0731,
       43.6151
-    ]
-  },
-  {
-    "id": "hiking_foot_routes_line.2369473",
-    "name": null,
-    "from": null,
-    "to": null,
-    "bbox": [
-      7.1198,
-      43.5855,
-      7.1207,
-      43.5868
     ]
   },
   {
@@ -547622,13 +549158,13 @@
   {
     "id": "hiking_foot_routes_line.2218582",
     "name": "J5",
-    "from": null,
-    "to": null,
+    "from": "Jupilles",
+    "to": "Jupilles",
     "bbox": [
-      0.3723,
-      47.7943,
-      0.3766,
-      47.8044
+      0.3714,
+      47.7859,
+      0.4566,
+      47.825
     ]
   },
   {
@@ -548372,7 +549908,7 @@
       1.6608,
       50.7394,
       2.7345,
-      50.9304
+      50.888
     ]
   },
   {
@@ -549367,7 +550903,7 @@
     "bbox": [
       2.8031,
       48.3708,
-      2.8343,
+      2.8358,
       48.3923
     ]
   },
@@ -549521,7 +551057,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      2.5455,
+      2.5456,
       51.0818,
       2.559,
       51.0933
@@ -550025,7 +551561,7 @@
     "from": null,
     "to": null,
     "bbox": [
-      2.5455,
+      2.5456,
       51.0818,
       2.5513,
       51.0891
@@ -551228,7 +552764,7 @@
       6.9928,
       47.2955,
       7.0217,
-      47.3039
+      47.304
     ]
   },
   {
@@ -553573,14 +555109,14 @@
   },
   {
     "id": "hiking_foot_routes_line.157494",
-    "name": "Montignez-Boncourt",
-    "from": null,
-    "to": null,
+    "name": null,
+    "from": "Montignez",
+    "to": "Boncourt",
     "bbox": [
-      7.034,
+      7.0339,
       47.4889,
       7.0553,
-      47.4983
+      47.4984
     ]
   },
   {
