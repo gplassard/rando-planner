@@ -79,6 +79,7 @@ updateData.addJob('update-data', {
   timeoutMinutes: 30,
   permissions: {
     contents: JobPermission.WRITE,
+    packages: JobPermission.READ,
   },
   steps: [
     WorkflowActionsX.checkout({}),
