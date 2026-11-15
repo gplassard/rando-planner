@@ -29,9 +29,15 @@ export async function generateHikingRoutesPmtiles(): Promise<void> {
     '--drop-densest-as-needed',
     '--drop-smallest-as-needed',
     // Only keep the attributes the app displays, to bound the archive size.
+    // ref/distance/duration/roundtrip feed the route info popup (see
+    // src/lib/routeInfo.ts).
     '--include', 'name',
     '--include', 'from',
     '--include', 'to',
+    '--include', 'ref',
+    '--include', 'distance',
+    '--include', 'duration',
+    '--include', 'roundtrip',
     input,
   ];
   await mkdir(PREPARED_DIR, { recursive: true });

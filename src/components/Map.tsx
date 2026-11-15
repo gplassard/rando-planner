@@ -1,8 +1,8 @@
 import type { Point } from 'geojson';
-import type { Layer, LeafletMouseEvent } from 'leaflet';
-import { divIcon, tooltip as leafletTooltip } from 'leaflet';
+import type { LatLng, Layer, LeafletMouseEvent } from 'leaflet';
+import { divIcon, popup as leafletPopup, tooltip as leafletTooltip } from 'leaflet';
 import { leafletLayer, LineSymbolizer } from 'protomaps-leaflet';
-import type { JsonObject } from 'protomaps-leaflet';
+import type { JsonObject, PickedFeature } from 'protomaps-leaflet';
 import React, { FC, useEffect, useState } from 'react';
 import {
   LayerGroup,
@@ -16,6 +16,7 @@ import {
 } from 'react-leaflet';
 import { isShortTrailName, TrailNameSymbolizer } from './TrailNameSymbolizer';
 import hikingRoutesPmtilesUrl from '../../data/prepared/hiking-routes.pmtiles?url';
+import { routeInfo } from '../lib/routeInfo';
 import { FocusTarget } from '../model/FocusTarget';
 import { Itinerary } from '../model/Itinerary';
 import { Station } from '../model/Station';
@@ -57,23 +58,49 @@ const SHORT_TRAIL_LABEL_MIN_ZOOM = 10;
 const ROUTE_DATA_MAX_ZOOM = 13;
 
 /** Brush radius (screen px) used to pick a hiking route under the cursor. */
-const ROUTE_HOVER_BRUSH_PX = 14;
+const ROUTE_PICK_BRUSH_PX = 14;
 
 /** Builds the hover tooltip content (name + endpoints) without HTML injection. */
 const routeTooltipContent = (props: JsonObject): HTMLElement => {
-  const name = typeof props.name === 'string' && props.name ? props.name : 'Sentier sans nom';
-  const endpoints = [props.from, props.to]
-    .filter((v): v is string => typeof v === 'string' && v.length > 0)
-    .join(' → ');
+  const info = routeInfo(props);
   const content = document.createElement('div');
   const title = document.createElement('strong');
-  title.textContent = name;
+  title.textContent = info.name;
   content.appendChild(title);
-  if (endpoints) {
+  if (info.endpoints) {
     const line = document.createElement('div');
     line.className = 'route-endpoints';
-    line.textContent = endpoints;
+    line.textContent = info.endpoints;
     content.appendChild(line);
+  }
+  return content;
+};
+
+/** Builds the click popup content (name, ref, endpoints and tagged metrics). */
+const routePopupContent = (props: JsonObject): HTMLElement => {
+  const info = routeInfo(props);
+  const content = routeTooltipContent(props);
+  const details = document.createElement('ul');
+  details.className = 'route-details';
+  const addDetail = (label: string, value: string): void => {
+    const item = document.createElement('li');
+    item.textContent = `${label} : ${value}`;
+    details.appendChild(item);
+  };
+  if (info.ref) {
+    addDetail('Balise', info.ref);
+  }
+  if (info.distanceKm !== null) {
+    addDetail('Distance', `${info.distanceKm.toLocaleString('fr-FR')} km`);
+  }
+  if (info.duration) {
+    addDetail('Durée', info.duration);
+  }
+  if (info.roundtrip) {
+    addDetail('Type', 'boucle');
+  }
+  if (details.firstChild) {
+    content.appendChild(details);
   }
   return content;
 };
@@ -82,8 +109,10 @@ const routeTooltipContent = (props: JsonObject): HTMLElement => {
  * Full hiking trail geometry, served as a PMTiles archive and rendered as a
  * canvas vector tile layer (see docs/adr/2026-10-31-hiking-routes-geometry-pmtiles.md).
  * Besides the trace, route names are labeled at the midpoint of the trail
- * (from ROUTE_LABEL_MIN_ZOOM, GR codes from SHORT_TRAIL_LABEL_MIN_ZOOM) and a
- * tooltip shows name + endpoints on hover.
+ * (from ROUTE_LABEL_MIN_ZOOM, GR codes from SHORT_TRAIL_LABEL_MIN_ZOOM), a
+ * tooltip shows name + endpoints on hover and clicking a route opens a popup
+ * with the details available in the tiles (name, ref, endpoints, distance,
+ * duration, loop), see routePopupContent.
  */
 const HikingRoutesLayer: FC = () => {
   const map = useMap();
@@ -115,14 +144,15 @@ const HikingRoutesLayer: FC = () => {
     });
     layer.addTo(map);
 
-    // The layer renders to canvas, so hover picking goes through its feature
-    // query; the tooltip is managed imperatively.
+    // The layer renders to canvas, so hover and click picking go through its
+    // feature query; the tooltip and popup are managed imperatively.
     const hoverTooltip = leafletTooltip({
       direction: 'top',
       offset: [0, -10],
       className: 'hiking-route-tooltip',
       opacity: 1,
     });
+    const routePopup = leafletPopup({ className: 'hiking-route-popup' });
     let pending: LeafletMouseEvent | null = null;
     let frame = 0;
     let lastX = -1;
@@ -135,11 +165,20 @@ const HikingRoutesLayer: FC = () => {
       map.getContainer().style.cursor = '';
     };
 
-    const pick = (e: LeafletMouseEvent) => {
-      const picked = layer.queryTileFeaturesDebug(e.latlng.lng, e.latlng.lat, ROUTE_HOVER_BRUSH_PX);
-      const features = picked.get('hiking_routes') ?? [];
-      const best = features.find(f => typeof f.feature.props.name === 'string' && f.feature.props.name)
+    // Picks the most relevant route under a geographic position: a named one
+    // when several route fragments overlap the brush, the first one otherwise.
+    const pickRoute = (latlng: LatLng): PickedFeature | undefined => {
+      const picked = layer.queryTileFeaturesDebug(latlng.lng, latlng.lat, ROUTE_PICK_BRUSH_PX);
+      // queryTileFeaturesDebug keys the result map by *source* name — the
+      // empty string for this single-PMTiles layer — not by the in-tile layer
+      // name ('hiking_routes', which only exists for the paint/label rules).
+      const features = [...picked.values()].flat();
+      return features.find(f => typeof f.feature.props.name === 'string' && f.feature.props.name)
         ?? features[0];
+    };
+
+    const pick = (e: LeafletMouseEvent) => {
+      const best = pickRoute(e.latlng);
       if (!best) {
         hideTooltip();
         return;
@@ -150,6 +189,25 @@ const HikingRoutesLayer: FC = () => {
         hoverTooltip.addTo(map);
       }
       map.getContainer().style.cursor = 'pointer';
+    };
+
+    // Clicking a route opens its info popup. Clicks that landed on an
+    // interactive layer (gare markers, which have their own popup) keep their
+    // default behavior; clicking away from any route simply lets Leaflet
+    // close the popup (closePopupOnClick).
+    const onMapClick = (e: LeafletMouseEvent) => {
+      const target = e.originalEvent.target as Element | null;
+      if (target?.closest?.('.leaflet-interactive')) {
+        return;
+      }
+      hideTooltip();
+      const best = pickRoute(e.latlng);
+      if (!best) {
+        return;
+      }
+      routePopup.setContent(routePopupContent(best.feature.props));
+      routePopup.setLatLng(e.latlng);
+      routePopup.openOn(map);
     };
 
     // Coalesce mousemove events into one picking query per frame, and skip
@@ -176,6 +234,7 @@ const HikingRoutesLayer: FC = () => {
     };
 
     map.on('mousemove', onMouseMove);
+    map.on('click', onMapClick);
     map.on('mouseout', hideTooltip);
     map.on('zoomstart', hideTooltip);
     return () => {
@@ -183,9 +242,13 @@ const HikingRoutesLayer: FC = () => {
         cancelAnimationFrame(frame);
       }
       map.off('mousemove', onMouseMove);
+      map.off('click', onMapClick);
       map.off('mouseout', hideTooltip);
       map.off('zoomstart', hideTooltip);
       hideTooltip();
+      if (map.hasLayer(routePopup)) {
+        map.removeLayer(routePopup);
+      }
       map.removeLayer(layer as unknown as Layer);
     };
   }, [map]);

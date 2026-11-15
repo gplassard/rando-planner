@@ -19,6 +19,22 @@
   }
 }
 
+// Info popup opened by clicking a hiking route (name, endpoints and tagged
+// metrics), see routePopupContent in Map.tsx.
+.hiking-route-popup {
+  .route-endpoints {
+    font-size: 11px;
+    color: #444;
+  }
+
+  .route-details {
+    margin: 6px 0 0;
+    padding-left: 16px;
+    font-size: 11px;
+    color: #444;
+  }
+}
+
 .itinerary-marker {
   background: transparent;
   border: none;

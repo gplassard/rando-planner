@@ -92,3 +92,14 @@ tippecanoe -f -o data/prepared/hiking-routes.pmtiles \
   artifact (~tens of MB) committed to git.
 - `data/small_database.json` / `data/small.json` are still produced by the pipeline
   as metadata products but are no longer imported by the app.
+
+## Addendum 2026-11-15 — extra attributes for the click popup
+
+Clicking a hiking route now opens an information popup (name, ref, from → to,
+distance, duration, loop) built by `routePopupContent` in
+`src/components/Map.tsx` from the `src/lib/routeInfo.ts` normalizer. To feed
+it, the tippecanoe command (`scripts/data/tiles.ts`) keeps four more short OSM
+tags in the archive: `ref`, `distance`, `duration`, `roundtrip`. These are
+short strings from the magOSM route extract, so the archive size impact is
+minimal. OSM tags every field sparsely, so `routeInfo` treats each one as
+optional and the popup only shows what the tagged data provides.
